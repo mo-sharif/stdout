@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: npm ci   # video render needs the Remotion devDependencies
       - name: render (+ optional private upload)
-        run: node video/build.mjs "${{ inputs.story }}" ${{ inputs.upload && '--upload' || '' }}
+        run: node video/build.mjs "${{ inputs.story }}" --voice ${{ inputs.upload && '--upload' || '' }}
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.story }}
