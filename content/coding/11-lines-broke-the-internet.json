@@ -1,0 +1,42 @@
+{
+  "slug": "11-lines-broke-the-internet",
+  "title": "11 lines of code took down the internet",
+  "category": "coding",
+  "kicker": "Engineering war story",
+  "hook": "A dev got into a naming fight, rage-quit npm, and half the world's builds started failing. Here's exactly how it happened.",
+  "readMinutes": 6,
+  "date": "2026-06-23",
+  "beats": [
+    { "type": "prose", "num": "01 — the setup", "heading": "One dev, one naming fight",
+      "html": "<p class=\"body r\">A startup wanted the npm name <strong>kik</strong>. A dev named Azer already had it. npm handed it to the company's lawyers, and Azer was <span class=\"hl\">not having it</span>, so he unpublished all 273 of his packages.</p><p class=\"body r\">Most? Nobody noticed. One of them? Oh, people noticed.</p>" },
+    { "type": "embeds", "items": [
+      { "platform": "x", "title": "A user unpublished 273 of his modules this morning. We're seeing the fallout now.", "meta": "@seldo · 2,108 reposts", "url": "https://twitter.com/seldo/status/712414410755178496" },
+      { "platform": "hn", "title": "An NPM package called left-pad broke half the build pipelines on earth", "meta": "1,902 points · 743 comments", "url": "https://news.ycombinator.com/item?id=11340510" }
+    ] },
+    { "type": "code", "file": "left-pad / index.js", "playground": true,
+      "inputs": [ {"name":"str","value":"42"}, {"name":"len","value":"6","width":"70px"}, {"name":"ch","value":"0","width":"60px"} ],
+      "code": "function leftpad (str, len, ch) {\n  str = String(str);\n  var i = -1;\n  if (!ch && ch !== 0) ch = ' ';\n  len = len - str.length;\n  while (++i < len) {\n    str = ch + str;\n  }\n  return str;\n}",
+      "caption": "Eleven lines. Babel, React, webpack, and Node all leaned on this." },
+    { "type": "terminal", "title": "zsh — building…", "caption": "Red CI as far as the eye could see.", "lines": [
+      {"t":"$ npm install","c":"pr"},
+      {"t":"npm ERR! 404 Not Found: left-pad@1.0.0","c":"err"},
+      {"t":"npm ERR! 404 'left-pad' is not in the npm registry.","c":"err"},
+      {"t":"✖ build failed in 3.2s","c":"err"}
+    ] },
+    { "type": "prose", "num": "04 — the blast radius", "heading": "It wasn't just the people who used it",
+      "html": "<p class=\"body r\">It hit everyone who used something that used something that used left-pad. <span class=\"hl\">Transitive dependencies.</span> Pull the brick out:</p>" },
+    { "type": "graph", "center": "left-pad", "nodes": ["React","Babel","webpack","Node","Express","Jest","ESLint","Vue","Gatsby","Yarn","Atom","Ember"] },
+    { "type": "stats", "items": [
+      {"to":273,"label":"packages pulled at once"},
+      {"to":2400000,"label":"daily downloads severed"},
+      {"to":11,"label":"lines of code at fault"}
+    ] },
+    { "type": "quote", "text": "I will not let a company take over a package I authored.", "cite": "Azer Koçulu, on why he pulled everything" },
+    { "type": "prose", "num": "06 — the takeaway", "heading": "You don't actually own your dependencies",
+      "html": "<p class=\"body r\">Your app is a <span class=\"hl\">tower of strangers' code</span>, and any brick can get yanked on a Tuesday. So: commit your lockfiles, vendor what you can't lose, and actually look at what <code>npm install</code> drags in.</p>" }
+  ],
+  "sources": [
+    { "platform": "npm", "title": "kik, left-pad and npm", "meta": "blog.npmjs.org", "url": "https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm" },
+    { "platform": "web", "title": "How one dev broke Node and the web", "meta": "theregister.com", "url": "https://www.theregister.com/2016/03/23/npm_left_pad_chaos/" }
+  ]
+}
