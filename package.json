@@ -10,7 +10,8 @@
     "test": "node --test",
     "build": "node build/build.mjs",
     "daily": "node pipeline/daily.mjs",
-    "announce": "node pipeline/announce.mjs"
+    "announce": "node pipeline/announce.mjs",
+    "video": "node video/build.mjs"
   },
   "keywords": [],
   "author": "",

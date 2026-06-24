@@ -1,0 +1,30 @@
+name: video
+on:
+  workflow_dispatch:
+    inputs:
+      story:
+        description: 'content path, e.g. content/coding/11-lines-broke-the-internet.json'
+        required: true
+      upload:
+        description: 'upload privately to the channel (needs YT_* secrets)'
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: [self-hosted, gpu]   # the box: render needs Remotion + (later) the cloned-voice server
+    env:
+      YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+      YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+      YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci   # video render needs the Remotion devDependencies
+      - name: render (+ optional private upload)
+        run: node video/build.mjs "${{ inputs.story }}" ${{ inputs.upload && '--upload' || '' }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.story }}
+          path: video/out/**/*.mp4
+          if-no-files-found: error
