@@ -1,0 +1,69 @@
+{
+  "slug": "what-happens-when-you-type-a-url",
+  "title": "What actually happens when you type a URL",
+  "category": "tech",
+  "kicker": "How it works",
+  "hook": "You hit enter and a page appears. In between, your machine runs a relay race across the planet in about 200 milliseconds. Here's every leg of it.",
+  "readMinutes": 9,
+  "date": "2026-06-22",
+  "beats": [
+    {
+      "num": "01 · the question",
+      "heading": "You hit enter. Now what?",
+      "blocks": [
+        { "type": "prose", "html": "<p class=\"body\">You type a URL, hit enter, and a fraction of a second later there's a page on your screen. In that gap your machine talked to <span class=\"hl\">half a dozen systems</span> spread across the planet, in a strict order, each one handing off to the next. Let's walk the whole chain.</p>" }
+      ]
+    },
+    {
+      "num": "02 · find the address",
+      "heading": "DNS: a name becomes a number",
+      "blocks": [
+        { "type": "prose", "html": "<p class=\"body\">Computers don't route to names, they route to IP addresses. So the first job is translation. Your browser checks its own cache, then the OS cache, then asks a <strong>resolver</strong> (usually your ISP's or something like 1.1.1.1). If nobody knows, the resolver walks the hierarchy: a <span class=\"hl\">root server</span> points it at the .com servers, which point it at the domain's authoritative server, which finally answers with an IP.</p>" },
+        { "type": "terminal", "title": "zsh · resolving", "caption": "One name, resolved by walking root to .com to authoritative.", "lines": [
+          {"t":"$ dig +short example.com","c":"pr"},
+          {"t":"93.184.216.34","c":""},
+          {"t":"# cached now, so the next lookup skips the whole walk","c":"dim"}
+        ] }
+      ]
+    },
+    {
+      "num": "03 · the handshake",
+      "heading": "TCP first, then TLS",
+      "blocks": [
+        { "type": "prose", "html": "<p class=\"body\">Now your machine has an IP, but it still has to open a connection. <strong>TCP</strong> does a three-way handshake: SYN, SYN-ACK, ACK. Then, because the URL is https, <strong>TLS</strong> negotiates encryption: the server proves who it is with a certificate, both sides agree on keys, and a secure tunnel comes up. With TLS 1.3 that's down to <span class=\"hl\">a single round trip</span>.</p>" },
+        { "type": "stats", "items": [
+          {"to":3,"label":"packets in the TCP handshake"},
+          {"to":1,"label":"round trip for a TLS 1.3 handshake"},
+          {"to":13,"label":"DNS root server clusters worldwide"}
+        ] }
+      ]
+    },
+    {
+      "num": "04 · the ask",
+      "heading": "The request is just text",
+      "blocks": [
+        { "type": "prose", "html": "<p class=\"body\">With the tunnel up, the actual request is almost boring. It's a few lines of plain text sent through the encrypted pipe:</p>" },
+        { "type": "code", "file": "GET / HTTP/1.1", "code": "GET / HTTP/1.1\nHost: example.com\nUser-Agent: Mozilla/5.0\nAccept: text/html\nConnection: keep-alive", "caption": "That's the whole thing. The server reads it and starts sending HTML back." }
+      ]
+    },
+    {
+      "num": "05 · paint",
+      "heading": "Parse, then paint",
+      "blocks": [
+        { "type": "prose", "html": "<p class=\"body\">The server streams HTML back. Your browser doesn't wait for all of it. It parses as bytes arrive, building the <strong>DOM</strong> from HTML and the <strong>CSSOM</strong> from CSS, then combines them into a render tree, works out where every box goes (layout), and finally <span class=\"hl\">paints pixels</span>. Images, scripts and fonts it spotted along the way get fetched in parallel, often over the same connection.</p>" }
+      ]
+    },
+    {
+      "num": "06 · the takeaway",
+      "heading": "It's fallbacks all the way down",
+      "blocks": [
+        { "type": "prose", "html": "<p class=\"body\">Every leg of that race has a cache in front of it and a fallback behind it. That's why the same page can feel instant once and sluggish the next: a cold DNS cache, a fresh TLS handshake, a far-away server. <strong>Next time it's slow,</strong> you now know exactly which leg to go measure.</p>" }
+      ]
+    }
+  ],
+  "sources": [
+    { "platform": "web", "meta": "MDN", "title": "Populating the page: how browsers work", "url": "https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work" },
+    { "platform": "web", "meta": "Cloudflare", "title": "What is DNS? How DNS works", "url": "https://www.cloudflare.com/learning/dns/what-is-dns/" },
+    { "platform": "web", "meta": "hpbn.co", "title": "High Performance Browser Networking (free book)", "url": "https://hpbn.co/" }
+  ]
+}
