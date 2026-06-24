@@ -8,6 +8,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = join(ROOT, 'video/out');
 await mkdir(outDir, { recursive: true });
 const slug = process.argv[2] || 'sample';
+const limit = process.argv[3] ? Number(process.argv[3]) : null; // optional frame cap for quick test renders
 
 console.log('bundling…');
 const serveUrl = await bundle({ entryPoint: join(ROOT, 'video/remotion/index.ts'), publicDir: join(ROOT, 'docs/assets') });
@@ -17,7 +18,8 @@ console.log(`rendering ${composition.durationInFrames} frames @ ${composition.fp
 const output = join(outDir, `${slug}-landscape.mp4`);
 let last = -1;
 await renderMedia({
-  serveUrl, composition, codec: 'h264', output, inputProps: {},
+  serveUrl, composition, codec: 'h264', outputLocation: output, inputProps: {},
+  frameRange: limit ? [0, limit] : undefined,
   onProgress: ({ progress }) => { const p = Math.floor(progress * 20) * 5; if (p > last) { last = p; console.log(`${p}%`); } },
 });
 console.log('wrote', output);
