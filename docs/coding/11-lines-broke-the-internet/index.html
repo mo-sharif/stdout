@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11 lines of code took down the internet</title>
+<meta name="description" content="True story. A dev got into a naming fight, rage-quit npm, and half the world's builds started failing. You've shipped stuff that depends on packages like this. Here's exactly how it happened.">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#37e1ff"><div class="aurora"></div><div class="wrap">
+  <span class="kicker"><span class="dot"></span> Engineering war story</span>
+  <h1>11 lines of code took down the internet</h1>
+  <p class="dek">True story. A dev got into a naming fight, rage-quit npm, and half the world's builds started failing. You've shipped stuff that depends on packages like this. Here's exactly how it happened.</p>
+  <div class="meta"><span>~6 min</span><span>&bull;</span><span>Coding</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the setup</div><h2>One dev, one naming fight</h2><p class="body">Quick version: a startup wanted the npm name <strong>kik</strong>. A dev named Azer already had it. npm handed the name to the company's lawyers. Azer was <span class="hl">not having it</span>, so he unpublished every package he'd ever pushed. All 273 of them.</p><p class="body">Most? Nobody noticed. One of them? Oh, people noticed.</p>
+<div class="embeds"><a class="embed e-x" href="https://twitter.com/seldo/status/712414410755178496" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">X</span> @seldo · npm, then</div>
+      <div class="txt">“A user unpublished 273 of his modules this morning... we're seeing the fallout now.”</div><div class="stat2">2,108 reposts · view on X ↗</div>
+    </a><a class="embed e-hn" href="https://news.ycombinator.com/item?id=11340510" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">Y</span> Hacker News</div>
+      <div class="txt">An NPM package called left-pad just broke half the build pipelines on earth</div><div class="stat2">1,902 points · 743 comments ↗</div>
+    </a></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the package</div><h2>Here's the whole thing. Go ahead, run it.</h2><p class="body">The package was <strong>left-pad</strong>. All it does is stick characters on the front of a string. That's the entire library. Mess with the inputs and hit run, this is the actual code:</p>
+<div class="panel" data-playground>
+    <div class="top"><i></i><i></i><i></i><span class="fn">left-pad / index.js</span>
+      <span class="act"><button class="mini" data-copy>copy</button><button class="mini run" data-run>&#9654; run</button></span></div>
+    <textarea class="code" data-code spellcheck="false">function leftpad (str, len, ch) {
+  str = String(str);
+  var i = -1;
+  if (!ch &amp;&amp; ch !== 0) ch = ' ';
+  len = len - str.length;
+  while (++i &lt; len) {
+    str = ch + str;
+  }
+  return str;
+}</textarea>
+    <div class="io"><label>str</label><input data-arg="str" value="42"><label>len</label><input data-arg="len" value="6" style="width:70px"><label>ch</label><input data-arg="ch" value="0" style="width:60px"><button class="mini run" data-run>&#9654; run</button></div><div class="out" data-out>run it</div>
+  </div><p class="cap">Eleven lines. Babel, React, webpack, and Node all leaned on this, usually without knowing it.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the break</div><h2>Then it just disappeared</h2><p class="body">The instant left-pad got unpublished, this is what devs everywhere started seeing. Same error, same minute, all over the planet:</p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">zsh · building...</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"$ npm install","c":"pr"},{"t":"npm WARN deprecated ...","c":"dim"},{"t":"npm ERR! 404 Not Found: left-pad@1.0.0","c":"err"},{"t":"npm ERR! 404 'left-pad' is not in the npm registry.","c":"err"},{"t":"npm ERR! A complete log of this run can be found in: ...","c":"dim"},{"t":"✖ build failed in 3.2s","c":"err"}]</script>
+  </div><p class="cap">Red CI as far as the eye could see.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the blast radius</div><h2>It wasn't just the people who used it</h2><p class="body">Here's the thing that made it ugly. It hit everyone who used something that used something that used left-pad. <span class="hl">Transitive dependencies.</span> Hit the button and pull the brick out:</p>
+<div class="panel" data-graph data-center="left-pad" data-nodes='[&quot;React&quot;,&quot;Babel&quot;,&quot;webpack&quot;,&quot;Node&quot;,&quot;Express&quot;,&quot;Jest&quot;,&quot;ESLint&quot;,&quot;Vue&quot;,&quot;Gatsby&quot;,&quot;Yarn&quot;,&quot;Atom&quot;,&quot;Ember&quot;]'>
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>&#9888; unpublish left-pad</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>all green</span></div>
+  </div>
+<div class="stats"><div class="stat"><b data-to="273">0</b><span>packages pulled at once</span></div><div class="stat"><b data-to="2400000">0</b><span>daily downloads severed</span></div><div class="stat"><b data-to="11">0</b><span>lines of code at fault</span></div></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">05 · the fix</div><h2>npm broke its own rules to stop it</h2><p class="body">To kill the bleeding, npm did something it had <span class="hl">never done before</span>: it un-unpublished left-pad. Restored a stranger's package without asking him. Builds went green. But it left a much bigger question sitting there.</p>
+<blockquote>I will not let a company take over a package I authored.<cite>Azer Koçulu, on why he pulled everything</cite></blockquote>
+<h4 class="lbl">where it played out</h4><div class="embeds"><a class="embed e-npm" href="https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">n</span> npm blog · official</div>
+      <div class="txt">kik, left-pad, and npm: what happened and what we changed</div><div class="stat2">blog.npmjs.org ↗</div>
+    </a><a class="embed e-gh" href="https://github.com/stevemao/left-pad/issues/4" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9679;</span> GitHub · issue #4</div>
+      <div class="txt">&quot;left-pad got unpublished&quot;: the thread where maintainers scrambled</div><div class="stat2">closed · 217 comments ↗</div>
+    </a><a class="embed e-x" href="https://twitter.com/cramforce/status/712539361491648512" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">X</span> @cramforce · Google</div>
+      <div class="txt">“Babel broke because of an 11-line module. We need to talk about dependencies.”</div><div class="stat2">3,400 likes · view on X ↗</div>
+    </a><a class="embed e-web" href="https://www.theregister.com/2016/03/23/npm_left_pad_chaos/" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> The Register</div>
+      <div class="txt">How one dev unpublishing 11 lines of code broke Node, Babel and thousands of projects</div><div class="stat2">theregister.com ↗</div>
+    </a></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">06 · the takeaway</div><h2>You don't actually own your dependencies</h2><p class="body">Look, the lesson isn't "Azer bad" or "npm bad." It's simpler and more uncomfortable: your app is a <span class="hl">tower of strangers' code</span>, and any brick in it can get yanked out from under you on a Tuesday.</p><p class="body"><strong>So, practically:</strong> commit your lockfiles, vendor the stuff you genuinely can't lose, and maybe, just once, actually look at what <code>npm install</code> drags in. left-pad is fixed. The tower didn't get any shorter.</p></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-npm" href="https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">n</span> npm blog</div>
+       <div class="txt">kik, left-pad and npm</div></a><a class="embed e-gh" href="https://github.com/stevemao/left-pad" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9679;</span> GitHub</div>
+       <div class="txt">stevemao/left-pad</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

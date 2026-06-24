@@ -7,7 +7,7 @@ export function renderHub(manifest, cats) {
   const sections = cats.map((c) => {
     const stories = manifest.byCategory.get(c.id) || [];
     if (!stories.length) return '';
-    return `<section class="cat" id="${esc(c.id)}" style="--accent:${esc(c.accent)}">
+    return `<section class="cat reveal" id="${esc(c.id)}" style="--accent:${esc(c.accent)}">
       <div class="rowhead"><span class="pill c-${esc(c.id)} bd"><span class="d"></span> ${esc(c.label)}</span><span class="why">${esc(c.blurb)}</span></div>
       <div class="grid">${stories.map((s) => storyCard(s, `${esc(c.id)}/`)).join('')}</div>
     </section>`;

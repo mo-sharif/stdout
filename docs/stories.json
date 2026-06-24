@@ -1,0 +1,25 @@
+[
+  {
+    "slug": "11-lines-broke-the-internet",
+    "title": "11 lines of code took down the internet",
+    "category": "coding",
+    "kicker": "Engineering war story",
+    "hook": "True story. A dev got into a naming fight, rage-quit npm, and half the world's builds started failing. You've shipped stuff that depends on packages like this. Here's exactly how it happened.",
+    "readMinutes": 6,
+    "date": "2026-06-23",
+    "sources": [
+      {
+        "platform": "npm",
+        "meta": "npm blog",
+        "title": "kik, left-pad and npm",
+        "url": "https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm"
+      },
+      {
+        "platform": "gh",
+        "meta": "GitHub",
+        "title": "stevemao/left-pad",
+        "url": "https://github.com/stevemao/left-pad"
+      }
+    ]
+  }
+]

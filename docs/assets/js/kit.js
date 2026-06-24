@@ -4,22 +4,15 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const safe = (fn) => { try { fn(); } catch (e) { console.error('kit:', e); } };
 
+// Mark the document so CSS only hides .reveal blocks once the kit is live.
+// If this module fails to load at all, .reveal stays visible (progressive enhancement).
+document.documentElement.classList.add('kit-ready');
+
 // reading progress
 safe(() => { if ($('#bar')) scroll(animate('#bar', { scaleX: [0, 1] }, { ease: 'linear' })); });
 
-// hero parallax (story pages)
-safe(() => {
-  const hero = $('.hero'), aurora = $('.aurora');
-  if (hero && aurora) scroll(animate(aurora, { y: [0, 240] }, { ease: 'linear' }), { target: hero, offset: ['start start', 'end start'] });
-});
-
-// spring reveals (per element so nothing can get stuck hidden)
-safe(() => {
-  $$('.r, .card').forEach((el) => {
-    el.style.opacity = '0';
-    inView(el, () => animate(el, { opacity: [0, 1], y: [26, 0] }, { type: 'spring', stiffness: 210, damping: 24 }), { margin: '-10% 0px' });
-  });
-});
+// block reveals: smooth CSS transition via .in (also drives the .hl highlight swipe)
+safe(() => { $$('.reveal').forEach((el) => inView(el, () => el.classList.add('in'), { margin: '-12% 0px' })); });
 
 // stat count-ups
 safe(() => {

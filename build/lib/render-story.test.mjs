@@ -5,7 +5,8 @@ import { renderStory } from './render-story.mjs';
 const cat = { id: 'coding', label: 'Coding', accent: '#37e1ff' };
 const story = {
   slug: 's', title: 'Title', category: 'coding', kicker: 'War story', hook: 'Hook.', readMinutes: 6, date: '2026-06-23',
-  beats: [{ type: 'quote', text: 'Q' }], sources: [{ platform: 'web', title: 'Src', url: 'https://x.test' }],
+  beats: [{ num: '01', heading: 'H', blocks: [{ type: 'quote', text: 'Q' }] }],
+  sources: [{ platform: 'web', title: 'Src', url: 'https://x.test' }],
 };
 
 test('renders hero, beats, and sources', () => {

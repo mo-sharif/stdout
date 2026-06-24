@@ -23,27 +23,34 @@ code{font-family:var(--mono);color:var(--amber);font-size:.92em}
 
 /* hero (story) */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.aurora{position:absolute;inset:-30% -10% auto -10%;height:110vh;z-index:0;filter:blur(72px);opacity:.55;will-change:transform;background:radial-gradient(40% 50% at 20% 30%,rgba(139,123,255,.7),transparent 70%),radial-gradient(45% 55% at 75% 25%,rgba(55,225,255,.55),transparent 70%),radial-gradient(40% 50% at 60% 80%,rgba(255,183,77,.45),transparent 70%)}
+.aurora{position:absolute;inset:-30% -10% auto -10%;height:90vh;z-index:0;filter:blur(70px);opacity:.55;will-change:transform;background:radial-gradient(40% 50% at 20% 30%,rgba(139,123,255,.7),transparent 70%),radial-gradient(45% 55% at 75% 25%,rgba(55,225,255,.55),transparent 70%),radial-gradient(40% 50% at 60% 80%,rgba(255,183,77,.45),transparent 70%);animation:drift 16s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(-4%,-2%,0) scale(1)}to{transform:translate3d(6%,4%,0) scale(1.12)}}
 .hero .wrap{position:relative;z-index:1}
 .kicker{display:inline-flex;align-items:center;gap:9px;font-family:"Space Grotesk";letter-spacing:.22em;text-transform:uppercase;font-size:13px;font-weight:500;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:7px 15px;background:rgba(55,225,255,.06)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
-h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(40px,7vw,76px);line-height:1.03;letter-spacing:-.02em;margin:24px 0 0;max-width:15ch}
+h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(40px,7vw,76px);line-height:1.03;letter-spacing:-.02em;margin:26px 0 0;max-width:15ch}
 h1 .grad{background:linear-gradient(100deg,var(--cyan),var(--violet) 60%,var(--amber));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .dek,.sub{font-size:21px;color:var(--muted);margin-top:24px;max-width:54ch}
 .meta{margin-top:28px;display:flex;gap:16px;align-items:center;font-size:14px;color:var(--faint);font-family:"Space Grotesk"}
-.hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--faint);font-size:12px;letter-spacing:.18em;text-transform:uppercase;z-index:1}
+.scrollcue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-align:center;z-index:1}
+.scrollcue span{display:block;font-size:22px;margin-top:4px;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(8px);opacity:1}}
 
 /* beats */
 section.beat{padding:10vh 0}
 .num{font-family:"Space Grotesk";font-size:13px;letter-spacing:.25em;color:var(--accent);text-transform:uppercase;margin-bottom:14px}
-h2{font-family:"Space Grotesk";font-weight:700;font-size:clamp(28px,4.3vw,42px);line-height:1.12;letter-spacing:-.015em;margin-bottom:20px}
+h2{font-family:"Space Grotesk";font-weight:700;font-size:clamp(27px,4.3vw,40px);line-height:1.12;letter-spacing:-.015em;margin-bottom:20px}
 p.body{color:#cdd6ea;margin-bottom:20px}
 p.body strong{color:#fff;font-weight:600}
-.cap{font-size:14px;color:var(--faint);margin-top:8px}
+.cap{font-size:14px;color:var(--faint);margin-top:6px}
 .lbl{font-family:"Space Grotesk";font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
 .hl{position:relative;color:#fff;font-weight:500;white-space:nowrap;padding:0 3px}
 .hl::before{content:"";position:absolute;left:0;right:0;bottom:1px;height:38%;z-index:-1;background:linear-gradient(90deg,rgba(55,225,255,0),rgba(55,225,255,.45),rgba(139,123,255,.4));transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
 .in .hl::before{transform:scaleX(1)}
+
+/* block reveal: only hide once the kit is live, so content survives a JS failure */
+html.kit-ready .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1)}
+html.kit-ready .reveal.in{opacity:1;transform:none}
 
 /* panel / code / playground / terminal */
 .panel{background:var(--surface2);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:10px 0 8px;box-shadow:0 30px 60px -34px rgba(0,0,0,.8)}
@@ -83,7 +90,7 @@ textarea.code{width:100%;border:0;resize:vertical;min-height:200px;padding:18px 
 .stat b{display:block;font-family:"Space Grotesk";font-weight:700;font-size:clamp(28px,5vw,44px);background:linear-gradient(120deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
 .stat span{display:block;font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.4}
 
-blockquote{border-left:3px solid var(--accent);padding:4px 0 4px 24px;margin:8px 0;font-family:"Space Grotesk";font-size:clamp(22px,3vw,30px);line-height:1.3;color:#fff;font-weight:500}
+blockquote{border-left:3px solid var(--accent);padding:4px 0 4px 24px;margin:8px 0;font-family:"Space Grotesk";font-size:clamp(21px,3vw,28px);line-height:1.3;color:#fff;font-weight:500}
 blockquote cite{display:block;font-family:"Inter";font-size:15px;font-weight:400;color:var(--muted);margin-top:12px;font-style:normal}
 
 /* embeds */
@@ -94,6 +101,7 @@ blockquote cite{display:block;font-family:"Inter";font-size:15px;font-weight:400
 .embed .eh{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px;color:var(--muted);font-family:"Space Grotesk"}
 .embed .logo{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;background:#33405e}
 .embed .txt{color:#dde4f2;font-size:15.5px;line-height:1.5}
+.embed .stat2{margin-top:10px;font-size:13px;color:var(--faint);font-family:var(--mono)}
 .e-x:hover{border-color:#1d9bf0}.e-x .logo{background:#1d9bf0}
 .e-hn:hover{border-color:#ff6600}.e-hn .logo{background:#ff6600}
 .e-gh:hover{border-color:#8b7bff}.e-gh .logo{background:#6e5494}
@@ -102,9 +110,6 @@ blockquote cite{display:block;font-family:"Inter";font-size:15px;font-weight:400
 footer{border-top:1px solid var(--line);margin-top:8vh;padding:8vh 0 12vh;background:linear-gradient(180deg,transparent,rgba(139,123,255,.05))}
 .badge{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:13px;color:var(--faint);font-family:"Space Grotesk"}
 .badge .d{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
-
-/* reveal: visible by default; kit.js hides+animates when present */
-.r{will-change:transform,opacity}
 
 /* hub nav */
 nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(12px);background:rgba(7,11,22,.7);border-bottom:1px solid var(--line)}
@@ -118,10 +123,10 @@ nav .right{margin-left:auto;font-family:"Space Grotesk";font-size:13px;color:var
 .pulse .d{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green)}
 
 /* hub hero + sections use the wider container */
-nav~.hero .wrap,.cat .wrap,body>.wrap{max-width:var(--maxw-hub)}
+nav~.hero .wrap,body>.wrap{max-width:var(--maxw-hub)}
 .hero .tag{font-family:"Space Grotesk";letter-spacing:.22em;text-transform:uppercase;font-size:13px;color:var(--cyan)}
 nav~.hero{min-height:auto;padding:9vh 0 5vh}
-.cat,body>.wrap>.cat{margin-top:56px}
+.cat{margin-top:56px}
 .rowhead{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;flex-wrap:wrap}
 .why{font-size:14px;color:var(--faint)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
