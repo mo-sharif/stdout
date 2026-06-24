@@ -14,7 +14,7 @@ export function renderHub(manifest, cats) {
   }).join('');
   const body = `<nav><div class="wrap"><span class="brand">stdout<span class="curs"></span></span>
     <span class="links">${nav}</span><span class="right"><span class="pulse"><span class="d"></span> new drop daily</span></span></div></nav>
-  <header class="hero"><div class="aurora"></div><div class="wrap">
+  <header class="hero"><div class="wrap">
     <span class="tag">dev stories, not slop</span>
     <h1>The stories behind the code, <span class="grad">told like a dev would tell them</span></h1>
     <p class="sub">Interactive, deeply-researched walk-throughs of the moments that shaped how we build.</p>

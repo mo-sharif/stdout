@@ -11,7 +11,7 @@ export function renderStory(story, cat) {
        <div class="eh"><span class="logo">${SRC_LOGO[s.platform] || '&#9632;'}</span> ${esc(s.meta || s.platform)}</div>
        <div class="txt">${esc(s.title)}</div></a>`).join('');
   const body = `
-<header class="hero" style="--accent:${esc(cat.accent)}"><div class="aurora"></div><div class="wrap">
+<header class="hero" style="--accent:${esc(cat.accent)}"><div class="wrap">
   <span class="kicker"><span class="dot"></span> ${esc(story.kicker || cat.label)}</span>
   <h1>${esc(story.title)}</h1>
   <p class="dek">${esc(story.hook)}</p>

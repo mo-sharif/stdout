@@ -1,8 +1,8 @@
 [
-  { "id": "ai", "label": "AI", "accent": "#8b7bff", "blurb": "models, agents, and the messy reality of shipping them" },
-  { "id": "coding", "label": "Coding", "accent": "#37e1ff", "blurb": "the war stories and the fundamentals" },
-  { "id": "leadership", "label": "Leadership", "accent": "#ffb74d", "blurb": "managing humans who manage machines" },
-  { "id": "tech", "label": "Tech", "accent": "#43e0a0", "blurb": "how the big systems actually work" },
-  { "id": "career", "label": "Career", "accent": "#ff8fb1", "blurb": "the stuff no bootcamp teaches" },
-  { "id": "security", "label": "Security", "accent": "#ff6b6b", "blurb": "how it breaks, told responsibly" }
+  { "id": "ai", "label": "AI", "accent": "#c977e0", "blurb": "models, agents, and the messy reality of shipping them" },
+  { "id": "coding", "label": "Coding", "accent": "#46d17e", "blurb": "the war stories and the fundamentals" },
+  { "id": "leadership", "label": "Leadership", "accent": "#e3a93a", "blurb": "managing humans who manage machines" },
+  { "id": "tech", "label": "Tech", "accent": "#3cc7d4", "blurb": "how the big systems actually work" },
+  { "id": "career", "label": "Career", "accent": "#5b94e6", "blurb": "the stuff no bootcamp teaches" },
+  { "id": "security", "label": "Security", "accent": "#e85d5d", "blurb": "how it breaks, told responsibly" }
 ]
