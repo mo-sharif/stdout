@@ -1,0 +1,24 @@
+name: daily story
+on:
+  schedule:
+    - cron: '0 15 * * *'   # 15:00 UTC daily; staggered after ViralVault's edition to avoid GPU contention
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: daily-story
+  cancel-in-progress: false
+jobs:
+  generate:
+    runs-on: [self-hosted, gpu]   # the box: has Ollama on 127.0.0.1:11434
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      OLLAMA_BASE: http://127.0.0.1:11434
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      # zero runtime deps — brain, build and tests run on plain node, no npm install
+      - run: node --test
+      - name: generate, build, open review PR
+        run: node pipeline/daily.mjs

@@ -1,0 +1,29 @@
+name: announce
+on:
+  push:
+    branches: [main]
+    paths: ['content/**']
+permissions:
+  contents: read
+jobs:
+  syndicate:
+    runs-on: ubuntu-latest
+    env:
+      MASTODON_BASE: ${{ secrets.MASTODON_BASE }}
+      MASTODON_TOKEN: ${{ secrets.MASTODON_TOKEN }}
+      BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
+      BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+      LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+      LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - name: announce newly added stories
+        run: |
+          ADDED=$(git diff --name-only --diff-filter=A HEAD^ HEAD -- 'content/**/*.json' | tr '\n' ' ')
+          echo "added: $ADDED"
+          [ -n "$ADDED" ] && node pipeline/announce.mjs $ADDED || echo "no new stories"

@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "node --test",
-    "build": "node build/build.mjs"
+    "build": "node build/build.mjs",
+    "daily": "node pipeline/daily.mjs",
+    "announce": "node pipeline/announce.mjs"
   },
   "keywords": [],
   "author": "",
@@ -18,8 +20,6 @@
   "devDependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/ibm-plex-serif": "^5.2.7",
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/space-grotesk": "^5.2.10",
     "esbuild": "^0.28.1",
     "motion": "^11.18.2"
   }

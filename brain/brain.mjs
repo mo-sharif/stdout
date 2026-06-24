@@ -30,5 +30,7 @@ const rel = ok ? join('content', story.category, `${story.slug}.json`) : join('d
 const out = join(ROOT, rel);
 await mkdir(dirname(out), { recursive: true });
 await writeFile(out, payload);
-await writeFile(out.replace(/\.json$/, '.verify.json'), JSON.stringify({ shapeErrors, ...report }, null, 2));
+const reportPath = join(ROOT, 'reports', `${story.slug}.verify.json`);
+await mkdir(dirname(reportPath), { recursive: true });
+await writeFile(reportPath, JSON.stringify({ shapeErrors, ...report }, null, 2));
 console.log(ok ? `published candidate -> ${rel}` : `held for review -> ${rel} (${report.unsupported.length} unsupported, ${shapeErrors.length} shape errors)`);
