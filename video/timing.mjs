@@ -32,3 +32,21 @@ export function buildTiming(script, { fps = 30 } = {}) {
   }
   return { fps, total: round(t), segments };
 }
+
+// Build timing from REAL measured audio durations (overrides the word-count estimate).
+// audioSegs: [{ id, duration }]; a segment with no audio falls back to its estimate.
+export function timingFromAudio(script, audioSegs, { fps = 30 } = {}) {
+  const byId = new Map(audioSegs.map((a) => [a.id, a.duration]));
+  let t = 0;
+  const segments = [];
+  for (const seg of script.segments) {
+    const audio = byId.get(seg.id);
+    const dur = Math.max(MIN_SEG, (audio || segmentDuration(seg)) + (audio ? 0.3 : 0));
+    segments.push({
+      id: seg.id, start: round(t), duration: round(dur),
+      startFrame: Math.round(t * fps), durationFrames: Math.round(dur * fps),
+    });
+    t += dur + GAP;
+  }
+  return { fps, total: round(t), segments, hasAudio: true };
+}

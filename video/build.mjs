@@ -4,38 +4,52 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildScript } from './script.mjs';
-import { buildTiming } from './timing.mjs';
+import { buildTiming, timingFromAudio } from './timing.mjs';
 import { buildPackage } from './package.mjs';
+import { buildVoiceover } from './vo.mjs';
 import { uploadVideo, uploadEnabled } from './upload.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const storyPath = args.find((a) => a.endsWith('.json'));
-const DRY = args.includes('--dry');        // skip the (slow) render — just emit metadata + props
+const DRY = args.includes('--dry');       // skip the (slow) render — just emit metadata + props
+const VOICE = args.includes('--voice');   // synthesize narration via the cloned voice (:8880)
 const DO_UPLOAD = args.includes('--upload');
 if (!storyPath) {
-  console.error('usage: node video/build.mjs content/<cat>/<slug>.json [--dry] [--upload]');
+  console.error('usage: node video/build.mjs content/<cat>/<slug>.json [--voice] [--dry] [--upload]');
   process.exit(1);
 }
 
-// 1. verified story -> render-ready script/timing + YouTube metadata (all deterministic)
+// 1. verified story -> render-ready script + (voiced or estimated) timing + YouTube metadata
 const story = JSON.parse(await readFile(join(ROOT, storyPath), 'utf8'));
 const script = buildScript(story);
-const timing = buildTiming(script);
+
+let audio = null;
+let timing;
+if (VOICE && !DRY) {
+  const audioDir = join(ROOT, 'docs/assets/_audio', story.slug);
+  console.log(`synthesizing voiceover via ${process.env.TTS_BASE_URL || 'http://127.0.0.1:8880'} …`);
+  const segs = await buildVoiceover(script, audioDir);
+  timing = timingFromAudio(script, segs);
+  audio = { slug: story.slug, segments: segs };
+  console.log(`voiceover: ${segs.filter((s) => s.file).length}/${segs.length} segments voiced, ${timing.total}s`);
+} else {
+  timing = buildTiming(script);
+}
 const pkg = buildPackage(story, script, timing);
 
 const outDir = join(ROOT, 'video/out', story.slug);
 await mkdir(outDir, { recursive: true });
 await writeFile(join(outDir, 'package.json'), JSON.stringify(pkg, null, 2));
-await writeFile(join(outDir, 'render-props.json'), JSON.stringify({ story, script, timing }, null, 2));
-console.log(`story: ${story.slug} · ${script.segments.length} segments · ${timing.total}s · ${pkg.chapters.length} chapters`);
+await writeFile(join(outDir, 'render-props.json'), JSON.stringify({ story, script, timing, audio }, null, 2));
+console.log(`story: ${story.slug} · ${script.segments.length} segments · ${timing.total}s · ${pkg.chapters.length} chapters · ${audio ? 'voiced' : 'silent'}`);
 
-// 2. render the terminal-aesthetic video for THIS story (inputProps override the sample defaults)
+// 2. render the terminal-aesthetic video for THIS story
 const mp4 = join(outDir, `${story.slug}-landscape.mp4`);
 if (DRY) {
   console.log(`--dry: skipped render. metadata + props written to ${outDir}`);
 } else {
-  const inputProps = { story, script, timing };
+  const inputProps = { story, script, timing, audio };
   console.log('rendering…');
   const serveUrl = await bundle({ entryPoint: join(ROOT, 'video/remotion/index.ts'), publicDir: join(ROOT, 'docs/assets') });
   const composition = await selectComposition({ serveUrl, id: 'StoryLandscape', inputProps });

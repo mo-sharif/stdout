@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, delayRender, continueRender } from 'remotion';
+import { AbsoluteFill, Sequence, Audio, staticFile, useCurrentFrame, useVideoConfig, delayRender, continueRender } from 'remotion';
 import { C, MONO, fontCss, CAT_ACCENT } from './theme';
 import { SceneRouter, Dot } from './scenes';
 
@@ -42,10 +42,11 @@ const Statusline: React.FC<any> = ({ story, accent, timing, segs }) => {
   );
 };
 
-export const Story: React.FC<any> = ({ story, script, timing }) => {
+export const Story: React.FC<any> = ({ story, script, timing, audio }) => {
   const accent = CAT_ACCENT[story?.category] || C.green;
   const segs = script?.segments || [];
   const times = timing?.segments || [];
+  const audioById = new Map((audio?.segments || []).map((a: any) => [a.id, a.file]));
   const { durationInFrames } = useVideoConfig();
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg, fontFamily: MONO, color: C.text }}>
@@ -60,6 +61,7 @@ export const Story: React.FC<any> = ({ story, script, timing }) => {
         return (
           <Sequence key={seg.id} from={start} durationInFrames={dur} name={seg.id} layout="none">
             <SceneRouter seg={seg} accent={accent} story={story} dur={dur} />
+            {audio && audioById.get(seg.id) ? <Audio src={staticFile(`_audio/${audio.slug}/${audioById.get(seg.id)}`)} /> : null}
           </Sequence>
         );
       })}
