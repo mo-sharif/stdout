@@ -1,9 +1,10 @@
 import React from 'react';
-import { useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';
-import { C } from './theme';
+import { useCurrentFrame, interpolate, spring, Sequence, AbsoluteFill } from 'remotion';
+import { C, MONO } from './theme';
 
 // ---- shared atoms ---------------------------------------------------------
 const FPS = 30;
+const PAD = '112px 84px 96px';
 const typed = (text: string, frame: number, start: number, cps = 30) =>
   String(text || '').slice(0, Math.max(0, Math.floor(((frame - start) / FPS) * cps)));
 
@@ -102,25 +103,93 @@ const TerminalScene: React.FC<any> = ({ scene, accent }) => {
   const lines = scene.lines || [];
   const colorOf = (c: string) => (c === 'err' ? C.red : c === 'pr' ? C.green : c === 'dim' ? C.faint : C.text);
   let acc = 10;
-  const starts = lines.map((L: any) => { const s = acc; acc += Math.max(8, (L.t || '').length * 0.5); return s; });
+  const starts = lines.map((L: any) => { const s = acc; acc += Math.max(7, (L.t || '').length * 0.34); return s; });
   return (
     <Panel title={scene.title || 'zsh'} accent={accent}>
       <div style={{ fontSize: 30, lineHeight: 1.72 }}>
         {lines.map((L: any, i: number) => {
           const start = starts[i];
-          const shown = typed(L.t || '', frame, start, 46);
+          const shown = typed(L.t || '', frame, start, 55);
           if (frame < start) return <div key={i} style={{ height: 0 }} />;
-          const isErr = L.c === 'err';
-          const flash = isErr ? interpolate(frame - (start + (L.t || '').length / 46 * FPS), [0, 4, 10], [0.4, 1, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) : 1;
           return (
-            <div key={i} style={{ color: colorOf(L.c), opacity: flash }}>
+            <div key={i} style={{ color: colorOf(L.c) }}>
               {shown}{shown.length < (L.t || '').length && <Cursor color={colorOf(L.c)} />}
             </div>
           );
         })}
       </div>
-      {scene.caption ? <Lower text={scene.caption} from={acc + 18} accent={accent} /> : null}
+      {scene.caption ? <Lower text={scene.caption} from={acc + 14} accent={accent} /> : null}
     </Panel>
+  );
+};
+
+const GraphScene: React.FC<any> = ({ scene, accent }) => {
+  const frame = useCurrentFrame();
+  const nodes: string[] = scene.nodes || [];
+  const n = Math.max(1, nodes.length);
+  const cx = 760, cy = 350, R = 320, ry = 250;
+  const cascade = 95;
+  const pos = (i: number) => { const a = (i / n) * Math.PI * 2 - Math.PI / 2; return { x: cx + Math.cos(a) * R, y: cy + Math.sin(a) * ry }; };
+  return (
+    <Panel title={`dependency graph · ${scene.center}`} accent={accent}>
+      <svg viewBox="0 0 1520 700" style={{ width: '100%', height: '100%' }}>
+        {nodes.map((d, i) => {
+          const { x, y } = pos(i);
+          const draw = interpolate(frame - 20 - i * 3, [0, 10], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+          const failed = frame > cascade + i * 6;
+          return <line key={'l' + i} x1={cx} y1={cy} x2={cx + (x - cx) * draw} y2={cy + (y - cy) * draw} stroke={failed ? C.red : C.lineBright} strokeWidth={2} opacity={failed ? 0.9 : 0.6} />;
+        })}
+        {nodes.map((d, i) => {
+          const { x, y } = pos(i);
+          const pop = spring({ frame: frame - 24 - i * 3, fps: FPS, config: { damping: 12 } });
+          const failed = frame > cascade + i * 6;
+          return (
+            <g key={'n' + i} opacity={pop} transform={`translate(${x},${y}) scale(${0.6 + pop * 0.4})`}>
+              <circle r={30} fill={failed ? 'rgba(232,93,93,0.16)' : 'rgba(70,209,126,0.12)'} stroke={failed ? C.red : accent} strokeWidth={2} />
+              <text textAnchor="middle" dy="6" fontSize="19" fill={failed ? C.red : C.text} fontFamily={MONO}>{d}</text>
+            </g>
+          );
+        })}
+        <g transform={`translate(${cx},${cy})`}>
+          <circle r={46} fill="rgba(60,199,212,0.16)" stroke={C.cyan} strokeWidth={2} />
+          <text textAnchor="middle" dy="6" fontSize="21" fontWeight="700" fill={C.greenBright} fontFamily={MONO}>{scene.center}</text>
+        </g>
+      </svg>
+      <Lower text={frame > cascade ? `✖ ${n} downstream builds failed` : 'one package — everything downstream depends on it'} from={0} accent={frame > cascade ? C.red : accent} />
+    </Panel>
+  );
+};
+
+const StatsScene: React.FC<any> = ({ scene, accent }) => {
+  const frame = useCurrentFrame();
+  const items = scene.items || [];
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', height: '100%', gap: 40 }}>
+      {items.map((it: any, i: number) => {
+        const start = 10 + i * 12;
+        const p = interpolate(frame, [start, start + 42], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+        const op = interpolate(frame, [start, start + 8], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+        return (
+          <div key={i} style={{ textAlign: 'center', opacity: op, transform: `translateY(${(1 - op) * 18}px)` }}>
+            <div style={{ fontSize: 112, fontWeight: 700, color: accent, textShadow: `0 0 34px ${accent}44`, lineHeight: 1 }}>{Math.round((it.to || 0) * p).toLocaleString()}</div>
+            <div style={{ fontSize: 28, color: C.dim, marginTop: 20, maxWidth: 360 }}>{it.label}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const QuoteScene: React.FC<any> = ({ scene, accent }) => {
+  const frame = useCurrentFrame();
+  const full = scene.text || '';
+  const text = typed(full, frame, 12, 22);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 36, paddingLeft: 20 }}>
+      <div style={{ fontSize: 150, color: accent, opacity: 0.5, lineHeight: 0.4, fontWeight: 700, height: 70 }}>&ldquo;</div>
+      <div style={{ fontSize: 56, lineHeight: 1.38, color: C.text, maxWidth: 1520, fontWeight: 600 }}>{text}{text.length < full.length && <Cursor />}</div>
+      <div style={{ fontSize: 31, color: C.dim, opacity: interpolate(frame, [64, 80], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) }}>&mdash; {scene.cite}</div>
+    </div>
   );
 };
 
@@ -136,9 +205,6 @@ const CardScene: React.FC<any> = ({ seg, scene, accent }) => {
         <span style={{ fontSize: 58, fontWeight: 700, color: C.text, lineHeight: 1.1 }}>{seg.heading}</span>
       </div>
       <div style={{ fontSize: 36, lineHeight: 1.55, color: C.dim, maxWidth: 1420 }}>{body}{body.length < bodyFull.length && <Cursor />}</div>
-      {scene.type && scene.type !== 'prose' ? (
-        <div style={{ color: C.faint, fontSize: 22, marginTop: 8 }}>[ {scene.type} visual — bespoke scene lands in stage 2b ]</div>
-      ) : null}
     </div>
   );
 };
@@ -154,19 +220,39 @@ const OutroScene: React.FC<any> = ({ scene, story, accent }) => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 13, marginTop: 8 }}>
         {sources.map((s: any, i: number) => {
           const op = interpolate(frame, [44 + i * 11, 56 + i * 11], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-          return <div key={i} style={{ opacity: op, fontSize: 27, color: C.text }}>→ {s.title} <span style={{ color: C.faint }}>({s.platform})</span></div>;
+          return <div key={i} style={{ opacity: op, fontSize: 27, color: C.text }}>&rarr; {s.title} <span style={{ color: C.faint }}>({s.platform})</span></div>;
         })}
       </div>
-      <div style={{ marginTop: 22, color: C.faint, fontSize: 22 }}>researched · written · verified autonomously on local hardware</div>
+      <div style={{ marginTop: 22, color: C.faint, fontSize: 22 }}>researched &middot; written &middot; verified autonomously on local hardware</div>
     </div>
   );
 };
 
-export const SceneRouter: React.FC<any> = ({ seg, accent, story }) => {
-  if (seg.kind === 'hook') return <TitleScene seg={seg} story={story} accent={accent} />;
-  if (seg.kind === 'outro') return <OutroScene scene={seg.scenes?.[0] || {}} story={story} accent={accent} />;
-  const scene = seg.scenes?.[0] || { type: 'prose' };
-  if (scene.type === 'code') return <CodeScene scene={scene} accent={accent} />;
-  if (scene.type === 'terminal') return <TerminalScene scene={scene} accent={accent} />;
-  return <CardScene seg={seg} scene={scene} accent={accent} />;
+// ---- routing --------------------------------------------------------------
+const One: React.FC<any> = ({ scene, seg, accent }) => {
+  switch (scene.type) {
+    case 'code': return <CodeScene scene={scene} accent={accent} />;
+    case 'terminal': return <TerminalScene scene={scene} accent={accent} />;
+    case 'graph': return <GraphScene scene={scene} accent={accent} />;
+    case 'stats': return <StatsScene scene={scene} accent={accent} />;
+    case 'quote': return <QuoteScene scene={scene} accent={accent} />;
+    default: return <CardScene seg={seg} scene={scene} accent={accent} />;
+  }
+};
+
+export const SceneRouter: React.FC<any> = ({ seg, accent, story, dur }) => {
+  if (seg.kind === 'hook') return <AbsoluteFill style={{ padding: PAD }}><TitleScene seg={seg} story={story} accent={accent} /></AbsoluteFill>;
+  if (seg.kind === 'outro') return <AbsoluteFill style={{ padding: PAD }}><OutroScene scene={seg.scenes?.[0] || {}} story={story} accent={accent} /></AbsoluteFill>;
+  const scenes = seg.scenes?.length ? seg.scenes : [{ type: 'prose' }];
+  if (scenes.length === 1) return <AbsoluteFill style={{ padding: PAD }}><One scene={scenes[0]} seg={seg} accent={accent} /></AbsoluteFill>;
+  const each = Math.floor((dur || 90) / scenes.length);
+  return (
+    <>
+      {scenes.map((sc: any, i: number) => (
+        <Sequence key={i} from={i * each} durationInFrames={i === scenes.length - 1 ? Math.max(1, (dur || 90) - each * i) : each} layout="none">
+          <AbsoluteFill style={{ padding: PAD }}><One scene={sc} seg={seg} accent={accent} /></AbsoluteFill>
+        </Sequence>
+      ))}
+    </>
+  );
 };

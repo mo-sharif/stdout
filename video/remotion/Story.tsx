@@ -59,9 +59,7 @@ export const Story: React.FC<any> = ({ story, script, timing }) => {
         const dur = Math.max(1, next - start);
         return (
           <Sequence key={seg.id} from={start} durationInFrames={dur} name={seg.id} layout="none">
-            <AbsoluteFill style={{ padding: '112px 84px 96px' }}>
-              <SceneRouter seg={seg} accent={accent} story={story} />
-            </AbsoluteFill>
+            <SceneRouter seg={seg} accent={accent} story={story} dur={dur} />
           </Sequence>
         );
       })}
