@@ -25,6 +25,6 @@ jobs:
         run: node video/build.mjs "${{ inputs.story }}" --voice ${{ inputs.upload && '--upload' || '' }}
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.story }}
+          name: video-${{ github.run_id }}
           path: video/out/**/*.mp4
           if-no-files-found: error
