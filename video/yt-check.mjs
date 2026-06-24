@@ -22,6 +22,18 @@ if (!tok.access_token) {
 const data = await fetch('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&mine=true', {
   headers: { Authorization: `Bearer ${tok.access_token}` },
 }).then((r) => r.json());
+if (data.error) {
+  // An upload-only token (youtube.upload) can't call the read API — that's expected
+  // and does NOT mean the token is bad: it refreshed fine, so it's valid + upload-ready.
+  if (data.error.code === 403 && /scope|permission/i.test(JSON.stringify(data.error))) {
+    console.log('OK — token refreshes and is VALID with the youtube.upload scope (ready to upload).');
+    console.log('Note: an upload-only token cannot read the channel name; uploads go to whichever channel');
+    console.log('you authorized at consent. Re-mint with youtube.readonly added to print the channel name here.');
+    process.exit(0);
+  }
+  console.error('channels.list error:', JSON.stringify(data.error).slice(0, 200));
+  process.exit(1);
+}
 const c = data.items?.[0];
 if (!c) {
   console.error('authorized, but no channel returned:', JSON.stringify(data).slice(0, 200));
