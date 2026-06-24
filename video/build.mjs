@@ -7,6 +7,7 @@ import { buildScript } from './script.mjs';
 import { buildTiming, timingFromAudio } from './timing.mjs';
 import { buildPackage } from './package.mjs';
 import { buildVoiceover } from './vo.mjs';
+import { buildShort } from './short.mjs';
 import { uploadVideo, uploadEnabled } from './upload.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -60,6 +61,17 @@ if (DRY) {
   });
   await renderStill({ serveUrl, composition, frame: 70, output: join(outDir, `${story.slug}-thumb.png`), inputProps, overwrite: true });
   console.log('rendered ->', mp4);
+
+  // vertical short (Reels/TikTok) — punchy subset, reuses the synthesized audio
+  const short = buildShort(story, script, timing, audio);
+  const shortComp = await selectComposition({ serveUrl, id: 'StoryVertical', inputProps: short });
+  const shortMp4 = join(outDir, `${story.slug}-short.mp4`);
+  let slast = -1;
+  await renderMedia({
+    serveUrl, composition: shortComp, codec: 'h264', outputLocation: shortMp4, inputProps: short,
+    onProgress: ({ progress }) => { const p = Math.floor(progress * 20) * 5; if (p > slast) { slast = p; console.log(`short ${p}%`); } },
+  });
+  console.log('rendered short ->', shortMp4);
 }
 
 // 3. upload (private, review-first) — only with --upload AND creds present

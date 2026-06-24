@@ -1,10 +1,11 @@
 import React from 'react';
-import { useCurrentFrame, interpolate, spring, Sequence, AbsoluteFill } from 'remotion';
+import { useCurrentFrame, interpolate, spring, Sequence, AbsoluteFill, useVideoConfig } from 'remotion';
 import { C, MONO } from './theme';
 
 // ---- shared atoms ---------------------------------------------------------
 const FPS = 30;
 const PAD = '112px 84px 96px';
+const usePortrait = () => { const { width, height } = useVideoConfig(); return height > width; };
 const typed = (text: string, frame: number, start: number, cps = 30) =>
   String(text || '').slice(0, Math.max(0, Math.floor(((frame - start) / FPS) * cps)));
 
@@ -62,27 +63,29 @@ const tokenize = (line: string) =>
 // ---- scenes ---------------------------------------------------------------
 const TitleScene: React.FC<any> = ({ seg, story, accent }) => {
   const frame = useCurrentFrame();
+  const P = usePortrait();
   const cmd = `$ stdout play "${story.title}"`;
   const titleIn = spring({ frame: frame - 38, fps: FPS, config: { damping: 14 } });
   const hookFull = story.hook || seg.narration || '';
   const hook = typed(hookFull, frame, 66, 30);
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 30 }}>
-      <div style={{ color: C.dim, fontSize: 31 }}>{typed(cmd, frame, 4, 26)}{frame < 44 && <Cursor />}</div>
-      <div style={{ opacity: titleIn, transform: `translateY(${(1 - titleIn) * 28}px)`, fontSize: 86, fontWeight: 700, lineHeight: 1.04, color: accent, textShadow: `0 0 36px ${accent}55`, maxWidth: 1500 }}>{story.title}</div>
-      <div style={{ fontSize: 27, color: C.dim, opacity: interpolate(frame, [52, 64], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) }}>[ {story.kicker || story.category} ]</div>
-      <div style={{ fontSize: 35, lineHeight: 1.5, color: C.text, maxWidth: 1380 }}>{hook}{frame > 66 && hook.length < hookFull.length && <Cursor />}</div>
+      <div style={{ color: C.dim, fontSize: P ? 28 : 31 }}>{typed(cmd, frame, 4, 26)}{frame < 44 && <Cursor />}</div>
+      <div style={{ opacity: titleIn, transform: `translateY(${(1 - titleIn) * 28}px)`, fontSize: P ? 66 : 86, fontWeight: 700, lineHeight: 1.05, color: accent, textShadow: `0 0 36px ${accent}55`, maxWidth: P ? 920 : 1500 }}>{story.title}</div>
+      <div style={{ fontSize: P ? 25 : 27, color: C.dim, opacity: interpolate(frame, [52, 64], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) }}>[ {story.kicker || story.category} ]</div>
+      <div style={{ fontSize: P ? 32 : 35, lineHeight: 1.5, color: C.text, maxWidth: P ? 920 : 1380 }}>{hook}{frame > 66 && hook.length < hookFull.length && <Cursor />}</div>
     </div>
   );
 };
 
 const CodeScene: React.FC<any> = ({ scene, accent }) => {
   const frame = useCurrentFrame();
+  const P = usePortrait();
   const lines = String(scene.code || '').split('\n');
   const per = 4;
   return (
     <Panel title={scene.file || 'source'} accent={accent}>
-      <div style={{ fontSize: 30, lineHeight: 1.62 }}>
+      <div style={{ fontSize: P ? 23 : 30, lineHeight: 1.62 }}>
         {lines.map((ln: string, i: number) => {
           const op = interpolate(frame - 10 - i * per, [0, 6], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
           return (
@@ -100,13 +103,14 @@ const CodeScene: React.FC<any> = ({ scene, accent }) => {
 
 const TerminalScene: React.FC<any> = ({ scene, accent }) => {
   const frame = useCurrentFrame();
+  const P = usePortrait();
   const lines = scene.lines || [];
   const colorOf = (c: string) => (c === 'err' ? C.red : c === 'pr' ? C.green : c === 'dim' ? C.faint : C.text);
   let acc = 10;
   const starts = lines.map((L: any) => { const s = acc; acc += Math.max(7, (L.t || '').length * 0.34); return s; });
   return (
     <Panel title={scene.title || 'zsh'} accent={accent}>
-      <div style={{ fontSize: 30, lineHeight: 1.72 }}>
+      <div style={{ fontSize: P ? 24 : 30, lineHeight: 1.72 }}>
         {lines.map((L: any, i: number) => {
           const start = starts[i];
           const shown = typed(L.t || '', frame, start, 55);
@@ -125,14 +129,17 @@ const TerminalScene: React.FC<any> = ({ scene, accent }) => {
 
 const GraphScene: React.FC<any> = ({ scene, accent }) => {
   const frame = useCurrentFrame();
+  const P = usePortrait();
   const nodes: string[] = scene.nodes || [];
   const n = Math.max(1, nodes.length);
-  const cx = 760, cy = 350, R = 320, ry = 250;
+  // squarer layout in portrait so the graph fills the taller panel
+  const cx = 760, cy = P ? 540 : 350, R = P ? 360 : 320, ry = P ? 470 : 250;
+  const vbH = P ? 1120 : 700;
   const cascade = 95;
   const pos = (i: number) => { const a = (i / n) * Math.PI * 2 - Math.PI / 2; return { x: cx + Math.cos(a) * R, y: cy + Math.sin(a) * ry }; };
   return (
     <Panel title={`dependency graph · ${scene.center}`} accent={accent}>
-      <svg viewBox="0 0 1520 700" style={{ width: '100%', height: '100%' }}>
+      <svg viewBox={`0 0 1520 ${vbH}`} style={{ width: '100%', height: '100%' }}>
         {nodes.map((d, i) => {
           const { x, y } = pos(i);
           const draw = interpolate(frame - 20 - i * 3, [0, 10], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
@@ -145,14 +152,14 @@ const GraphScene: React.FC<any> = ({ scene, accent }) => {
           const failed = frame > cascade + i * 6;
           return (
             <g key={'n' + i} opacity={pop} transform={`translate(${x},${y}) scale(${0.6 + pop * 0.4})`}>
-              <circle r={30} fill={failed ? 'rgba(232,93,93,0.16)' : 'rgba(70,209,126,0.12)'} stroke={failed ? C.red : accent} strokeWidth={2} />
-              <text textAnchor="middle" dy="6" fontSize="19" fill={failed ? C.red : C.text} fontFamily={MONO}>{d}</text>
+              <circle r={34} fill={failed ? 'rgba(232,93,93,0.16)' : 'rgba(70,209,126,0.12)'} stroke={failed ? C.red : accent} strokeWidth={2} />
+              <text textAnchor="middle" dy="6" fontSize="22" fill={failed ? C.red : C.text} fontFamily={MONO}>{d}</text>
             </g>
           );
         })}
         <g transform={`translate(${cx},${cy})`}>
-          <circle r={46} fill="rgba(60,199,212,0.16)" stroke={C.cyan} strokeWidth={2} />
-          <text textAnchor="middle" dy="6" fontSize="21" fontWeight="700" fill={C.greenBright} fontFamily={MONO}>{scene.center}</text>
+          <circle r={52} fill="rgba(60,199,212,0.16)" stroke={C.cyan} strokeWidth={2} />
+          <text textAnchor="middle" dy="6" fontSize="24" fontWeight="700" fill={C.greenBright} fontFamily={MONO}>{scene.center}</text>
         </g>
       </svg>
       <Lower text={frame > cascade ? `✖ ${n} downstream builds failed` : 'one package — everything downstream depends on it'} from={0} accent={frame > cascade ? C.red : accent} />
@@ -162,17 +169,18 @@ const GraphScene: React.FC<any> = ({ scene, accent }) => {
 
 const StatsScene: React.FC<any> = ({ scene, accent }) => {
   const frame = useCurrentFrame();
+  const P = usePortrait();
   const items = scene.items || [];
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', height: '100%', gap: 40 }}>
+    <div style={{ display: 'flex', flexDirection: P ? 'column' : 'row', alignItems: 'center', justifyContent: 'space-around', height: '100%', gap: P ? 56 : 40 }}>
       {items.map((it: any, i: number) => {
         const start = 10 + i * 12;
         const p = interpolate(frame, [start, start + 42], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
         const op = interpolate(frame, [start, start + 8], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
         return (
           <div key={i} style={{ textAlign: 'center', opacity: op, transform: `translateY(${(1 - op) * 18}px)` }}>
-            <div style={{ fontSize: 112, fontWeight: 700, color: accent, textShadow: `0 0 34px ${accent}44`, lineHeight: 1 }}>{Math.round((it.to || 0) * p).toLocaleString()}</div>
-            <div style={{ fontSize: 28, color: C.dim, marginTop: 20, maxWidth: 360 }}>{it.label}</div>
+            <div style={{ fontSize: P ? 104 : 112, fontWeight: 700, color: accent, textShadow: `0 0 34px ${accent}44`, lineHeight: 1 }}>{Math.round((it.to || 0) * p).toLocaleString()}</div>
+            <div style={{ fontSize: P ? 30 : 28, color: C.dim, marginTop: P ? 12 : 20 }}>{it.label}</div>
           </div>
         );
       })}
@@ -182,19 +190,21 @@ const StatsScene: React.FC<any> = ({ scene, accent }) => {
 
 const QuoteScene: React.FC<any> = ({ scene, accent }) => {
   const frame = useCurrentFrame();
+  const P = usePortrait();
   const full = scene.text || '';
   const text = typed(full, frame, 12, 22);
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 36, paddingLeft: 20 }}>
       <div style={{ fontSize: 150, color: accent, opacity: 0.5, lineHeight: 0.4, fontWeight: 700, height: 70 }}>&ldquo;</div>
-      <div style={{ fontSize: 56, lineHeight: 1.38, color: C.text, maxWidth: 1520, fontWeight: 600 }}>{text}{text.length < full.length && <Cursor />}</div>
-      <div style={{ fontSize: 31, color: C.dim, opacity: interpolate(frame, [64, 80], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) }}>&mdash; {scene.cite}</div>
+      <div style={{ fontSize: P ? 48 : 56, lineHeight: 1.38, color: C.text, maxWidth: P ? 920 : 1520, fontWeight: 600 }}>{text}{text.length < full.length && <Cursor />}</div>
+      <div style={{ fontSize: P ? 28 : 31, color: C.dim, opacity: interpolate(frame, [64, 80], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) }}>&mdash; {scene.cite}</div>
     </div>
   );
 };
 
 const CardScene: React.FC<any> = ({ seg, scene, accent }) => {
   const frame = useCurrentFrame();
+  const P = usePortrait();
   const headIn = spring({ frame, fps: FPS, config: { damping: 14 } });
   const bodyFull = seg.narration || scene.text || '';
   const body = typed(bodyFull, frame, 16, 32);
@@ -202,28 +212,29 @@ const CardScene: React.FC<any> = ({ seg, scene, accent }) => {
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 30 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 20, opacity: headIn, transform: `translateY(${(1 - headIn) * 20}px)` }}>
         <span style={{ width: 14, height: 38, background: accent, boxShadow: `0 0 20px ${accent}` }} />
-        <span style={{ fontSize: 58, fontWeight: 700, color: C.text, lineHeight: 1.1 }}>{seg.heading}</span>
+        <span style={{ fontSize: P ? 48 : 58, fontWeight: 700, color: C.text, lineHeight: 1.1 }}>{seg.heading}</span>
       </div>
-      <div style={{ fontSize: 36, lineHeight: 1.55, color: C.dim, maxWidth: 1420 }}>{body}{body.length < bodyFull.length && <Cursor />}</div>
+      <div style={{ fontSize: P ? 32 : 36, lineHeight: 1.55, color: C.dim, maxWidth: P ? 920 : 1420 }}>{body}{body.length < bodyFull.length && <Cursor />}</div>
     </div>
   );
 };
 
 const OutroScene: React.FC<any> = ({ scene, story, accent }) => {
   const frame = useCurrentFrame();
+  const P = usePortrait();
   const url = `mo-sharif.github.io/stdout/${story.category}/${story.slug}/`;
   const sources = scene.sources || [];
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', gap: 26 }}>
-      <div style={{ fontSize: 31, color: C.dim }}>{typed(`$ open ${url}`, frame, 4, 28)}{frame < 60 && <Cursor />}</div>
-      <div style={{ fontSize: 64, fontWeight: 700, color: accent, textShadow: `0 0 30px ${accent}55` }}>read the full story</div>
+      <div style={{ fontSize: P ? 27 : 31, color: C.dim }}>{typed(`$ open ${url}`, frame, 4, 28)}{frame < 60 && <Cursor />}</div>
+      <div style={{ fontSize: P ? 56 : 64, fontWeight: 700, color: accent, textShadow: `0 0 30px ${accent}55` }}>read the full story</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 13, marginTop: 8 }}>
         {sources.map((s: any, i: number) => {
           const op = interpolate(frame, [44 + i * 11, 56 + i * 11], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-          return <div key={i} style={{ opacity: op, fontSize: 27, color: C.text }}>&rarr; {s.title} <span style={{ color: C.faint }}>({s.platform})</span></div>;
+          return <div key={i} style={{ opacity: op, fontSize: P ? 25 : 27, color: C.text }}>&rarr; {s.title} <span style={{ color: C.faint }}>({s.platform})</span></div>;
         })}
       </div>
-      <div style={{ marginTop: 22, color: C.faint, fontSize: 22 }}>researched &middot; written &middot; verified autonomously on local hardware</div>
+      <div style={{ marginTop: 22, color: C.faint, fontSize: P ? 21 : 22 }}>researched &middot; written &middot; verified autonomously on local hardware</div>
     </div>
   );
 };
