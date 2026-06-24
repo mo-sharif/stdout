@@ -87,7 +87,7 @@ safe(() => {
     let html = '';
     nodes.forEach((d, i) => { const a = (i / nodes.length) * Math.PI * 2; const x = cx + Math.cos(a) * 250, y = cy + Math.sin(a) * 110; html += `<line class="gline" data-l="${i}" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`; });
     nodes.forEach((d, i) => { const a = (i / nodes.length) * Math.PI * 2; const x = cx + Math.cos(a) * 250, y = cy + Math.sin(a) * 110; html += `<g class="gnode" data-n="${i}"><circle cx="${x}" cy="${y}" r="22" fill="rgba(67,224,160,.14)" stroke="#43e0a0"/><text x="${x}" y="${y + 4}" text-anchor="middle">${d}</text></g>`; });
-    html += `<g class="gnode"><circle cx="${cx}" cy="${cy}" r="34" fill="rgba(55,225,255,.18)" stroke="#37e1ff"/><text x="${cx}" y="${cy + 4}" text-anchor="middle" style="fill:#37e1ff">${center}</text></g>`;
+    html += `<g class="gnode"><circle cx="${cx}" cy="${cy}" r="34" fill="rgba(55,225,255,.18)" stroke="#37e1ff"/><text x="${cx}" y="${cy + 4}" text-anchor="middle" style="fill:#46d17e">${center}</text></g>`;
     svg.innerHTML = html;
     const status = $('[data-status]', g);
     const pull = $('[data-pull]', g), reset = $('[data-reset]', g);
