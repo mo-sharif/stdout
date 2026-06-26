@@ -24,17 +24,17 @@ jobs:
         with: { fetch-depth: 0 }
       # zero runtime deps — brain, build and tests run on plain node, no npm install
       - run: node --test
-      # Pre-load + pin both models BEFORE the timed brain run. A cold load on the contended
-      # GPU box can take ~5 min, which exceeds Node fetch's 300s headersTimeout and aborts the
-      # request mid-load (Ollama then cancels the load). curl/preload has no such cap, so the
-      # slow load happens here and brain.mjs only ever hits an already-resident model.
-      - name: warm up models
+      # Pre-load + pin ONLY the brain model (used first and for most calls). Warming the
+      # 23GB verify model too would evict the brain model from the GPU on this contended
+      # box, forcing it to cold-load again on the first real call. The verify model loads
+      # on demand later; brain.mjs uses node:http with a long inactivity timeout, so that
+      # one cold load (and any slow CPU-offloaded generation) is absorbed rather than
+      # aborted — unlike fetch's fixed 300s headersTimeout. curl/preload has no such cap.
+      - name: warm up the brain model
         run: |
-          for m in "$BRAIN_MODEL" "$VERIFY_MODEL"; do
-            echo "warming $m ..."
-            curl -sf --max-time 1200 "$OLLAMA_BASE/api/generate" \
-              -d "{\"model\":\"$m\",\"keep_alive\":\"$OLLAMA_KEEP_ALIVE\"}" >/dev/null \
-              || { echo "::error::ollama warmup failed for $m"; exit 1; }
-          done
+          echo "warming $BRAIN_MODEL ..."
+          curl -sf --max-time 1200 "$OLLAMA_BASE/api/generate" \
+            -d "{\"model\":\"$BRAIN_MODEL\",\"keep_alive\":\"$OLLAMA_KEEP_ALIVE\"}" >/dev/null \
+            || { echo "::error::ollama warmup failed for $BRAIN_MODEL"; exit 1; }
       - name: generate, build, open review PR
         run: node pipeline/daily.mjs

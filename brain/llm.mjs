@@ -1,3 +1,5 @@
+import http from 'node:http';
+import https from 'node:https';
 import { OLLAMA_BASE, BRAIN_MODEL, KEEP_ALIVE, REQUEST_TIMEOUT_MS, RETRY_BACKOFF_MS } from './config.mjs';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -20,23 +22,41 @@ export function extractJSON(text) {
   return JSON.parse(body.slice(start, end));
 }
 
-export async function chat(messages, { model = BRAIN_MODEL, json = false, temperature = 0.4, keepAlive = KEEP_ALIVE, timeoutMs = REQUEST_TIMEOUT_MS } = {}) {
-  let res;
-  try {
-    res = await fetch(`${OLLAMA_BASE}/api/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model, messages, stream: false, keep_alive: keepAlive, options: { temperature }, ...(json ? { format: 'json' } : {}) }),
-      signal: AbortSignal.timeout(timeoutMs),
-    });
-  } catch (e) {
-    // surface the real reason (ECONNREFUSED / TimeoutError / HeadersTimeout) instead of a bare "fetch failed"
-    const reason = e?.cause?.code || e?.cause?.message || e?.message || String(e);
-    throw new Error(`ollama chat (${model}) at ${OLLAMA_BASE} failed: ${reason}`);
-  }
-  if (!res.ok) throw new Error(`ollama ${res.status}: ${await res.text()}`);
-  const data = await res.json();
-  return data.message?.content ?? '';
+/**
+ * POST /api/chat over node:http (NOT fetch). A non-streaming Ollama response
+ * withholds HTTP headers until the whole generation finishes, and undici's
+ * `fetch` aborts after a fixed 300s headersTimeout that cannot be raised without
+ * the (uninstalled) undici package — so a slow cold load or a CPU-offloaded
+ * generation on the GPU-contended box dies with UND_ERR_HEADERS_TIMEOUT.
+ * node:http has no such cap; we bound it with an *inactivity* timeout instead,
+ * which only fires on a genuine stall (no bytes for timeoutMs).
+ */
+export async function chat(messages, { model = BRAIN_MODEL, json = false, temperature = 0.4, keepAlive = KEEP_ALIVE, timeoutMs = REQUEST_TIMEOUT_MS, baseUrl = OLLAMA_BASE } = {}) {
+  const payload = JSON.stringify({ model, messages, stream: false, keep_alive: keepAlive, options: { temperature }, ...(json ? { format: 'json' } : {}) });
+  const url = new URL(`${baseUrl.replace(/\/$/, '')}/api/chat`);
+  const lib = url.protocol === 'https:' ? https : http;
+  return new Promise((resolve, reject) => {
+    const fail = (reason) => reject(new Error(`ollama chat (${model}) at ${baseUrl} failed: ${reason}`));
+    const req = lib.request(
+      url,
+      { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) } },
+      (res) => {
+        let data = '';
+        res.setEncoding('utf8');
+        res.on('data', (c) => { data += c; });
+        res.on('end', () => {
+          if (res.statusCode < 200 || res.statusCode >= 300) return fail(`ollama ${res.statusCode}: ${data.slice(0, 200)}`);
+          try { resolve(JSON.parse(data).message?.content ?? ''); }
+          catch (e) { fail(`bad JSON response: ${e.message}`); }
+        });
+      },
+    );
+    // Inactivity timeout (not a total cap): resets on socket activity, fires only
+    // if the box sends nothing for timeoutMs — covers a long load + slow generation.
+    req.setTimeout(timeoutMs, () => req.destroy(new Error(`no response for ${timeoutMs}ms`)));
+    req.on('error', (e) => fail(e.code || e.message));
+    req.end(payload);
+  });
 }
 
 export async function chatJSON(messages, opts = {}) {
