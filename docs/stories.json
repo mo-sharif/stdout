@@ -1,5 +1,22 @@
 [
   {
+    "slug": "first-complete-reading-of-a-herculaneum-scroll-achieved",
+    "title": "First Complete Reading of a Herculaneum Scroll Achieved",
+    "category": "tech",
+    "kicker": "Tech breakthrough in digital humanities using AI and X-ray imaging",
+    "hook": "For the first time, an entire ancient Herculaneum scroll was virtually unwrapped and read without damaging it, thanks to cutting-edge technology.",
+    "readMinutes": 6,
+    "date": "2026-06-26",
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "name",
+        "title": "An entire Herculaneum scroll has been read for the first time",
+        "url": "https://scrollprize.org/firstscroll"
+      }
+    ]
+  },
+  {
     "slug": "11-lines-broke-the-internet",
     "title": "11 lines of code took down the internet",
     "category": "coding",
