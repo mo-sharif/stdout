@@ -1,0 +1,134 @@
+{
+  "slug": "ibm-unveils-sub-1-nanometer-chip-technology",
+  "title": "IBM Unveils Sub-1 Nanometer Chip Technology",
+  "category": "tech",
+  "kicker": "Engineering breakthrough | Semiconductor innovation | Future of computing",
+  "hook": "IBM's new sub-1 nm chip packs nearly 100 billion transistors, doubling density over its 2 nm predecessor and promising up to 50% more performance or 70% better energy efficiency.",
+  "readMinutes": 6,
+  "date": "2026-06-26",
+  "beats": [
+    {
+      "num": "01 · the setup",
+      "heading": "IBM's Sub-1 Nanometer Chip: A Leap Beyond Atomic Dimensions",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">IBM has introduced a <span class=\"hl\">sub-1 nanometer</span> chip that fits nearly 100 billion transistors onto a fingernail-sized die, roughly twice the density of its 2 nm chip from 2021.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "Enabled by a series of structural and material innovations, including IBM’s groundbreaking three-dimensional nanostack architecture, the technology demonstrates how continued gains in performance and efficiency remain possible even as chip features approach atomic dimensions.",
+          "cite": "IBM Newsroom"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 100,
+              "label": "Transistors per chip"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the innovation",
+      "heading": "Nanostack Architecture: The Industry’s First 3D Nanosheet Design",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Researchers developed a new transistor architecture called <span class=\"hl\">nanostack</span>, the industry’s first known three-dimensional, nanosheet-based design that vertically stacks and staggers transistors for higher density.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "The nanostack design unlocks different material combinations within each stacked layer, optimizing performance and power efficiency independently.",
+          "cite": "IBM Newsroom"
+        }
+      ]
+    },
+    {
+      "num": "03 · the validation",
+      "heading": "Experimental Confirmation of Nanostack Technology",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The nanostack architecture was experimentally validated through ultra-thin dielectric bonding, dual-channel engineering capability, and functional CMOS inverter operation with expected switching performance.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "sources",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "IBM Newsroom",
+              "title": "IBM debuts sub-1 nanometer chip technology",
+              "url": "https://newsroom.ibm.com/2026-06-25-ibm-debuts-worlds-first-sub-1-nanometer-chip-technology",
+              "note": "Source for experimental validation details"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the impact",
+      "heading": "SRAM Scaling and Future Roadmap",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">In research presented at VLSI 2026, IBM showed a <span class=\"hl\">40% scaling in SRAM</span> with the nanostack architecture, enabling more efficient chips for advanced AI workloads.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "With this breakthrough structure, logic technology can extend below the 1 nm node, advancing angstrom-level scaling and projecting at least a decade of future scaling.",
+          "cite": "IBM Newsroom"
+        }
+      ]
+    },
+    {
+      "num": "05 · the ecosystem",
+      "heading": "Partnerships and Facilities Driving Sub-1 nm Production",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">IBM partners with Lam Research, Tokyo Electron, and SCREEN Semiconductor Solutions to develop new High NA EUV processes essential for sub‑1 nm chip manufacturing.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "sources",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "IBM Newsroom",
+              "title": "IBM debuts sub-1 nanometer chip technology",
+              "url": "https://newsroom.ibm.com/2026-06-25-ibm-debuts-worlds-first-sub-1-nanometer-chip-technology",
+              "note": "Source for partnership details"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "06 · the outlook",
+      "heading": "Path to Production and Quantum Foundry Initiative",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">IBM anticipates early adoption of nanostack technology at the sub-1 nm node, with potential production as soon as the next 5 years.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "Additionally, IBM is forming Anderon, a pure-play quantum foundry to manufacture most of the world’s quantum wafers, further solidifying its leadership in semiconductor R&D.",
+          "cite": "IBM Newsroom"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "IBM Newsroom",
+      "title": "IBM debuts sub-1 nanometer chip technology",
+      "url": "https://newsroom.ibm.com/2026-06-25-ibm-debuts-worlds-first-sub-1-nanometer-chip-technology"
+    }
+  ]
+}
