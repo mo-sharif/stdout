@@ -15,10 +15,26 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       OLLAMA_BASE: http://127.0.0.1:11434
+      # single source of truth for models + pin, shared by the warmup step and brain.mjs (config.mjs reads these)
+      BRAIN_MODEL: granite4.1:8b-q5_K_M
+      VERIFY_MODEL: qwen3.6:35b-a3b-q4_K_M
+      OLLAMA_KEEP_ALIVE: 60m
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
       # zero runtime deps — brain, build and tests run on plain node, no npm install
       - run: node --test
+      # Pre-load + pin both models BEFORE the timed brain run. A cold load on the contended
+      # GPU box can take ~5 min, which exceeds Node fetch's 300s headersTimeout and aborts the
+      # request mid-load (Ollama then cancels the load). curl/preload has no such cap, so the
+      # slow load happens here and brain.mjs only ever hits an already-resident model.
+      - name: warm up models
+        run: |
+          for m in "$BRAIN_MODEL" "$VERIFY_MODEL"; do
+            echo "warming $m ..."
+            curl -sf --max-time 1200 "$OLLAMA_BASE/api/generate" \
+              -d "{\"model\":\"$m\",\"keep_alive\":\"$OLLAMA_KEEP_ALIVE\"}" >/dev/null \
+              || { echo "::error::ollama warmup failed for $m"; exit 1; }
+          done
       - name: generate, build, open review PR
         run: node pipeline/daily.mjs
