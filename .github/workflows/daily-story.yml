@@ -20,7 +20,7 @@ jobs:
       VERIFY_MODEL: qwen3.6:35b-a3b-q4_K_M
       OLLAMA_KEEP_ALIVE: 60m
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with: { fetch-depth: 0 }
       # zero runtime deps — brain, build and tests run on plain node, no npm install
       - run: node --test

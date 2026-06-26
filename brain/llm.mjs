@@ -32,7 +32,7 @@ export function extractJSON(text) {
  * which only fires on a genuine stall (no bytes for timeoutMs).
  */
 export async function chat(messages, { model = BRAIN_MODEL, json = false, temperature = 0.4, keepAlive = KEEP_ALIVE, timeoutMs = REQUEST_TIMEOUT_MS, baseUrl = OLLAMA_BASE } = {}) {
-  const payload = JSON.stringify({ model, messages, stream: false, keep_alive: keepAlive, options: { temperature }, ...(json ? { format: 'json' } : {}) });
+  const payload = JSON.stringify({ model, messages, stream: false, keep_alive: keepAlive, options: { temperature, num_gpu: 99 }, ...(json ? { format: 'json' } : {}) });
   const url = new URL(`${baseUrl.replace(/\/$/, '')}/api/chat`);
   const lib = url.protocol === 'https:' ? https : http;
   return new Promise((resolve, reject) => {
