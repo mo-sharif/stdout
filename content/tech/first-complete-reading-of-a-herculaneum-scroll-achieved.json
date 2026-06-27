@@ -1,0 +1,114 @@
+{
+  "slug": "first-complete-reading-of-a-herculaneum-scroll-achieved",
+  "title": "First Complete Reading of a Herculaneum Scroll Achieved",
+  "category": "tech",
+  "kicker": "Tech breakthrough in digital humanities using AI and X-ray imaging",
+  "hook": "For the first time, an entire ancient Herculaneum scroll was virtually unwrapped and read without damaging it, thanks to cutting-edge technology.",
+  "readMinutes": 6,
+  "date": "2026-06-26",
+  "beats": [
+    {
+      "num": "01 · The Setup",
+      "heading": "Unlocking a centuries-old mystery",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">PHerc. 1667, sealed since Vesuvius’ eruption in 79 AD, has been virtually unwrapped and read from beginning to end.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "To read one was to destroy it.",
+          "cite": "S1"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 273,
+              "label": "Years sealed"
+            }
+          ]
+        },
+        {
+          "type": "embeds",
+          "heading": "sources",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "name",
+              "title": "An entire Herculaneum scroll has been read for the first time",
+              "url": "https://scrollprize.org/firstscroll",
+              "note": "Source of the main narrative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · The Method",
+      "heading": "High-tech imaging and AI to reveal hidden text",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The scroll was scanned with high-resolution X-rays, reconstructed digitally, and machine learning brought out faint ink traces.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "It is the first Herculaneum papyrus to be digitally unrolled and read in full.",
+          "cite": "S1"
+        },
+        {
+          "type": "embeds",
+          "heading": "technologies",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "name",
+              "title": "Phase-contrast X-ray microtomography at ESRF",
+              "url": "https://www.esrf.eu/",
+              "note": "Imaging technique used"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "03 · The Content",
+      "heading": "A Stoic philosophical treatise uncovered",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The recovered text is a philosophical treatise on ethics, likely a Stoic work attributed to Aristocreon, dating to the 2nd century BC.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "It turns on human nature, impulse, and the moral progress of human beings.",
+          "cite": "S1"
+        }
+      ]
+    },
+    {
+      "num": "04 · The Impact",
+      "heading": "Open data and scalable method for future scrolls",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">All tomographic data, reconstructions, transcriptions, and code are openly available under a Creative Commons licence.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "Anyone can check the work, build on it, and apply it to the scrolls that remain.",
+          "cite": "S1"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "name",
+      "title": "An entire Herculaneum scroll has been read for the first time",
+      "url": "https://scrollprize.org/firstscroll"
+    }
+  ]
+}
