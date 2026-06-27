@@ -1,6 +1,4 @@
-import http from 'node:http';
-import https from 'node:https';
-import { OLLAMA_BASE, BRAIN_MODEL, KEEP_ALIVE, REQUEST_TIMEOUT_MS, RETRY_BACKOFF_MS } from './config.mjs';
+import { AI_BASE_URL, AI_API_KEY, BRAIN_MODEL, KEEP_ALIVE, REQUEST_TIMEOUT_MS, RETRY_BACKOFF_MS } from './config.mjs';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -22,41 +20,38 @@ export function extractJSON(text) {
   return JSON.parse(body.slice(start, end));
 }
 
-/**
- * POST /api/chat over node:http (NOT fetch). A non-streaming Ollama response
- * withholds HTTP headers until the whole generation finishes, and undici's
- * `fetch` aborts after a fixed 300s headersTimeout that cannot be raised without
- * the (uninstalled) undici package — so a slow cold load or a CPU-offloaded
- * generation on the GPU-contended box dies with UND_ERR_HEADERS_TIMEOUT.
- * node:http has no such cap; we bound it with an *inactivity* timeout instead,
- * which only fires on a genuine stall (no bytes for timeoutMs).
- */
-export async function chat(messages, { model = BRAIN_MODEL, json = false, temperature = 0.4, keepAlive = KEEP_ALIVE, timeoutMs = REQUEST_TIMEOUT_MS, baseUrl = OLLAMA_BASE } = {}) {
-  const payload = JSON.stringify({ model, messages, stream: false, keep_alive: keepAlive, options: { temperature, num_gpu: 99 }, ...(json ? { format: 'json' } : {}) });
-  const url = new URL(`${baseUrl.replace(/\/$/, '')}/api/chat`);
-  const lib = url.protocol === 'https:' ? https : http;
-  return new Promise((resolve, reject) => {
-    const fail = (reason) => reject(new Error(`ollama chat (${model}) at ${baseUrl} failed: ${reason}`));
-    const req = lib.request(
-      url,
-      { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) } },
-      (res) => {
-        let data = '';
-        res.setEncoding('utf8');
-        res.on('data', (c) => { data += c; });
-        res.on('end', () => {
-          if (res.statusCode < 200 || res.statusCode >= 300) return fail(`ollama ${res.statusCode}: ${data.slice(0, 200)}`);
-          try { resolve(JSON.parse(data).message?.content ?? ''); }
-          catch (e) { fail(`bad JSON response: ${e.message}`); }
-        });
-      },
-    );
-    // Inactivity timeout (not a total cap): resets on socket activity, fires only
-    // if the box sends nothing for timeoutMs — covers a long load + slow generation.
-    req.setTimeout(timeoutMs, () => req.destroy(new Error(`no response for ${timeoutMs}ms`)));
-    req.on('error', (e) => fail(e.code || e.message));
-    req.end(payload);
-  });
+export async function chat(messages, { model = BRAIN_MODEL, json = false, temperature = 0.4, keepAlive = KEEP_ALIVE, timeoutMs = REQUEST_TIMEOUT_MS, baseUrl = AI_BASE_URL, apiKey = AI_API_KEY } = {}) {
+  const cleanBase = baseUrl.replace(/\/$/, '');
+  const headers = { 'Content-Type': 'application/json' };
+  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+  if (!apiKey && !/^https?:\/\/(127\.0\.0\.1|localhost)(?::|\/|$)/.test(cleanBase)) {
+    throw new Error('AI_API_KEY or GEMINI_API_KEY is required for hosted LLM calls');
+  }
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(`${cleanBase}/chat/completions`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        model,
+        messages,
+        temperature,
+        ...(json ? { response_format: { type: 'json_object' } } : {}),
+        ...(cleanBase.includes('localhost') || cleanBase.includes('127.0.0.1') ? { keep_alive: keepAlive } : {}),
+      }),
+      signal: ctrl.signal,
+    });
+    const data = await res.text();
+    if (!res.ok) throw new Error(`llm ${res.status}: ${data.slice(0, 200)}`);
+    try { return JSON.parse(data).choices?.[0]?.message?.content ?? ''; }
+    catch (e) { throw new Error(`bad JSON response: ${e.message}`); }
+  } catch (e) {
+    if (e.name === 'AbortError') throw new Error(`llm chat (${model}) at ${cleanBase} timed out after ${timeoutMs}ms`);
+    throw new Error(`llm chat (${model}) at ${cleanBase} failed: ${e.code || e.message}`);
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 export async function chatJSON(messages, opts = {}) {

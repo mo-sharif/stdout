@@ -1,14 +1,16 @@
-export const OLLAMA_BASE = process.env.OLLAMA_BASE || "http://localhost:11434";
-export const BRAIN_MODEL = process.env.BRAIN_MODEL || "granite4.1:8b-q5_K_M";   // editorial/writer: fast, grounded, fits the P100's 16GB on-GPU
-export const VERIFY_MODEL = process.env.VERIFY_MODEL || "qwen3.6:35b-a3b-q4_K_M"; // accuracy gate: deeper reasoning to catch unsupported claims
+export const AI_BASE_URL = (
+  process.env.AI_BASE_URL ||
+  process.env.OPENAI_BASE_URL ||
+  process.env.OLLAMA_BASE ||
+  "https://generativelanguage.googleapis.com/v1beta/openai"
+).replace(/\/$/, "");
+export const AI_API_KEY = process.env.AI_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY || "";
+export const BRAIN_MODEL = process.env.BRAIN_MODEL || process.env.AI_MODEL || "gemini-3.5-flash";
+export const VERIFY_MODEL = process.env.VERIFY_MODEL || process.env.AI_VERIFY_MODEL || process.env.AI_MODEL || "gemini-3.5-flash";
 export const UA = "stdout-brain/1.0 (+https://github.com/mo-sharif/stdout)";
 
-// keep a warmed model resident across the run so a slow cold reload never lands on
-// the critical path (a cold load on the contended GPU box can exceed 5 min).
+// Kept for older local Ollama runs; hosted providers ignore it.
 export const KEEP_ALIVE = process.env.OLLAMA_KEEP_ALIVE || "30m";
-// inactivity timeout for the Ollama request (node:http, not fetch): resets on any
-// socket activity, so it tolerates a long cold load + a slow CPU-offloaded generation
-// on the contended box and only trips on a genuine stall. 20 min is generous headroom.
-export const REQUEST_TIMEOUT_MS = Number(process.env.OLLAMA_TIMEOUT_MS) || 1200000;
+export const REQUEST_TIMEOUT_MS = Number(process.env.AI_TIMEOUT_MS || process.env.OLLAMA_TIMEOUT_MS) || 300000;
 // spacing between chatJSON retries so a transient blip gets a moment to recover.
-export const RETRY_BACKOFF_MS = Number(process.env.OLLAMA_RETRY_BACKOFF_MS) || 3000;
+export const RETRY_BACKOFF_MS = Number(process.env.AI_RETRY_BACKOFF_MS || process.env.OLLAMA_RETRY_BACKOFF_MS) || 3000;

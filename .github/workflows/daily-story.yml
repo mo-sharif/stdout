@@ -1,7 +1,7 @@
 name: daily story
 on:
   schedule:
-    - cron: '0 15 * * *'   # 15:00 UTC daily; staggered after ViralVault's edition to avoid GPU contention
+    - cron: '0 15 * * *'
   workflow_dispatch: {}
 permissions:
   contents: write
@@ -11,30 +11,17 @@ concurrency:
   cancel-in-progress: false
 jobs:
   generate:
-    runs-on: [self-hosted, gpu]   # the box: has Ollama on 127.0.0.1:11434
+    runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      OLLAMA_BASE: http://127.0.0.1:11434
-      # single source of truth for models + pin, shared by the warmup step and brain.mjs (config.mjs reads these)
-      BRAIN_MODEL: granite4.1:8b-q5_K_M
-      VERIFY_MODEL: qwen3.6:35b-a3b-q4_K_M
-      OLLAMA_KEEP_ALIVE: 60m
+      AI_BASE_URL: ${{ vars.AI_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/openai' }}
+      AI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.AI_API_KEY }}
+      BRAIN_MODEL: ${{ vars.BRAIN_MODEL || vars.AI_MODEL || 'gemini-3.5-flash' }}
+      VERIFY_MODEL: ${{ vars.VERIFY_MODEL || vars.AI_VERIFY_MODEL || vars.AI_MODEL || 'gemini-3.5-flash' }}
     steps:
       - uses: actions/checkout@v5
         with: { fetch-depth: 0 }
       # zero runtime deps — brain, build and tests run on plain node, no npm install
       - run: node --test
-      # Pre-load + pin ONLY the brain model (used first and for most calls). Warming the
-      # 23GB verify model too would evict the brain model from the GPU on this contended
-      # box, forcing it to cold-load again on the first real call. The verify model loads
-      # on demand later; brain.mjs uses node:http with a long inactivity timeout, so that
-      # one cold load (and any slow CPU-offloaded generation) is absorbed rather than
-      # aborted — unlike fetch's fixed 300s headersTimeout. curl/preload has no such cap.
-      - name: warm up the brain model
-        run: |
-          echo "warming $BRAIN_MODEL ..."
-          curl -sf --max-time 1200 "$OLLAMA_BASE/api/generate" \
-            -d "{\"model\":\"$BRAIN_MODEL\",\"keep_alive\":\"$OLLAMA_KEEP_ALIVE\"}" >/dev/null \
-            || { echo "::error::ollama warmup failed for $BRAIN_MODEL"; exit 1; }
       - name: generate, build, open review PR
         run: node pipeline/daily.mjs

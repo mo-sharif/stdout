@@ -13,7 +13,7 @@ permissions:
   contents: read
 jobs:
   render:
-    runs-on: [self-hosted, gpu]   # the box: render needs Remotion + (later) the cloned-voice server
+    runs-on: ubuntu-latest
     env:
       YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
       YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
