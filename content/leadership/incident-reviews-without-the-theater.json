@@ -45,6 +45,23 @@
               "c": ""
             }
           ]
+        },
+        {
+          "type": "graph",
+          "center": "decision",
+          "nodes": [
+            "context",
+            "owner",
+            "risk",
+            "feedback",
+            "scope",
+            "followup"
+          ],
+          "caption": "Leadership bugs are system bugs too. Pull context out and the team graph starts wobbling.",
+          "action": "remove context",
+          "idle": "team has a map",
+          "running": "watching ambiguity spread...",
+          "done": "6 leadership signals went red"
         }
       ]
     },
@@ -76,6 +93,42 @@
           "file": "postmortem-actions.md",
           "code": "- Add migration smoke test before production deploy\n- Move payment errors to paging alert, owner: infra\n- Add checkout rollback runbook with one-command path\n- Delete stale processor config after audit",
           "caption": "Good action items are specific enough to close."
+        },
+        {
+          "type": "lab",
+          "title": "team clarity switchboard",
+          "caption": "Flip the switches and watch the story turn into a tiny operating model.",
+          "toggles": [
+            {
+              "label": "named owner",
+              "off": "everyone is sort of responsible",
+              "on": "one owner is explicit",
+              "weight": 25
+            },
+            {
+              "label": "tradeoff written",
+              "off": "priority lives in meetings",
+              "on": "the no is visible",
+              "weight": 25
+            },
+            {
+              "label": "feedback loop",
+              "off": "drift arrives late",
+              "on": "checkpoints are scheduled",
+              "weight": 24
+            },
+            {
+              "label": "decision log",
+              "off": "memory carries the plan",
+              "on": "future readers get receipts",
+              "weight": 26
+            }
+          ],
+          "minLabel": "muddy",
+          "maxLabel": "clear",
+          "low": "muddy: people can move, but they are guessing while they do it",
+          "mid": "clearer: ownership and tradeoffs are starting to show up",
+          "high": "aligned: the team can act without decoding hidden context"
         }
       ]
     },

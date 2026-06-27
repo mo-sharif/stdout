@@ -19,7 +19,12 @@
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"$ npm create service","c":"pr"},{"t":"added auth middleware","c":""},{"t":"added request logging without sensitive fields","c":""},{"t":"added default rate limits","c":""}]</script>
-  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+  </div><p class="cap">The useful signal is usually already there.</p>
+<div class="panel" data-graph data-center="trust boundary" data-nodes='[&quot;input&quot;,&quot;authn&quot;,&quot;authz&quot;,&quot;secrets&quot;,&quot;deps&quot;,&quot;egress&quot;]' data-idle="controls quiet" data-running="attack path lighting up..." data-done="6 security edges need review">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>poke the boundary</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>controls quiet</span></div>
+  </div><p class="cap">Security gets real when the trust boundaries light up. Poke it and see what has to hold.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Put safety in the template</h2><p class="body">Framework defaults, generators, shared middleware, and CI checks make the secure path the easiest path.</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">service-template.ts</span></div>
@@ -29,6 +34,23 @@ app.use(redactSensitiveLogs);
 app.use(securityHeaders());</textarea>
   </div><p class="cap">The best control is the one every new service gets automatically.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Review exceptions, not basics</h2><p class="body">If defaults cover the common path, security review can focus on unusual risk instead of repeating the same checklist forever.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;exposed: the feature trusts too much and records too little&quot;,&quot;mid&quot;:&quot;better: the easy abuse paths now have friction&quot;,&quot;high&quot;:&quot;hardened: authorization, limits, and recovery all have a job&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">security control lab</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>exposed</span><div class="labbar"><i data-lab-bar></i></div><span>hardened</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="28" aria-pressed="false">
+      <b>object authz</b><span data-off="route check only" data-on="resource access checked">route check only</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="24" aria-pressed="false">
+      <b>rate limits</b><span data-off="attackers get free loops" data-on="abuse has a cost">attackers get free loops</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>secret hygiene</b><span data-off="tokens can leak into logs" data-on="values are redacted and rotated">tokens can leak into logs</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="24" aria-pressed="false">
+      <b>threat model</b><span data-off="risks discovered after build" data-on="boundaries reviewed early">risks discovered after build</span>
+    </button></div>
+      <div class="labout" data-lab-out>exposed: the feature trusts too much and records too little</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
 <div class="stats"><div class="stat"><b data-to="4">0</b><span>defaults: auth, logs, limits, headers</span></div><div class="stat"><b data-to="1">0</b><span>approved service template</span></div><div class="stat"><b data-to="0">0</b><span>copy-pasted security folklore</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Make the safe path boring</h2><p class="body">A secure culture is not only people knowing the right thing. It is systems that make the right thing the normal thing.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://www.cisa.gov/securebydesign" target="_blank" rel="noopener">

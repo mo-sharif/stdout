@@ -23,6 +23,23 @@
           "type": "quote",
           "text": "The goal is not to prove you tried hard. The goal is to make the next experiment obvious.",
           "cite": "debugging note"
+        },
+        {
+          "type": "graph",
+          "center": "growth loop",
+          "nodes": [
+            "work",
+            "evidence",
+            "feedback",
+            "manager",
+            "peers",
+            "next bet"
+          ],
+          "caption": "Career systems are still systems. Pull out evidence and everything gets harder to debug.",
+          "action": "hide the receipts",
+          "idle": "career signal visible",
+          "running": "impact getting fuzzy...",
+          "done": "6 career signals lost context"
         }
       ]
     },
@@ -72,6 +89,42 @@
               "c": "dim"
             }
           ]
+        },
+        {
+          "type": "lab",
+          "title": "career signal lab",
+          "caption": "Flip the switches and watch the story turn into a tiny operating model.",
+          "toggles": [
+            {
+              "label": "weekly receipts",
+              "off": "memory has to reconstruct impact",
+              "on": "evidence is captured while fresh",
+              "weight": 26
+            },
+            {
+              "label": "specific ask",
+              "off": "people infer the blocker",
+              "on": "help request names the lever",
+              "weight": 24
+            },
+            {
+              "label": "peer signal",
+              "off": "growth happens alone",
+              "on": "feedback network is active",
+              "weight": 24
+            },
+            {
+              "label": "tradeoff list",
+              "off": "every yes is automatic",
+              "on": "constraints are explicit",
+              "weight": 26
+            }
+          ],
+          "minLabel": "fuzzy",
+          "maxLabel": "legible",
+          "low": "fuzzy: good work happened, but the signal is hard to carry forward",
+          "mid": "clearer: your manager and peers can see some of the shape",
+          "high": "legible: impact, support, and next steps are easy to inspect"
         }
       ]
     },

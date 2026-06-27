@@ -19,7 +19,12 @@
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"retrieve context        420ms","c":""},{"t":"call model           2,850ms","c":"err"},{"t":"validate JSON          45ms","c":""},{"t":"render answer          18ms","c":""}]</script>
-  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+  </div><p class="cap">The useful signal is usually already there.</p>
+<div class="panel" data-graph data-center="model loop" data-nodes='[&quot;prompt&quot;,&quot;retrieval&quot;,&quot;tools&quot;,&quot;memory&quot;,&quot;policy&quot;,&quot;evals&quot;]' data-idle="guardrails armed" data-running="probing weak edges..." data-done="6 AI failure paths exposed">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>stress the agent</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>guardrails armed</span></div>
+  </div><p class="cap">Hit the button and watch the hidden AI surface area light up.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Budget the wait</h2><p class="body">Choose the model, context size, streaming strategy, and tool count around the user moment. A background research job can take longer than an inline autocomplete.</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">latency-budget.json</span></div>
@@ -30,6 +35,23 @@
 }</textarea>
   </div><p class="cap">Latency budgets turn performance into an explicit product decision.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Show progress with receipts</h2><p class="body">If the job is slow, expose useful progress: sources found, checks complete, draft ready. Streaming text can help, but structured progress is often calmer.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;fragile: the model is still freelancing without enough checks&quot;,&quot;mid&quot;:&quot;better: useful guardrails are catching the obvious mistakes&quot;,&quot;high&quot;:&quot;ready-ish: evidence, policy, and evals are all in the loop&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">AI launch switchboard</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>sloppy</span><div class="labbar"><i data-lab-bar></i></div><span>shippable</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="26" aria-pressed="false">
+      <b>source checks</b><span data-off="answers from vibe" data-on="evidence gate on">answers from vibe</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="28" aria-pressed="false">
+      <b>tool policy</b><span data-off="model can ask for anything" data-on="permissions checked outside model">model can ask for anything</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>eval replay</b><span data-off="demo path only" data-on="failure cases replayed">demo path only</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="22" aria-pressed="false">
+      <b>human handoff</b><span data-off="bot traps edge cases" data-on="risky cases route out">bot traps edge cases</span>
+    </button></div>
+      <div class="labout" data-lab-out>fragile: the model is still freelancing without enough checks</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
 <div class="stats"><div class="stat"><b data-to="300">0</b><span>milliseconds feels instant for tiny assists</span></div><div class="stat"><b data-to="4">0</b><span>seconds needs visible progress</span></div><div class="stat"><b data-to="1">0</b><span>background path for long jobs</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Pick the right amount of intelligence</h2><p class="body">Latency is not just infrastructure. It is the shape of the promise you make to the user.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">

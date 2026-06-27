@@ -19,7 +19,12 @@
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"$ classify ticket-4421","c":"pr"},{"t":"intent: billing_dispute","c":""},{"t":"risk: high","c":"err"},{"t":"action: draft reply and hand off to human","c":""}]</script>
-  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+  </div><p class="cap">The useful signal is usually already there.</p>
+<div class="panel" data-graph data-center="model loop" data-nodes='[&quot;prompt&quot;,&quot;retrieval&quot;,&quot;tools&quot;,&quot;memory&quot;,&quot;policy&quot;,&quot;evals&quot;]' data-idle="guardrails armed" data-running="probing weak edges..." data-done="6 AI failure paths exposed">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>stress the agent</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>guardrails armed</span></div>
+  </div><p class="cap">Hit the button and watch the hidden AI surface area light up.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Define handoff triggers</h2><p class="body">Write down the cases that must leave automation: low confidence, missing policy, angry customer, protected class, regulated advice, payment exception, or repeated failure.</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">support/handoff-rules.js</span></div>
@@ -30,6 +35,23 @@
   attempts &gt; 2;</textarea>
   </div><p class="cap">A handoff rule is product empathy written as code.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Measure graceful exits</h2><p class="body">Track not just containment rate, but bad containment. A bot that traps a user in a wrong answer is worse than a bot that quickly brings a person in.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;fragile: the model is still freelancing without enough checks&quot;,&quot;mid&quot;:&quot;better: useful guardrails are catching the obvious mistakes&quot;,&quot;high&quot;:&quot;ready-ish: evidence, policy, and evals are all in the loop&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">AI launch switchboard</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>sloppy</span><div class="labbar"><i data-lab-bar></i></div><span>shippable</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="26" aria-pressed="false">
+      <b>source checks</b><span data-off="answers from vibe" data-on="evidence gate on">answers from vibe</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="28" aria-pressed="false">
+      <b>tool policy</b><span data-off="model can ask for anything" data-on="permissions checked outside model">model can ask for anything</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>eval replay</b><span data-off="demo path only" data-on="failure cases replayed">demo path only</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="22" aria-pressed="false">
+      <b>human handoff</b><span data-off="bot traps edge cases" data-on="risky cases route out">bot traps edge cases</span>
+    </button></div>
+      <div class="labout" data-lab-out>fragile: the model is still freelancing without enough checks</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
 <div class="stats"><div class="stat"><b data-to="4">0</b><span>handoff triggers to define before launch</span></div><div class="stat"><b data-to="2">0</b><span>failed attempts before escalation</span></div><div class="stat"><b data-to="1">0</b><span>clean summary for the human</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Automation should lower the human cost</h2><p class="body">The handoff is not failure. It is how the system protects the user, the team, and the brand when the model reaches the edge of its lane.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">

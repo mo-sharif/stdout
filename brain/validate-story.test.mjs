@@ -12,3 +12,7 @@ test('flags bad category, empty beats, unknown block type', () => {
   assert.ok(validateStory({ ...good, beats: [] }, cats).length > 0);
   assert.ok(validateStory({ ...good, beats: [{ blocks: [{ type: 'zzz' }] }] }, cats).length > 0);
 });
+test('flags lab blocks without toggles', () => {
+  assert.ok(validateStory({ ...good, beats: [{ blocks: [{ type: 'lab', title: 'Lab' }] }] }, cats).length > 0);
+  assert.equal(validateStory({ ...good, beats: [{ blocks: [{ type: 'lab', toggles: [{ label: 'x' }] }] }] }, cats).length, 0);
+});

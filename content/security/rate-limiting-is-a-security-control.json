@@ -37,6 +37,23 @@
               "c": ""
             }
           ]
+        },
+        {
+          "type": "graph",
+          "center": "trust boundary",
+          "nodes": [
+            "input",
+            "authn",
+            "authz",
+            "secrets",
+            "deps",
+            "egress"
+          ],
+          "caption": "Security gets real when the trust boundaries light up. Poke it and see what has to hold.",
+          "action": "poke the boundary",
+          "idle": "controls quiet",
+          "running": "attack path lighting up...",
+          "done": "6 security edges need review"
         }
       ]
     },
@@ -63,6 +80,42 @@
         {
           "type": "prose",
           "html": "<p class=\"body\">A good abuse control makes attackers expensive while giving legitimate users a recovery path.</p>"
+        },
+        {
+          "type": "lab",
+          "title": "security control lab",
+          "caption": "Flip the switches and watch the story turn into a tiny operating model.",
+          "toggles": [
+            {
+              "label": "object authz",
+              "off": "route check only",
+              "on": "resource access checked",
+              "weight": 28
+            },
+            {
+              "label": "rate limits",
+              "off": "attackers get free loops",
+              "on": "abuse has a cost",
+              "weight": 24
+            },
+            {
+              "label": "secret hygiene",
+              "off": "tokens can leak into logs",
+              "on": "values are redacted and rotated",
+              "weight": 24
+            },
+            {
+              "label": "threat model",
+              "off": "risks discovered after build",
+              "on": "boundaries reviewed early",
+              "weight": 24
+            }
+          ],
+          "minLabel": "exposed",
+          "maxLabel": "hardened",
+          "low": "exposed: the feature trusts too much and records too little",
+          "mid": "better: the easy abuse paths now have friction",
+          "high": "hardened: authorization, limits, and recovery all have a job"
         },
         {
           "type": "stats",

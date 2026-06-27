@@ -37,6 +37,23 @@
               "c": "err"
             }
           ]
+        },
+        {
+          "type": "graph",
+          "center": "model loop",
+          "nodes": [
+            "prompt",
+            "retrieval",
+            "tools",
+            "memory",
+            "policy",
+            "evals"
+          ],
+          "caption": "Hit the button and watch the hidden AI surface area light up.",
+          "action": "stress the agent",
+          "idle": "guardrails armed",
+          "running": "probing weak edges...",
+          "done": "6 AI failure paths exposed"
         }
       ]
     },
@@ -63,6 +80,42 @@
         {
           "type": "prose",
           "html": "<p class=\"body\">Run the agent against fake data with fake tools and real limits. The goal is not to prove it succeeds. The goal is to see how it behaves when the task is ambiguous, stale, impossible, or risky.</p>"
+        },
+        {
+          "type": "lab",
+          "title": "AI launch switchboard",
+          "caption": "Flip the switches and watch the story turn into a tiny operating model.",
+          "toggles": [
+            {
+              "label": "source checks",
+              "off": "answers from vibe",
+              "on": "evidence gate on",
+              "weight": 26
+            },
+            {
+              "label": "tool policy",
+              "off": "model can ask for anything",
+              "on": "permissions checked outside model",
+              "weight": 28
+            },
+            {
+              "label": "eval replay",
+              "off": "demo path only",
+              "on": "failure cases replayed",
+              "weight": 24
+            },
+            {
+              "label": "human handoff",
+              "off": "bot traps edge cases",
+              "on": "risky cases route out",
+              "weight": 22
+            }
+          ],
+          "minLabel": "sloppy",
+          "maxLabel": "shippable",
+          "low": "fragile: the model is still freelancing without enough checks",
+          "mid": "better: useful guardrails are catching the obvious mistakes",
+          "high": "ready-ish: evidence, policy, and evals are all in the loop"
         },
         {
           "type": "stats",

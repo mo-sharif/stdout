@@ -1,4 +1,4 @@
-const BLOCK_TYPES = new Set(['prose', 'code', 'terminal', 'graph', 'stats', 'quote', 'embeds']);
+const BLOCK_TYPES = new Set(['prose', 'code', 'terminal', 'graph', 'stats', 'quote', 'embeds', 'lab']);
 
 export function validateStory(s, cats) {
   const errs = [];
@@ -11,6 +11,7 @@ export function validateStory(s, cats) {
       if (!BLOCK_TYPES.has(blk.type)) errs.push(`beat ${i}: bad block type ${blk.type}`);
       if (blk.type === 'prose' && !blk.html) errs.push(`beat ${i}: prose with no html`);
       if (blk.type === 'embeds' && (!Array.isArray(blk.items) || !blk.items.length)) errs.push(`beat ${i}: embeds with no items`);
+      if (blk.type === 'lab' && (!Array.isArray(blk.toggles) || !blk.toggles.length)) errs.push(`beat ${i}: lab with no toggles`);
     }
   }
   if (!Array.isArray(s.sources) || s.sources.length === 0) errs.push('no sources');

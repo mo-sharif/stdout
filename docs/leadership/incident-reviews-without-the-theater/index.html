@@ -19,7 +19,12 @@
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"09:42 deploy starts","c":""},{"t":"09:46 first payment errors","c":"err"},{"t":"09:49 alert fires in low-priority channel","c":"dim"},{"t":"10:07 rollback begins","c":""},{"t":"10:12 checkout recovers","c":""}]</script>
-  </div><p class="cap">A timeline is evidence, not a blame map.</p></div></section>
+  </div><p class="cap">A timeline is evidence, not a blame map.</p>
+<div class="panel" data-graph data-center="decision" data-nodes='[&quot;context&quot;,&quot;owner&quot;,&quot;risk&quot;,&quot;feedback&quot;,&quot;scope&quot;,&quot;followup&quot;]' data-idle="team has a map" data-running="watching ambiguity spread..." data-done="6 leadership signals went red">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>remove context</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>team has a map</span></div>
+  </div><p class="cap">Leadership bugs are system bugs too. Pull context out and the team graph starts wobbling.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the room</div><h2>Blameless does not mean consequence-free</h2><p class="body">Blameless means you investigate without making people hide details to survive the meeting. It does not mean shrugging. You can be kind to people and ruthless about weak signals, risky defaults, confusing tools, and missing guardrails.</p>
 <blockquote>Replace &quot;who caused this?&quot; with &quot;what made this easy to do and hard to catch?&quot;<cite>review prompt</cite></blockquote></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the output</div><h2>Actions should change the system</h2><p class="body">Training everyone to be more careful is usually a weak action item. Stronger actions alter the path: add an automated check, change the deploy order, page the right owner, make rollback one command, or remove the confusing option.</p>
@@ -29,7 +34,24 @@
 - Move payment errors to paging alert, owner: infra
 - Add checkout rollback runbook with one-command path
 - Delete stale processor config after audit</textarea>
-  </div><p class="cap">Good action items are specific enough to close.</p></div></section>
+  </div><p class="cap">Good action items are specific enough to close.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;muddy: people can move, but they are guessing while they do it&quot;,&quot;mid&quot;:&quot;clearer: ownership and tradeoffs are starting to show up&quot;,&quot;high&quot;:&quot;aligned: the team can act without decoding hidden context&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">team clarity switchboard</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>muddy</span><div class="labbar"><i data-lab-bar></i></div><span>clear</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="25" aria-pressed="false">
+      <b>named owner</b><span data-off="everyone is sort of responsible" data-on="one owner is explicit">everyone is sort of responsible</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="25" aria-pressed="false">
+      <b>tradeoff written</b><span data-off="priority lives in meetings" data-on="the no is visible">priority lives in meetings</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>feedback loop</b><span data-off="drift arrives late" data-on="checkpoints are scheduled">drift arrives late</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="26" aria-pressed="false">
+      <b>decision log</b><span data-off="memory carries the plan" data-on="future readers get receipts">memory carries the plan</span>
+    </button></div>
+      <div class="labout" data-lab-out>muddy: people can move, but they are guessing while they do it</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the memory</div><h2>A review should be useful six months later</h2><p class="body">Future engineers will not remember the meeting. They will find the doc during a similar outage. Write for them: impact, timeline, contributing factors, detection gaps, what changed, and how to tell if it worked.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://sre.google/sre-book/postmortem-culture/" target="_blank" rel="noopener">
       <div class="eh"><span class="logo">&#9632;</span> Google SRE</div>

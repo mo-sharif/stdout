@@ -19,7 +19,12 @@
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"checkout state machine: +2 days per pricing change","c":"err"},{"t":"old admin CSS: annoying, low product impact","c":"dim"},{"t":"billing retry job: caused 3 incidents this quarter","c":"err"}]</script>
-  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+  </div><p class="cap">The useful signal is usually already there.</p>
+<div class="panel" data-graph data-center="decision" data-nodes='[&quot;context&quot;,&quot;owner&quot;,&quot;risk&quot;,&quot;feedback&quot;,&quot;scope&quot;,&quot;followup&quot;]' data-idle="team has a map" data-running="watching ambiguity spread..." data-done="6 leadership signals went red">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>remove context</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>team has a map</span></div>
+  </div><p class="cap">Leadership bugs are system bugs too. Pull context out and the team graph starts wobbling.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Quantify the drag</h2><p class="body">Attach debt work to a visible cost and a near-term opportunity. "Clean up billing" is weak. "Make pricing experiments one-day changes again" is a business case.</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">debt-register.md</span></div>
@@ -28,6 +33,23 @@
 | checkout state | slow changes | faster pricing tests |</textarea>
   </div><p class="cap">A debt register should read like a decision tool, not a shame list.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Pay down debt near the work</h2><p class="body">The best debt work often rides with feature work that already touches the risky area. Big cleanup seasons are harder to protect.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;muddy: people can move, but they are guessing while they do it&quot;,&quot;mid&quot;:&quot;clearer: ownership and tradeoffs are starting to show up&quot;,&quot;high&quot;:&quot;aligned: the team can act without decoding hidden context&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">team clarity switchboard</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>muddy</span><div class="labbar"><i data-lab-bar></i></div><span>clear</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="25" aria-pressed="false">
+      <b>named owner</b><span data-off="everyone is sort of responsible" data-on="one owner is explicit">everyone is sort of responsible</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="25" aria-pressed="false">
+      <b>tradeoff written</b><span data-off="priority lives in meetings" data-on="the no is visible">priority lives in meetings</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>feedback loop</b><span data-off="drift arrives late" data-on="checkpoints are scheduled">drift arrives late</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="26" aria-pressed="false">
+      <b>decision log</b><span data-off="memory carries the plan" data-on="future readers get receipts">memory carries the plan</span>
+    </button></div>
+      <div class="labout" data-lab-out>muddy: people can move, but they are guessing while they do it</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
 <div class="stats"><div class="stat"><b data-to="1">0</b><span>visible cost per debt item</span></div><div class="stat"><b data-to="3">0</b><span>signals: incidents, cycle time, confusion</span></div><div class="stat"><b data-to="0">0</b><span>blanket rewrites without payoff</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Debt conversations need economics</h2><p class="body">When you can explain the interest rate, debt work stops sounding like polish and starts sounding like risk management.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://martinfowler.com/bliki/TechnicalDebt.html" target="_blank" rel="noopener">

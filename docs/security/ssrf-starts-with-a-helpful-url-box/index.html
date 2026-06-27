@@ -20,7 +20,12 @@
   const html = await fetch(req.body.url).then((r) =&gt; r.text());
   res.json(extractPreview(html));
 });</textarea>
-  </div><p class="cap">This helper is one validation step away from becoming a tunnel.</p></div></section>
+  </div><p class="cap">This helper is one validation step away from becoming a tunnel.</p>
+<div class="panel" data-graph data-center="trust boundary" data-nodes='[&quot;input&quot;,&quot;authn&quot;,&quot;authz&quot;,&quot;secrets&quot;,&quot;deps&quot;,&quot;egress&quot;]' data-idle="controls quiet" data-running="attack path lighting up..." data-done="6 security edges need review">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>poke the boundary</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>controls quiet</span></div>
+  </div><p class="cap">Security gets real when the trust boundaries light up. Poke it and see what has to hold.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>The URL can point inward</h2><p class="body">The attacker does not need your credentials if they can make your server ask the question. They try localhost, private address ranges, cloud metadata endpoints, redirects, DNS tricks, and alternate URL forms. The server becomes the browser they wanted.</p>
 <div class="panel term" data-terminal>
     <div class="top"><i></i><i></i><i></i><span class="fn">zsh · attacker input</span>
@@ -29,6 +34,23 @@
     <script type="application/json" data-lines>[{"t":"POST /preview","c":"pr"},{"t":"{ \"url\": \"http://169.254.169.254/latest/meta-data/\" }","c":""},{"t":"backend fetches from inside the network","c":"err"},{"t":"response leaks internal metadata","c":"err"}]</script>
   </div><p class="cap">Do not fetch first and validate later.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the defense</div><h2>Validate, resolve, and restrict the egress path</h2><p class="body">A strong defense is layered: allow only expected schemes, parse with a real URL parser, resolve DNS, block private and link-local ranges, re-check after redirects, limit response size and timeout, and send fetches through an egress proxy that enforces the policy.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;exposed: the feature trusts too much and records too little&quot;,&quot;mid&quot;:&quot;better: the easy abuse paths now have friction&quot;,&quot;high&quot;:&quot;hardened: authorization, limits, and recovery all have a job&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">security control lab</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>exposed</span><div class="labbar"><i data-lab-bar></i></div><span>hardened</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="28" aria-pressed="false">
+      <b>object authz</b><span data-off="route check only" data-on="resource access checked">route check only</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="24" aria-pressed="false">
+      <b>rate limits</b><span data-off="attackers get free loops" data-on="abuse has a cost">attackers get free loops</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>secret hygiene</b><span data-off="tokens can leak into logs" data-on="values are redacted and rotated">tokens can leak into logs</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="24" aria-pressed="false">
+      <b>threat model</b><span data-off="risks discovered after build" data-on="boundaries reviewed early">risks discovered after build</span>
+    </button></div>
+      <div class="labout" data-lab-out>exposed: the feature trusts too much and records too little</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
 <div class="stats"><div class="stat"><b data-to="2">0</b><span>schemes usually enough: http and https</span></div><div class="stat"><b data-to="1">0</b><span>egress policy beats scattered checks</span></div><div class="stat"><b data-to="0">0</b><span>trust in user-provided hostnames</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the habit</div><h2>Treat server-side fetch as a privileged action</h2><p class="body">The mindset shift is the whole game. A URL box is not just input validation. It is a network access decision. Put it through the same review you would give a new outbound integration.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">

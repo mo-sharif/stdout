@@ -14,7 +14,29 @@
   <div class="meta"><span>~6 min</span><span>&bull;</span><span>Tech</span></div>
 </div><div class="scrollcue">scroll<span>&darr;</span></div></header>
 <main><section class="beat"><div class="wrap reveal"><div class="num">01 · the deal</div><h2>A cache trades freshness for speed</h2><p class="body">Every cache is a bet: this answer will still be good later. Browsers bet. CDNs bet. APIs bet. Databases bet. Your app probably bets several times before the user sees a pixel. Most of the time, that is why everything feels fast.</p>
-<div class="stats"><div class="stat"><b data-to="4">0</b><span>common layers: browser, CDN, app, database</span></div><div class="stat"><b data-to="1">0</b><span>bad invalidation can make the whole stack look haunted</span></div><div class="stat"><b data-to="0">0</b><span>magic involved, just old answers</span></div></div></div></section>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;brittle: the system works only while the weather is perfect&quot;,&quot;mid&quot;:&quot;steadier: one failure can happen without a full mystery&quot;,&quot;high&quot;:&quot;resilient: pressure, waiting, and recovery are all visible&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">reliability control room</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>brittle</span><div class="labbar"><i data-lab-bar></i></div><span>resilient</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="24" aria-pressed="false">
+      <b>timeouts</b><span data-off="requests can hang forever" data-on="slow paths fail closed">requests can hang forever</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="26" aria-pressed="false">
+      <b>backpressure</b><span data-off="spikes hit everything" data-on="queues and limits absorb load">spikes hit everything</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="22" aria-pressed="false">
+      <b>freshness policy</b><span data-off="old answers linger invisibly" data-on="cache age is explicit">old answers linger invisibly</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="28" aria-pressed="false">
+      <b>trace ids</b><span data-off="one request becomes a maze" data-on="path is stitched together">one request becomes a maze</span>
+    </button></div>
+      <div class="labout" data-lab-out>brittle: the system works only while the weather is perfect</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
+<div class="stats"><div class="stat"><b data-to="4">0</b><span>common layers: browser, CDN, app, database</span></div><div class="stat"><b data-to="1">0</b><span>bad invalidation can make the whole stack look haunted</span></div><div class="stat"><b data-to="0">0</b><span>magic involved, just old answers</span></div></div>
+<div class="panel" data-graph data-center="request" data-nodes='[&quot;client&quot;,&quot;edge&quot;,&quot;API&quot;,&quot;queue&quot;,&quot;db&quot;,&quot;cache&quot;]' data-idle="system steady" data-running="pressure moving downstream..." data-done="6 infrastructure layers reacted">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>add load</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>system steady</span></div>
+  </div><p class="cap">Systems stories get more interesting when you can feel the pressure move through the stack.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the headers</div><h2>HTTP caching is mostly instructions</h2><p class="body">The server sends a response with caching instructions. <code>Cache-Control</code> can say how long a response is fresh, whether a shared cache may store it, and whether the client must revalidate before reuse. <code>ETag</code> gives the client a cheap way to ask, "is my copy still good?"</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">response.txt</span></div>

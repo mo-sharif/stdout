@@ -24,6 +24,23 @@
           "file": "preview-url.js",
           "code": "app.post(\"/preview\", async (req, res) => {\n  const html = await fetch(req.body.url).then((r) => r.text());\n  res.json(extractPreview(html));\n});",
           "caption": "This helper is one validation step away from becoming a tunnel."
+        },
+        {
+          "type": "graph",
+          "center": "trust boundary",
+          "nodes": [
+            "input",
+            "authn",
+            "authz",
+            "secrets",
+            "deps",
+            "egress"
+          ],
+          "caption": "Security gets real when the trust boundaries light up. Poke it and see what has to hold.",
+          "action": "poke the boundary",
+          "idle": "controls quiet",
+          "running": "attack path lighting up...",
+          "done": "6 security edges need review"
         }
       ]
     },
@@ -67,6 +84,42 @@
         {
           "type": "prose",
           "html": "<p class=\"body\">A strong defense is layered: allow only expected schemes, parse with a real URL parser, resolve DNS, block private and link-local ranges, re-check after redirects, limit response size and timeout, and send fetches through an egress proxy that enforces the policy.</p>"
+        },
+        {
+          "type": "lab",
+          "title": "security control lab",
+          "caption": "Flip the switches and watch the story turn into a tiny operating model.",
+          "toggles": [
+            {
+              "label": "object authz",
+              "off": "route check only",
+              "on": "resource access checked",
+              "weight": 28
+            },
+            {
+              "label": "rate limits",
+              "off": "attackers get free loops",
+              "on": "abuse has a cost",
+              "weight": 24
+            },
+            {
+              "label": "secret hygiene",
+              "off": "tokens can leak into logs",
+              "on": "values are redacted and rotated",
+              "weight": 24
+            },
+            {
+              "label": "threat model",
+              "off": "risks discovered after build",
+              "on": "boundaries reviewed early",
+              "weight": 24
+            }
+          ],
+          "minLabel": "exposed",
+          "maxLabel": "hardened",
+          "low": "exposed: the feature trusts too much and records too little",
+          "mid": "better: the easy abuse paths now have friction",
+          "high": "hardened: authorization, limits, and recovery all have a job"
         },
         {
           "type": "stats",

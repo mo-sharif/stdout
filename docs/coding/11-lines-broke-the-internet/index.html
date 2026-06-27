@@ -45,7 +45,7 @@
     <script type="application/json" data-lines>[{"t":"$ npm install","c":"pr"},{"t":"npm WARN deprecated ...","c":"dim"},{"t":"npm ERR! 404 Not Found: left-pad@1.0.0","c":"err"},{"t":"npm ERR! 404 'left-pad' is not in the npm registry.","c":"err"},{"t":"npm ERR! A complete log of this run can be found in: ...","c":"dim"},{"t":"✖ build failed in 3.2s","c":"err"}]</script>
   </div><p class="cap">Red CI as far as the eye could see.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the blast radius</div><h2>It wasn't just the people who used it</h2><p class="body">Here's the thing that made it ugly. It hit everyone who used something that used something that used left-pad. <span class="hl">Transitive dependencies.</span> Hit the button and pull the brick out:</p>
-<div class="panel" data-graph data-center="left-pad" data-nodes='[&quot;React&quot;,&quot;Babel&quot;,&quot;webpack&quot;,&quot;Node&quot;,&quot;Express&quot;,&quot;Jest&quot;,&quot;ESLint&quot;,&quot;Vue&quot;,&quot;Gatsby&quot;,&quot;Yarn&quot;,&quot;Atom&quot;,&quot;Ember&quot;]'>
+<div class="panel" data-graph data-center="left-pad" data-nodes='[&quot;React&quot;,&quot;Babel&quot;,&quot;webpack&quot;,&quot;Node&quot;,&quot;Express&quot;,&quot;Jest&quot;,&quot;ESLint&quot;,&quot;Vue&quot;,&quot;Gatsby&quot;,&quot;Yarn&quot;,&quot;Atom&quot;,&quot;Ember&quot;]' data-idle="all green" data-running="cascading failures..." data-done="">
     <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
     <div class="io"><button class="mini run" data-pull>&#9888; unpublish left-pad</button><button class="mini" data-reset>reset</button>
       <span class="gstatus" data-status>all green</span></div>

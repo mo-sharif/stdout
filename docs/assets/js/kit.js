@@ -92,16 +92,59 @@ safe(() => {
     const status = $('[data-status]', g);
     const pull = $('[data-pull]', g), reset = $('[data-reset]', g);
     if (pull) pull.addEventListener('click', () => {
-      if (status) status.textContent = 'cascading failures...';
+      if (status) status.textContent = g.dataset.running || 'cascading failures...';
       nodes.forEach((d, i) => setTimeout(() => {
         g.querySelector(`[data-n="${i}"]`)?.classList.add('failed');
         g.querySelector(`[data-l="${i}"]`)?.classList.add('failed');
       }, 150 + i * 160));
-      setTimeout(() => { if (status) { status.textContent = '✖ ' + nodes.length + ' builds failed'; status.style.color = 'var(--red)'; } }, 150 + nodes.length * 160 + 200);
+      setTimeout(() => { if (status) { status.textContent = g.dataset.done || ('✖ ' + nodes.length + ' builds failed'); status.style.color = 'var(--red)'; } }, 150 + nodes.length * 160 + 200);
     });
     if (reset) reset.addEventListener('click', () => {
       nodes.forEach((d, i) => { g.querySelector(`[data-n="${i}"]`)?.classList.remove('failed'); g.querySelector(`[data-l="${i}"]`)?.classList.remove('failed'); });
-      if (status) { status.textContent = 'all green'; status.style.color = ''; }
+      if (status) { status.textContent = g.dataset.idle || 'all green'; status.style.color = ''; }
     });
+  });
+});
+
+// switchboard lab
+safe(() => {
+  $$('[data-lab]').forEach((lab) => {
+    const toggles = $$('[data-toggle]', lab);
+    const score = $('[data-lab-score]', lab);
+    const bar = $('[data-lab-bar]', lab);
+    const out = $('[data-lab-out]', lab);
+    const reset = $('[data-lab-reset]', lab);
+    const results = JSON.parse(lab.dataset.results || '{}');
+    let animated;
+
+    const setToggle = (btn, on) => {
+      btn.classList.toggle('on', on);
+      btn.setAttribute('aria-pressed', String(on));
+      const label = $('span', btn);
+      if (label) label.textContent = on ? label.dataset.on : label.dataset.off;
+    };
+
+    const update = () => {
+      const total = toggles.reduce((sum, btn) => sum + (btn.classList.contains('on') ? Number(btn.dataset.weight || 0) : 0), 0);
+      const value = Math.max(0, Math.min(100, total));
+      if (animated) animated.stop();
+      animated = animate(Number(score?.textContent || 0), value, {
+        duration: 0.45,
+        ease: 'easeOut',
+        onUpdate: (v) => { if (score) score.textContent = Math.round(v); }
+      });
+      if (bar) bar.style.width = value + '%';
+      if (out) out.textContent = value >= 75 ? results.high : value >= 40 ? results.mid : results.low;
+    };
+
+    toggles.forEach((btn) => btn.addEventListener('click', () => {
+      setToggle(btn, !btn.classList.contains('on'));
+      update();
+    }));
+    if (reset) reset.addEventListener('click', () => {
+      toggles.forEach((btn) => setToggle(btn, false));
+      update();
+    });
+    update();
   });
 });

@@ -8,9 +8,11 @@ const force = process.argv.includes('--force');
 const prose = (html) => ({ type: 'prose', html });
 const terminal = (title, caption, lines) => ({ type: 'terminal', title, caption, lines });
 const code = (file, source, caption) => ({ type: 'code', file, code: source, caption });
+const graph = (center, nodes, caption, copy = {}) => ({ type: 'graph', center, nodes, caption, ...copy });
 const stats = (items) => ({ type: 'stats', items });
 const quote = (text, cite) => ({ type: 'quote', text, cite });
 const embeds = (heading, items) => ({ type: 'embeds', heading, items });
+const lab = (title, caption, toggles, copy = {}) => ({ type: 'lab', title, caption, toggles, ...copy });
 
 const stories = [
   {
@@ -765,6 +767,163 @@ const sourceLibrary = {
 
 function sources(keys) {
   return keys.map((key) => ({ ...sourceLibrary[key], note: 'reference' }));
+}
+
+const interactiveProfiles = {
+  ai: {
+    center: 'model loop',
+    nodes: ['prompt', 'retrieval', 'tools', 'memory', 'policy', 'evals'],
+    action: 'stress the agent',
+    idle: 'guardrails armed',
+    running: 'probing weak edges...',
+    done: '6 AI failure paths exposed',
+    graphCaption: 'Hit the button and watch the hidden AI surface area light up.',
+    labTitle: 'AI launch switchboard',
+    metric: ['sloppy', 'shippable'],
+    low: 'fragile: the model is still freelancing without enough checks',
+    mid: 'better: useful guardrails are catching the obvious mistakes',
+    high: 'ready-ish: evidence, policy, and evals are all in the loop',
+    toggles: [
+      { label: 'source checks', off: 'answers from vibe', on: 'evidence gate on', weight: 26 },
+      { label: 'tool policy', off: 'model can ask for anything', on: 'permissions checked outside model', weight: 28 },
+      { label: 'eval replay', off: 'demo path only', on: 'failure cases replayed', weight: 24 },
+      { label: 'human handoff', off: 'bot traps edge cases', on: 'risky cases route out', weight: 22 }
+    ]
+  },
+  coding: {
+    center: 'change',
+    nodes: ['tests', 'API', 'data', 'logs', 'review', 'deploy'],
+    action: 'ship the diff',
+    idle: 'change looks calm',
+    running: 'checking blast radius...',
+    done: '6 engineering checks touched',
+    graphCaption: 'A tiny patch rarely touches only one thing. Push it and watch the review surface appear.',
+    labTitle: 'change confidence lab',
+    metric: ['guessy', 'safe'],
+    low: 'fragile: this change still depends on hope and a lucky deploy',
+    mid: 'better: the main risk has at least one alarm around it',
+    high: 'solid: tests, observability, and review all agree on the shape',
+    toggles: [
+      { label: 'contract test', off: 'shape can drift silently', on: 'public behavior pinned', weight: 28 },
+      { label: 'rollback note', off: 'recovery is folklore', on: 'exit ramp written down', weight: 22 },
+      { label: 'logs with ids', off: 'debugging by vibes', on: 'request can be traced', weight: 24 },
+      { label: 'small diff', off: 'reviewer has to excavate', on: 'review path is narrow', weight: 26 }
+    ]
+  },
+  leadership: {
+    center: 'decision',
+    nodes: ['context', 'owner', 'risk', 'feedback', 'scope', 'followup'],
+    action: 'remove context',
+    idle: 'team has a map',
+    running: 'watching ambiguity spread...',
+    done: '6 leadership signals went red',
+    graphCaption: 'Leadership bugs are system bugs too. Pull context out and the team graph starts wobbling.',
+    labTitle: 'team clarity switchboard',
+    metric: ['muddy', 'clear'],
+    low: 'muddy: people can move, but they are guessing while they do it',
+    mid: 'clearer: ownership and tradeoffs are starting to show up',
+    high: 'aligned: the team can act without decoding hidden context',
+    toggles: [
+      { label: 'named owner', off: 'everyone is sort of responsible', on: 'one owner is explicit', weight: 25 },
+      { label: 'tradeoff written', off: 'priority lives in meetings', on: 'the no is visible', weight: 25 },
+      { label: 'feedback loop', off: 'drift arrives late', on: 'checkpoints are scheduled', weight: 24 },
+      { label: 'decision log', off: 'memory carries the plan', on: 'future readers get receipts', weight: 26 }
+    ]
+  },
+  tech: {
+    center: 'request',
+    nodes: ['client', 'edge', 'API', 'queue', 'db', 'cache'],
+    action: 'add load',
+    idle: 'system steady',
+    running: 'pressure moving downstream...',
+    done: '6 infrastructure layers reacted',
+    graphCaption: 'Systems stories get more interesting when you can feel the pressure move through the stack.',
+    labTitle: 'reliability control room',
+    metric: ['brittle', 'resilient'],
+    low: 'brittle: the system works only while the weather is perfect',
+    mid: 'steadier: one failure can happen without a full mystery',
+    high: 'resilient: pressure, waiting, and recovery are all visible',
+    toggles: [
+      { label: 'timeouts', off: 'requests can hang forever', on: 'slow paths fail closed', weight: 24 },
+      { label: 'backpressure', off: 'spikes hit everything', on: 'queues and limits absorb load', weight: 26 },
+      { label: 'freshness policy', off: 'old answers linger invisibly', on: 'cache age is explicit', weight: 22 },
+      { label: 'trace ids', off: 'one request becomes a maze', on: 'path is stitched together', weight: 28 }
+    ]
+  },
+  career: {
+    center: 'growth loop',
+    nodes: ['work', 'evidence', 'feedback', 'manager', 'peers', 'next bet'],
+    action: 'hide the receipts',
+    idle: 'career signal visible',
+    running: 'impact getting fuzzy...',
+    done: '6 career signals lost context',
+    graphCaption: 'Career systems are still systems. Pull out evidence and everything gets harder to debug.',
+    labTitle: 'career signal lab',
+    metric: ['fuzzy', 'legible'],
+    low: 'fuzzy: good work happened, but the signal is hard to carry forward',
+    mid: 'clearer: your manager and peers can see some of the shape',
+    high: 'legible: impact, support, and next steps are easy to inspect',
+    toggles: [
+      { label: 'weekly receipts', off: 'memory has to reconstruct impact', on: 'evidence is captured while fresh', weight: 26 },
+      { label: 'specific ask', off: 'people infer the blocker', on: 'help request names the lever', weight: 24 },
+      { label: 'peer signal', off: 'growth happens alone', on: 'feedback network is active', weight: 24 },
+      { label: 'tradeoff list', off: 'every yes is automatic', on: 'constraints are explicit', weight: 26 }
+    ]
+  },
+  security: {
+    center: 'trust boundary',
+    nodes: ['input', 'authn', 'authz', 'secrets', 'deps', 'egress'],
+    action: 'poke the boundary',
+    idle: 'controls quiet',
+    running: 'attack path lighting up...',
+    done: '6 security edges need review',
+    graphCaption: 'Security gets real when the trust boundaries light up. Poke it and see what has to hold.',
+    labTitle: 'security control lab',
+    metric: ['exposed', 'hardened'],
+    low: 'exposed: the feature trusts too much and records too little',
+    mid: 'better: the easy abuse paths now have friction',
+    high: 'hardened: authorization, limits, and recovery all have a job',
+    toggles: [
+      { label: 'object authz', off: 'route check only', on: 'resource access checked', weight: 28 },
+      { label: 'rate limits', off: 'attackers get free loops', on: 'abuse has a cost', weight: 24 },
+      { label: 'secret hygiene', off: 'tokens can leak into logs', on: 'values are redacted and rotated', weight: 24 },
+      { label: 'threat model', off: 'risks discovered after build', on: 'boundaries reviewed early', weight: 24 }
+    ]
+  }
+};
+
+function addInteractiveBlocks(story) {
+  const profile = interactiveProfiles[story.category];
+  if (!profile) return story;
+
+  const hasGraph = story.beats.some((beat) => beat.blocks?.some((block) => block.type === 'graph'));
+  if (!hasGraph && story.beats[0]) {
+    story.beats[0].blocks.push(graph(profile.center, profile.nodes, profile.graphCaption, {
+      action: profile.action,
+      idle: profile.idle,
+      running: profile.running,
+      done: profile.done
+    }));
+  }
+
+  const hasLab = story.beats.some((beat) => beat.blocks?.some((block) => block.type === 'lab'));
+  if (!hasLab) {
+    const target = story.beats.find((beat) => beat.blocks?.some((block) => block.type === 'stats')) || story.beats[Math.min(2, story.beats.length - 1)];
+    if (target) {
+      const block = lab(profile.labTitle, 'Flip the switches and watch the story turn into a tiny operating model.', profile.toggles, {
+        minLabel: profile.metric[0],
+        maxLabel: profile.metric[1],
+        low: profile.low,
+        mid: profile.mid,
+        high: profile.high
+      });
+      const statsIndex = target.blocks.findIndex((candidate) => candidate.type === 'stats');
+      if (statsIndex === -1) target.blocks.push(block);
+      else target.blocks.splice(statsIndex, 0, block);
+    }
+  }
+
+  return story;
 }
 
 function makeSeedStory(d) {
@@ -2142,6 +2301,7 @@ const skippedSeedSlugs = new Set([
 ]);
 
 stories.push(...extraStoryDefs.filter((story) => !skippedSeedSlugs.has(story.slug)).map(makeSeedStory));
+stories.forEach(addInteractiveBlocks);
 
 const expectedSeedCounts = { ai: 8, coding: 7, leadership: 8, tech: 6, career: 8, security: 8 };
 const seedCounts = stories.reduce((acc, story) => ({ ...acc, [story.category]: (acc[story.category] || 0) + 1 }), {});

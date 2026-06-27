@@ -19,7 +19,12 @@
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"$ query \"how do refunds work for paused accounts?\"","c":"pr"},{"t":"retrieved: billing-overview.md, stripe-webhooks.md, faq-old.md","c":""},{"t":"missing: paused-account-policy.md","c":"err"},{"t":"answer: \"I do not see that policy in the docs.\"","c":"dim"}]</script>
-  </div><p class="cap">The most common RAG bug looks boring in the logs.</p></div></section>
+  </div><p class="cap">The most common RAG bug looks boring in the logs.</p>
+<div class="panel" data-graph data-center="model loop" data-nodes='[&quot;prompt&quot;,&quot;retrieval&quot;,&quot;tools&quot;,&quot;memory&quot;,&quot;policy&quot;,&quot;evals&quot;]' data-idle="guardrails armed" data-running="probing weak edges..." data-done="6 AI failure paths exposed">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>stress the agent</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>guardrails armed</span></div>
+  </div><p class="cap">Hit the button and watch the hidden AI surface area light up.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the pipeline</div><h2>Chunking is product design</h2><p class="body">A chunk is not just a blob of text. It is a unit of meaning. If you split a policy table away from its heading, retrieval can find the table and lose the question it answers. If you make chunks huge, every match becomes noisy. Good RAG starts with <strong>boring document hygiene</strong>: titles, hierarchy, dates, owners, and clean boundaries.</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">chunking/checklist.js</span></div>
@@ -34,6 +39,23 @@
 index.write(chunk);</textarea>
   </div><p class="cap">Metadata is part of the answer. Treat it like source code, not decoration.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the measurement</div><h2>Measure retrieval before generation</h2><p class="body">Before you judge answer quality, run a tiny harness that asks: did the retriever find the document a human would use? That gives you a clean signal. If retrieval failed, fix search. If retrieval passed and the answer is bad, fix prompting, context shape, or the model.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;fragile: the model is still freelancing without enough checks&quot;,&quot;mid&quot;:&quot;better: useful guardrails are catching the obvious mistakes&quot;,&quot;high&quot;:&quot;ready-ish: evidence, policy, and evals are all in the loop&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">AI launch switchboard</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>sloppy</span><div class="labbar"><i data-lab-bar></i></div><span>shippable</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="26" aria-pressed="false">
+      <b>source checks</b><span data-off="answers from vibe" data-on="evidence gate on">answers from vibe</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="28" aria-pressed="false">
+      <b>tool policy</b><span data-off="model can ask for anything" data-on="permissions checked outside model">model can ask for anything</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>eval replay</b><span data-off="demo path only" data-on="failure cases replayed">demo path only</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="22" aria-pressed="false">
+      <b>human handoff</b><span data-off="bot traps edge cases" data-on="risky cases route out">bot traps edge cases</span>
+    </button></div>
+      <div class="labout" data-lab-out>fragile: the model is still freelancing without enough checks</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
 <div class="stats"><div class="stat"><b data-to="20">0</b><span>starter questions can expose the obvious misses</span></div><div class="stat"><b data-to="3">0</b><span>signals to log: query, retrieved ids, answer</span></div><div class="stat"><b data-to="1">0</b><span>owner for each source keeps docs from rotting</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the loop</div><h2>The best RAG systems are edited weekly</h2><p class="body">Your corpus changes. User language changes. Product names drift. So the system needs a weekly rhythm: inspect misses, merge duplicate docs, add synonyms, retire stale chunks, and replay the eval set. The glamorous part is the chat box. The durable part is <span class="hl">search ops</span>.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://cookbook.openai.com/examples/question_answering_using_embeddings" target="_blank" rel="noopener">

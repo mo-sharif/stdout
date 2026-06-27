@@ -37,6 +37,23 @@
               "c": "dim"
             }
           ]
+        },
+        {
+          "type": "graph",
+          "center": "change",
+          "nodes": [
+            "tests",
+            "API",
+            "data",
+            "logs",
+            "review",
+            "deploy"
+          ],
+          "caption": "A tiny patch rarely touches only one thing. Push it and watch the review surface appear.",
+          "action": "ship the diff",
+          "idle": "change looks calm",
+          "running": "checking blast radius...",
+          "done": "6 engineering checks touched"
         }
       ]
     },
@@ -63,6 +80,42 @@
         {
           "type": "prose",
           "html": "<p class=\"body\">Add contract tests for response shapes and error codes. Breaking clients is a production incident even when your server is green.</p>"
+        },
+        {
+          "type": "lab",
+          "title": "change confidence lab",
+          "caption": "Flip the switches and watch the story turn into a tiny operating model.",
+          "toggles": [
+            {
+              "label": "contract test",
+              "off": "shape can drift silently",
+              "on": "public behavior pinned",
+              "weight": 28
+            },
+            {
+              "label": "rollback note",
+              "off": "recovery is folklore",
+              "on": "exit ramp written down",
+              "weight": 22
+            },
+            {
+              "label": "logs with ids",
+              "off": "debugging by vibes",
+              "on": "request can be traced",
+              "weight": 24
+            },
+            {
+              "label": "small diff",
+              "off": "reviewer has to excavate",
+              "on": "review path is narrow",
+              "weight": 26
+            }
+          ],
+          "minLabel": "guessy",
+          "maxLabel": "safe",
+          "low": "fragile: this change still depends on hope and a lucky deploy",
+          "mid": "better: the main risk has at least one alarm around it",
+          "high": "solid: tests, observability, and review all agree on the shape"
         },
         {
           "type": "stats",

@@ -26,11 +26,37 @@ const terminal = (b) => `<div class="panel term" data-terminal>
     <script type="application/json" data-lines>${JSON.stringify(b.lines || [])}</script>
   </div>${b.caption ? `<p class="cap">${esc(b.caption)}</p>` : ''}`;
 
-const graph = (b) => `<div class="panel" data-graph data-center="${esc(b.center)}" data-nodes='${esc(JSON.stringify(b.nodes || []))}'>
+const graph = (b) => {
+  const action = b.action ? esc(b.action) : `&#9888; unpublish ${esc(b.center)}`;
+  const idle = b.idle || 'all green';
+  const running = b.running || 'cascading failures...';
+  const done = b.done || '';
+  return `<div class="panel" data-graph data-center="${esc(b.center)}" data-nodes='${esc(JSON.stringify(b.nodes || []))}' data-idle="${esc(idle)}" data-running="${esc(running)}" data-done="${esc(done)}">
     <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
-    <div class="io"><button class="mini run" data-pull>&#9888; unpublish ${esc(b.center)}</button><button class="mini" data-reset>reset</button>
-      <span class="gstatus" data-status>all green</span></div>
+    <div class="io"><button class="mini run" data-pull>${action}</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>${esc(idle)}</span></div>
   </div>${b.caption ? `<p class="cap">${esc(b.caption)}</p>` : ''}`;
+};
+
+const lab = (b) => {
+  const toggles = (b.toggles || []).map((t, i) => `<button class="labtoggle" type="button" data-toggle="${i}" data-weight="${Number(t.weight || 0)}" aria-pressed="false">
+      <b>${esc(t.label)}</b><span data-off="${esc(t.off || '')}" data-on="${esc(t.on || '')}">${esc(t.off || '')}</span>
+    </button>`).join('');
+  const results = {
+    low: b.low || 'fragile: too many silent assumptions',
+    mid: b.mid || 'better: a few guardrails are working',
+    high: b.high || 'ready: the system has receipts'
+  };
+  return `<div class="panel lab" data-lab data-results='${esc(JSON.stringify(results))}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">${esc(b.title || 'interactive lab')}</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>${esc(b.minLabel || 'fragile')}</span><div class="labbar"><i data-lab-bar></i></div><span>${esc(b.maxLabel || 'ready')}</span><b data-lab-score>0</b></div>
+      <div class="labtoggles">${toggles}</div>
+      <div class="labout" data-lab-out>${esc(results.low)}</div>
+    </div>
+  </div>${b.caption ? `<p class="cap">${esc(b.caption)}</p>` : ''}`;
+};
 
 const stats = (b) => `<div class="stats">${(b.items || []).map((s) =>
   `<div class="stat"><b data-to="${Number(s.to)}">0</b><span>${esc(s.label)}</span></div>`).join('')}</div>`;
@@ -46,7 +72,7 @@ const embeds = (b) => {
   return `${heading}<div class="embeds">${items}</div>`;
 };
 
-const BLOCKS = { prose, code, terminal, graph, stats, quote, embeds };
+const BLOCKS = { prose, code, terminal, graph, stats, quote, embeds, lab };
 
 export function renderBlock(b) {
   const fn = BLOCKS[b.type];

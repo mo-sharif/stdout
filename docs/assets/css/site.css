@@ -94,6 +94,22 @@ textarea.code{width:100%;border:0;resize:vertical;min-height:200px;padding:16px 
 .gline.failed{stroke:var(--red)}
 .gstatus{font-family:var(--mono);font-size:13px;color:var(--muted);margin-left:auto}
 
+/* interactive switchboard lab */
+.labbody{padding:16px 18px}
+.labmeter{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:14px}
+.labmeter b{color:var(--accent);font-size:24px;line-height:1;min-width:42px;text-align:right}
+.labbar{height:10px;background:var(--bg-deep);border:1px solid var(--line);overflow:hidden}
+.labbar i{display:block;height:100%;width:0;background:var(--accent);transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.labtoggles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.labtoggle{font-family:var(--mono);text-align:left;background:var(--surface);border:1px solid var(--line);color:var(--text);padding:12px;cursor:pointer;transition:border-color .18s,transform .18s,background .18s}
+.labtoggle:hover,.labtoggle:focus-visible{border-color:var(--accent);outline:none;transform:translateY(-1px)}
+.labtoggle.on{border-color:var(--accent);background:rgba(70,209,126,.08)}
+.labtoggle b{display:block;font-size:13px;font-weight:600;margin-bottom:5px;color:var(--text)}
+.labtoggle span{display:block;font-size:12px;line-height:1.45;color:var(--muted)}
+.labtoggle.on span{color:var(--accent)}
+.labout{margin-top:12px;padding:12px 13px;border:1px dashed var(--line-bright);font-family:var(--mono);font-size:13px;color:var(--text);background:var(--bg-deep)}
+@media(max-width:620px){.labmeter{grid-template-columns:auto 1fr auto}.labmeter b{grid-column:1/-1;text-align:left}.labtoggles{grid-template-columns:1fr}}
+
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
 .stat{border:1px solid var(--line);padding:20px 16px;background:var(--surface)}

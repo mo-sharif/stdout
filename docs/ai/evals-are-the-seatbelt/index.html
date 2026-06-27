@@ -19,7 +19,12 @@
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"$ npm run evals","c":"pr"},{"t":"PASS refund_policy_basic","c":""},{"t":"PASS appointment_reschedule_context","c":""},{"t":"FAIL medication_question_refusal","c":"err"},{"t":"blocked: model answered instead of routing to clinician copy","c":"err"}]</script>
-  </div><p class="cap">A small replay beats a confident demo.</p></div></section>
+  </div><p class="cap">A small replay beats a confident demo.</p>
+<div class="panel" data-graph data-center="model loop" data-nodes='[&quot;prompt&quot;,&quot;retrieval&quot;,&quot;tools&quot;,&quot;memory&quot;,&quot;policy&quot;,&quot;evals&quot;]' data-idle="guardrails armed" data-running="probing weak edges..." data-done="6 AI failure paths exposed">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>stress the agent</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>guardrails armed</span></div>
+  </div><p class="cap">Hit the button and watch the hidden AI surface area light up.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the set</div><h2>Start with the failures you fear</h2><p class="body">A useful first eval set is not huge. It is honest. Include common requests, edge cases, policy boundaries, prompt injection attempts, and examples from real support tickets after removing private data. Each case should say what good looks like in plain language.</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">evals/cases.json</span></div>
@@ -33,7 +38,24 @@
 ]</textarea>
   </div><p class="cap">Readable beats clever. If a product manager can review the case, you are on the right track.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the judge</div><h2>Score behavior, not eloquence</h2><p class="body">Pretty answers can still be wrong. The rubric should check concrete behavior: cites the right source, refuses the forbidden task, asks the missing question, routes the risky topic, or returns structured JSON. Let style be a smaller score. Accuracy gets the veto.</p>
-<blockquote>Do the boring checks first: exact match, schema match, source match, refusal match. Bring in an LLM judge only when rules cannot express the behavior.<cite>stdout rule of thumb</cite></blockquote></div></section>
+<blockquote>Do the boring checks first: exact match, schema match, source match, refusal match. Bring in an LLM judge only when rules cannot express the behavior.<cite>stdout rule of thumb</cite></blockquote>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;fragile: the model is still freelancing without enough checks&quot;,&quot;mid&quot;:&quot;better: useful guardrails are catching the obvious mistakes&quot;,&quot;high&quot;:&quot;ready-ish: evidence, policy, and evals are all in the loop&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">AI launch switchboard</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>sloppy</span><div class="labbar"><i data-lab-bar></i></div><span>shippable</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="26" aria-pressed="false">
+      <b>source checks</b><span data-off="answers from vibe" data-on="evidence gate on">answers from vibe</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="28" aria-pressed="false">
+      <b>tool policy</b><span data-off="model can ask for anything" data-on="permissions checked outside model">model can ask for anything</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>eval replay</b><span data-off="demo path only" data-on="failure cases replayed">demo path only</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="22" aria-pressed="false">
+      <b>human handoff</b><span data-off="bot traps edge cases" data-on="risky cases route out">bot traps edge cases</span>
+    </button></div>
+      <div class="labout" data-lab-out>fragile: the model is still freelancing without enough checks</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the habit</div><h2>Run evals whenever the system changes</h2><p class="body">The model changed? Run evals. The prompt changed? Run evals. The docs changed? Run evals. The retrieval code changed? Definitely run evals. You are building a moving system, so quality has to move with it.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-gh" href="https://github.com/openai/evals" target="_blank" rel="noopener">
       <div class="eh"><span class="logo">&#9679;</span> GitHub</div>

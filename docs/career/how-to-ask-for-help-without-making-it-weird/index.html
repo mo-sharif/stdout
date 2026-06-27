@@ -14,7 +14,12 @@
   <div class="meta"><span>~5 min</span><span>&bull;</span><span>Career</span></div>
 </div><div class="scrollcue">scroll<span>&darr;</span></div></header>
 <main><section class="beat"><div class="wrap reveal"><div class="num">01 · the fear</div><h2>The delay is usually more expensive than the question</h2><p class="body">Everyone gets stuck. The risky part is silently spinning until the problem grows teeth. A good help request protects both sides: you show your work, the helper gets context, and the team gets unstuck sooner.</p>
-<blockquote>The goal is not to prove you tried hard. The goal is to make the next experiment obvious.<cite>debugging note</cite></blockquote></div></section>
+<blockquote>The goal is not to prove you tried hard. The goal is to make the next experiment obvious.<cite>debugging note</cite></blockquote>
+<div class="panel" data-graph data-center="growth loop" data-nodes='[&quot;work&quot;,&quot;evidence&quot;,&quot;feedback&quot;,&quot;manager&quot;,&quot;peers&quot;,&quot;next bet&quot;]' data-idle="career signal visible" data-running="impact getting fuzzy..." data-done="6 career signals lost context">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>hide the receipts</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>career signal visible</span></div>
+  </div><p class="cap">Career systems are still systems. Pull out evidence and everything gets harder to debug.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the packet</div><h2>Send the smallest complete problem</h2><p class="body">A useful request has five pieces: what you expected, what happened, what changed recently, what you already tried, and the smallest reproduction you can make. That turns "it is broken" into something another person can run.</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">help-request.md</span></div>
@@ -30,7 +35,24 @@ Repro: branch mo/coupon-total, test command below</textarea>
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"$ git checkout mo/coupon-total","c":"pr"},{"t":"$ npm test -- coupon-total","c":"pr"},{"t":"FAIL updates total after coupon apply","c":"err"},{"t":"# API response is correct, UI selector is stale","c":"dim"}]</script>
-  </div><p class="cap">A helper should be able to start here.</p></div></section>
+  </div><p class="cap">A helper should be able to start here.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;fuzzy: good work happened, but the signal is hard to carry forward&quot;,&quot;mid&quot;:&quot;clearer: your manager and peers can see some of the shape&quot;,&quot;high&quot;:&quot;legible: impact, support, and next steps are easy to inspect&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">career signal lab</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>fuzzy</span><div class="labbar"><i data-lab-bar></i></div><span>legible</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="26" aria-pressed="false">
+      <b>weekly receipts</b><span data-off="memory has to reconstruct impact" data-on="evidence is captured while fresh">memory has to reconstruct impact</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="24" aria-pressed="false">
+      <b>specific ask</b><span data-off="people infer the blocker" data-on="help request names the lever">people infer the blocker</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>peer signal</b><span data-off="growth happens alone" data-on="feedback network is active">growth happens alone</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="26" aria-pressed="false">
+      <b>tradeoff list</b><span data-off="every yes is automatic" data-on="constraints are explicit">every yes is automatic</span>
+    </button></div>
+      <div class="labout" data-lab-out>fuzzy: good work happened, but the signal is hard to carry forward</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the close</div><h2>Report back with the fix</h2><p class="body">The loop is not done when someone rescues you. Write the outcome in the thread, update the doc or test, and thank the specific help. That makes the next person faster and makes future help easier to ask for.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://stackoverflow.com/help/minimal-reproducible-example" target="_blank" rel="noopener">
       <div class="eh"><span class="logo">&#9632;</span> Stack Overflow</div>

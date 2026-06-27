@@ -19,7 +19,12 @@
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"POST /login from 203.0.113.10 count=61/min","c":"err"},{"t":"decision: challenge","c":""},{"t":"next: block if failures continue","c":""}]</script>
-  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+  </div><p class="cap">The useful signal is usually already there.</p>
+<div class="panel" data-graph data-center="trust boundary" data-nodes='[&quot;input&quot;,&quot;authn&quot;,&quot;authz&quot;,&quot;secrets&quot;,&quot;deps&quot;,&quot;egress&quot;]' data-idle="controls quiet" data-running="attack path lighting up..." data-done="6 security edges need review">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>poke the boundary</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>controls quiet</span></div>
+  </div><p class="cap">Security gets real when the trust boundaries light up. Poke it and see what has to hold.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Limit by behavior, not just IP</h2><p class="body">IP limits help, but attackers rotate. Combine user, device, account, route, cost, and failure signals where it matters.</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">abuse-limits.yml</span></div>
@@ -30,6 +35,23 @@
   action: step_up_challenge</textarea>
   </div><p class="cap">The best action is not always block; sometimes it is challenge.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Avoid punishing normal users</h2><p class="body">A good abuse control makes attackers expensive while giving legitimate users a recovery path.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;exposed: the feature trusts too much and records too little&quot;,&quot;mid&quot;:&quot;better: the easy abuse paths now have friction&quot;,&quot;high&quot;:&quot;hardened: authorization, limits, and recovery all have a job&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">security control lab</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>exposed</span><div class="labbar"><i data-lab-bar></i></div><span>hardened</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="28" aria-pressed="false">
+      <b>object authz</b><span data-off="route check only" data-on="resource access checked">route check only</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="24" aria-pressed="false">
+      <b>rate limits</b><span data-off="attackers get free loops" data-on="abuse has a cost">attackers get free loops</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>secret hygiene</b><span data-off="tokens can leak into logs" data-on="values are redacted and rotated">tokens can leak into logs</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="24" aria-pressed="false">
+      <b>threat model</b><span data-off="risks discovered after build" data-on="boundaries reviewed early">risks discovered after build</span>
+    </button></div>
+      <div class="labout" data-lab-out>exposed: the feature trusts too much and records too little</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
 <div class="stats"><div class="stat"><b data-to="5">0</b><span>failed logins before step-up in this example</span></div><div class="stat"><b data-to="3">0</b><span>keys to consider: IP, account, device</span></div><div class="stat"><b data-to="0">0</b><span>unlimited sensitive attempts</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Friction belongs at the risky edge</h2><p class="body">Rate limiting is not just reliability. It is how you make abusive loops cost more than they are worth.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html" target="_blank" rel="noopener">

@@ -19,7 +19,12 @@
       <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
     <div class="termbody" data-termbody></div>
     <script type="application/json" data-lines>[{"t":"$ agent run \"clean up duplicate invoices\"","c":"pr"},{"t":"plan: search, merge, email customers","c":""},{"t":"blocked: email_customers requires human approval","c":"err"}]</script>
-  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+  </div><p class="cap">The useful signal is usually already there.</p>
+<div class="panel" data-graph data-center="model loop" data-nodes='[&quot;prompt&quot;,&quot;retrieval&quot;,&quot;tools&quot;,&quot;memory&quot;,&quot;policy&quot;,&quot;evals&quot;]' data-idle="guardrails armed" data-running="probing weak edges..." data-done="6 AI failure paths exposed">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>stress the agent</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>guardrails armed</span></div>
+  </div><p class="cap">Hit the button and watch the hidden AI surface area light up.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Design the stop signs first</h2><p class="body">Before adding tools, write down what the agent may read, what it may change, how much it may spend, when it must ask, and where every action is logged.</p>
 <div class="panel">
     <div class="top"><i></i><i></i><i></i><span class="fn">agent/permissions.json</span></div>
@@ -30,6 +35,23 @@
 }</textarea>
   </div><p class="cap">A small permission file is more useful than a heroic prompt.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Simulate failure before launch</h2><p class="body">Run the agent against fake data with fake tools and real limits. The goal is not to prove it succeeds. The goal is to see how it behaves when the task is ambiguous, stale, impossible, or risky.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;fragile: the model is still freelancing without enough checks&quot;,&quot;mid&quot;:&quot;better: useful guardrails are catching the obvious mistakes&quot;,&quot;high&quot;:&quot;ready-ish: evidence, policy, and evals are all in the loop&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">AI launch switchboard</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>sloppy</span><div class="labbar"><i data-lab-bar></i></div><span>shippable</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="26" aria-pressed="false">
+      <b>source checks</b><span data-off="answers from vibe" data-on="evidence gate on">answers from vibe</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="28" aria-pressed="false">
+      <b>tool policy</b><span data-off="model can ask for anything" data-on="permissions checked outside model">model can ask for anything</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>eval replay</b><span data-off="demo path only" data-on="failure cases replayed">demo path only</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="22" aria-pressed="false">
+      <b>human handoff</b><span data-off="bot traps edge cases" data-on="risky cases route out">bot traps edge cases</span>
+    </button></div>
+      <div class="labout" data-lab-out>fragile: the model is still freelancing without enough checks</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
 <div class="stats"><div class="stat"><b data-to="1">0</b><span>human approval gate for irreversible work</span></div><div class="stat"><b data-to="100">0</b><span>percent of tool calls logged</span></div><div class="stat"><b data-to="0">0</b><span>silent writes to production systems</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>The guardrails are the product</h2><p class="body">Users do not just want the agent to act. They want to trust it while it acts. That trust comes from limits, receipts, and graceful refusal.</p>
 <h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">

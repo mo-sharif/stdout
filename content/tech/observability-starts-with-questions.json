@@ -41,6 +41,23 @@
               "c": ""
             }
           ]
+        },
+        {
+          "type": "graph",
+          "center": "request",
+          "nodes": [
+            "client",
+            "edge",
+            "API",
+            "queue",
+            "db",
+            "cache"
+          ],
+          "caption": "Systems stories get more interesting when you can feel the pressure move through the stack.",
+          "action": "add load",
+          "idle": "system steady",
+          "running": "pressure moving downstream...",
+          "done": "6 infrastructure layers reacted"
         }
       ]
     },
@@ -67,6 +84,42 @@
         {
           "type": "prose",
           "html": "<p class=\"body\">Ask what a user would report, then make sure telemetry can answer it: who was affected, when it started, what changed, and which dependency was slow or wrong.</p>"
+        },
+        {
+          "type": "lab",
+          "title": "reliability control room",
+          "caption": "Flip the switches and watch the story turn into a tiny operating model.",
+          "toggles": [
+            {
+              "label": "timeouts",
+              "off": "requests can hang forever",
+              "on": "slow paths fail closed",
+              "weight": 24
+            },
+            {
+              "label": "backpressure",
+              "off": "spikes hit everything",
+              "on": "queues and limits absorb load",
+              "weight": 26
+            },
+            {
+              "label": "freshness policy",
+              "off": "old answers linger invisibly",
+              "on": "cache age is explicit",
+              "weight": 22
+            },
+            {
+              "label": "trace ids",
+              "off": "one request becomes a maze",
+              "on": "path is stitched together",
+              "weight": 28
+            }
+          ],
+          "minLabel": "brittle",
+          "maxLabel": "resilient",
+          "low": "brittle: the system works only while the weather is perfect",
+          "mid": "steadier: one failure can happen without a full mystery",
+          "high": "resilient: pressure, waiting, and recovery are all visible"
         },
         {
           "type": "stats",

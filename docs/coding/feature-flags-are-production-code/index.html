@@ -21,8 +21,30 @@
 }
 
 return renderCurrentCheckout(cart);</textarea>
-  </div><p class="cap">That branch is live in production even when the new path is hidden.</p></div></section>
+  </div><p class="cap">That branch is live in production even when the new path is hidden.</p>
+<div class="panel" data-graph data-center="change" data-nodes='[&quot;tests&quot;,&quot;API&quot;,&quot;data&quot;,&quot;logs&quot;,&quot;review&quot;,&quot;deploy&quot;]' data-idle="change looks calm" data-running="checking blast radius..." data-done="6 engineering checks touched">
+    <div class="graphwrap"><svg data-svg viewBox="0 0 700 300" aria-label="dependency graph"></svg></div>
+    <div class="io"><button class="mini run" data-pull>ship the diff</button><button class="mini" data-reset>reset</button>
+      <span class="gstatus" data-status>change looks calm</span></div>
+  </div><p class="cap">A tiny patch rarely touches only one thing. Push it and watch the review surface appear.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">02 · the cost</div><h2>Every flag doubles a path somewhere</h2><p class="body">A flag creates at least two realities: on and off. Sometimes it creates many more: user cohorts, regions, plans, experiments, internal overrides. If you do not test the important combinations, the rollback path can be the broken path.</p>
+<div class="panel lab" data-lab data-results='{&quot;low&quot;:&quot;fragile: this change still depends on hope and a lucky deploy&quot;,&quot;mid&quot;:&quot;better: the main risk has at least one alarm around it&quot;,&quot;high&quot;:&quot;solid: tests, observability, and review all agree on the shape&quot;}'>
+    <div class="top"><i></i><i></i><i></i><span class="fn">change confidence lab</span>
+      <span class="act"><button class="mini" data-lab-reset>reset</button></span></div>
+    <div class="labbody">
+      <div class="labmeter"><span>guessy</span><div class="labbar"><i data-lab-bar></i></div><span>safe</span><b data-lab-score>0</b></div>
+      <div class="labtoggles"><button class="labtoggle" type="button" data-toggle="0" data-weight="28" aria-pressed="false">
+      <b>contract test</b><span data-off="shape can drift silently" data-on="public behavior pinned">shape can drift silently</span>
+    </button><button class="labtoggle" type="button" data-toggle="1" data-weight="22" aria-pressed="false">
+      <b>rollback note</b><span data-off="recovery is folklore" data-on="exit ramp written down">recovery is folklore</span>
+    </button><button class="labtoggle" type="button" data-toggle="2" data-weight="24" aria-pressed="false">
+      <b>logs with ids</b><span data-off="debugging by vibes" data-on="request can be traced">debugging by vibes</span>
+    </button><button class="labtoggle" type="button" data-toggle="3" data-weight="26" aria-pressed="false">
+      <b>small diff</b><span data-off="reviewer has to excavate" data-on="review path is narrow">reviewer has to excavate</span>
+    </button></div>
+      <div class="labout" data-lab-out>fragile: this change still depends on hope and a lucky deploy</div>
+    </div>
+  </div><p class="cap">Flip the switches and watch the story turn into a tiny operating model.</p>
 <div class="stats"><div class="stat"><b data-to="2">0</b><span>minimum paths for every boolean flag</span></div><div class="stat"><b data-to="1">0</b><span>named owner who deletes it</span></div><div class="stat"><b data-to="30">0</b><span>days before many release flags should be questioned</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">03 · the hygiene</div><h2>Put metadata next to the decision</h2><p class="body">A useful flag has a purpose, owner, creation date, expected removal date, and safe default. Without that, nobody knows if the off path is still real or just a museum exhibit with traffic.</p>
 <div class="panel term" data-terminal>

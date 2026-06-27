@@ -14,6 +14,13 @@ test('graph block embeds center and nodes as data', () => {
   assert.match(h, /data-center="left-pad"/);
   assert.match(h, /React/);
 });
+test('lab block renders toggles and result data', () => {
+  const h = renderBlock({ type: 'lab', title: 'Switchboard', toggles: [{ label: 'tests', off: 'off', on: 'on', weight: 25 }], high: 'ready' });
+  assert.match(h, /data-lab/);
+  assert.match(h, /aria-pressed="false"/);
+  assert.match(h, /data-weight="25"/);
+  assert.match(h, /ready/);
+});
 test('embed block renders the metric note', () => {
   const h = renderBlock({ type: 'embeds', items: [{ platform: 'x', title: 'T', meta: '@a', note: '2,108 reposts', url: 'https://x.test' }] });
   assert.match(h, /class="embed e-x"/);
