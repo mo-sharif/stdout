@@ -1,0 +1,135 @@
+{
+  "slug": "secure-defaults-beat-security-training",
+  "title": "Secure defaults beat security training",
+  "category": "security",
+  "kicker": "Secure by design",
+  "hook": "Training helps. Defaults help even when everyone is tired, rushed, or new.",
+  "readMinutes": 5,
+  "date": "2026-06-18",
+  "tags": [
+    "secure-by-design",
+    "defaults"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Humans should not have to remember every guardrail",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">If every team has to rediscover safe headers, secret handling, auth checks, logging rules, and dependency policy, security becomes a memory test.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "scaffold · safe path",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ npm create service",
+              "c": "pr"
+            },
+            {
+              "t": "added auth middleware",
+              "c": ""
+            },
+            {
+              "t": "added request logging without sensitive fields",
+              "c": ""
+            },
+            {
+              "t": "added default rate limits",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Put safety in the template",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Framework defaults, generators, shared middleware, and CI checks make the secure path the easiest path.</p>"
+        },
+        {
+          "type": "code",
+          "file": "service-template.ts",
+          "code": "app.use(requireAuth);\napp.use(rateLimit.defaults());\napp.use(redactSensitiveLogs);\napp.use(securityHeaders());",
+          "caption": "The best control is the one every new service gets automatically."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Review exceptions, not basics",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">If defaults cover the common path, security review can focus on unusual risk instead of repeating the same checklist forever.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 4,
+              "label": "defaults: auth, logs, limits, headers"
+            },
+            {
+              "to": 1,
+              "label": "approved service template"
+            },
+            {
+              "to": 0,
+              "label": "copy-pasted security folklore"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Make the safe path boring",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A secure culture is not only people knowing the right thing. It is systems that make the right thing the normal thing.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "CISA",
+              "title": "Secure by Design",
+              "url": "https://www.cisa.gov/securebydesign",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "OWASP",
+              "title": "Threat Modeling",
+              "url": "https://owasp.org/www-community/Threat_Modeling",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "CISA",
+      "title": "Secure by Design",
+      "url": "https://www.cisa.gov/securebydesign"
+    },
+    {
+      "platform": "web",
+      "meta": "OWASP",
+      "title": "Threat Modeling",
+      "url": "https://owasp.org/www-community/Threat_Modeling"
+    }
+  ]
+}

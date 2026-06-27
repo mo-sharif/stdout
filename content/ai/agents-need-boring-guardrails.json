@@ -1,0 +1,131 @@
+{
+  "slug": "agents-need-boring-guardrails",
+  "title": "Agents need boring guardrails",
+  "category": "ai",
+  "kicker": "Agent design",
+  "hook": "The impressive demo is an agent doing five steps by itself. The production version is knowing which sixth step it must never take.",
+  "readMinutes": 5,
+  "date": "2026-06-22",
+  "tags": [
+    "agents",
+    "tools"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Autonomy multiplies blast radius",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">An agent is just software with a loop, tools, memory, and permission to keep going. That loop is powerful. It also means a bad assumption can repeat until it has touched files, calendars, customers, or money.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "agent · task loop",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ agent run \"clean up duplicate invoices\"",
+              "c": "pr"
+            },
+            {
+              "t": "plan: search, merge, email customers",
+              "c": ""
+            },
+            {
+              "t": "blocked: email_customers requires human approval",
+              "c": "err"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Design the stop signs first",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Before adding tools, write down what the agent may read, what it may change, how much it may spend, when it must ask, and where every action is logged.</p>"
+        },
+        {
+          "type": "code",
+          "file": "agent/permissions.json",
+          "code": "{\n  \"read\": [\"tickets\", \"docs\"],\n  \"write\": [\"drafts\"],\n  \"requiresApproval\": [\"send_email\", \"refund\", \"delete_record\"]\n}",
+          "caption": "A small permission file is more useful than a heroic prompt."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Simulate failure before launch",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Run the agent against fake data with fake tools and real limits. The goal is not to prove it succeeds. The goal is to see how it behaves when the task is ambiguous, stale, impossible, or risky.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "human approval gate for irreversible work"
+            },
+            {
+              "to": 100,
+              "label": "percent of tool calls logged"
+            },
+            {
+              "to": 0,
+              "label": "silent writes to production systems"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "The guardrails are the product",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Users do not just want the agent to act. They want to trust it while it acts. That trust comes from limits, receipts, and graceful refusal.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Anthropic",
+              "title": "Building effective agents",
+              "url": "https://www.anthropic.com/engineering/building-effective-agents",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "OWASP",
+              "title": "Top 10 for LLM Applications",
+              "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Anthropic",
+      "title": "Building effective agents",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents"
+    },
+    {
+      "platform": "web",
+      "meta": "OWASP",
+      "title": "Top 10 for LLM Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+    }
+  ]
+}

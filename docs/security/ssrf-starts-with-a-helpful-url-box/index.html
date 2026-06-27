@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSRF starts with a helpful URL box</title>
+<meta name="description" content="The feature says &quot;paste a URL and we will fetch it for you.&quot; The attacker hears &quot;make our server talk to places your browser cannot reach.&quot;">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#e85d5d"><div class="wrap">
+  <span class="kicker"><span class="dot"></span> Security explainer</span>
+  <h1>SSRF starts with a helpful URL box</h1>
+  <p class="dek">The feature says &quot;paste a URL and we will fetch it for you.&quot; The attacker hears &quot;make our server talk to places your browser cannot reach.&quot;</p>
+  <div class="meta"><span>~6 min</span><span>&bull;</span><span>Security</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the feature</div><h2>Fetching a URL moves trust to your server</h2><p class="body">URL importers are useful: unfurl a link, fetch an avatar, import a feed, preview a webhook. But once your backend makes the request, it has a different network position than the user. It may reach internal hosts, metadata services, admin panels, or private IP ranges.</p>
+<div class="panel">
+    <div class="top"><i></i><i></i><i></i><span class="fn">preview-url.js</span></div>
+    <textarea class="code" data-code spellcheck="false">app.post(&quot;/preview&quot;, async (req, res) =&gt; {
+  const html = await fetch(req.body.url).then((r) =&gt; r.text());
+  res.json(extractPreview(html));
+});</textarea>
+  </div><p class="cap">This helper is one validation step away from becoming a tunnel.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>The URL can point inward</h2><p class="body">The attacker does not need your credentials if they can make your server ask the question. They try localhost, private address ranges, cloud metadata endpoints, redirects, DNS tricks, and alternate URL forms. The server becomes the browser they wanted.</p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">zsh · attacker input</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"POST /preview","c":"pr"},{"t":"{ \"url\": \"http://169.254.169.254/latest/meta-data/\" }","c":""},{"t":"backend fetches from inside the network","c":"err"},{"t":"response leaks internal metadata","c":"err"}]</script>
+  </div><p class="cap">Do not fetch first and validate later.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the defense</div><h2>Validate, resolve, and restrict the egress path</h2><p class="body">A strong defense is layered: allow only expected schemes, parse with a real URL parser, resolve DNS, block private and link-local ranges, re-check after redirects, limit response size and timeout, and send fetches through an egress proxy that enforces the policy.</p>
+<div class="stats"><div class="stat"><b data-to="2">0</b><span>schemes usually enough: http and https</span></div><div class="stat"><b data-to="1">0</b><span>egress policy beats scattered checks</span></div><div class="stat"><b data-to="0">0</b><span>trust in user-provided hostnames</span></div></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the habit</div><h2>Treat server-side fetch as a privileged action</h2><p class="body">The mindset shift is the whole game. A URL box is not just input validation. It is a network access decision. Put it through the same review you would give a new outbound integration.</p>
+<h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> OWASP</div>
+      <div class="txt">SSRF Prevention Cheat Sheet</div><div class="stat2">defense checklist</div>
+    </a><a class="embed e-web" href="https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> OWASP Top 10</div>
+      <div class="txt">Server-Side Request Forgery</div><div class="stat2">risk overview</div>
+    </a></div></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-web" href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> OWASP</div>
+       <div class="txt">SSRF Prevention Cheat Sheet</div></a><a class="embed e-web" href="https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> OWASP Top 10</div>
+       <div class="txt">Server-Side Request Forgery</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

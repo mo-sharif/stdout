@@ -1,0 +1,135 @@
+{
+  "slug": "embeddings-are-compression-with-opinions",
+  "title": "Embeddings are compression with opinions",
+  "category": "ai",
+  "kicker": "AI fundamentals",
+  "hook": "An embedding turns messy meaning into numbers. That is useful, but it is not neutral, magic, or guaranteed to match how your users think.",
+  "readMinutes": 5,
+  "date": "2026-06-20",
+  "tags": [
+    "embeddings",
+    "search"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Similarity is a product choice",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Vector search feels objective because it returns scores. But those scores come from a model trained to notice some kinds of similarity more than others. Your corpus, chunking, and user language decide whether that is helpful.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "search · weird neighbors",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ search \"cancel appointment fee\"",
+              "c": "pr"
+            },
+            {
+              "t": "0.82 cancellation policy",
+              "c": ""
+            },
+            {
+              "t": "0.79 appointment reminders",
+              "c": ""
+            },
+            {
+              "t": "0.76 subscription cancelation typo page",
+              "c": "dim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Look at the neighbors",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Do not tune embeddings from aggregate scores alone. Inspect nearest neighbors for real queries, label misses, and decide which mistakes matter to the product.</p>"
+        },
+        {
+          "type": "code",
+          "file": "evals/nearest-neighbors.js",
+          "code": "for (const query of evalQueries) {\n  const hits = await vector.search(query, { topK: 5 });\n  console.log(query, hits.map((h) => h.slug));\n}",
+          "caption": "A simple neighbor dump can explain a lot of strange answers."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Pair vectors with old-school filters",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Metadata filters, keyword search, recency rules, and reranking can make vector search less mysterious. The best retrieval systems are usually hybrids.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 5,
+              "label": "neighbors worth inspecting per query"
+            },
+            {
+              "to": 2,
+              "label": "search modes: vector plus keyword"
+            },
+            {
+              "to": 1,
+              "label": "human-labeled eval set"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Numbers still need judgment",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Embeddings are powerful because they compress meaning. They are risky for the same reason. Keep the compression visible.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Martin Fowler",
+              "title": "Patterns of Generative AI",
+              "url": "https://martinfowler.com/articles/gen-ai-patterns/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "OpenAI Docs",
+              "title": "Structured outputs",
+              "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Martin Fowler",
+      "title": "Patterns of Generative AI",
+      "url": "https://martinfowler.com/articles/gen-ai-patterns/"
+    },
+    {
+      "platform": "web",
+      "meta": "OpenAI Docs",
+      "title": "Structured outputs",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+    }
+  ]
+}

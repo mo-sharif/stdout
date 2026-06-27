@@ -1,0 +1,131 @@
+{
+  "slug": "good-strategy-says-no",
+  "title": "Good strategy says no",
+  "category": "leadership",
+  "kicker": "Product engineering",
+  "hook": "A strategy that supports every idea is just a calendar with nicer fonts.",
+  "readMinutes": 5,
+  "date": "2026-06-22",
+  "tags": [
+    "strategy",
+    "prioritization"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Teams drown in plausible work",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Most backlog items are not obviously dumb. That is what makes them dangerous. Without a strategy, every request gets argued on its own tiny island.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "roadmap · triage",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "yes: improve activation checkout",
+              "c": ""
+            },
+            {
+              "t": "no: rebuild settings for aesthetics",
+              "c": "dim"
+            },
+            {
+              "t": "later: admin bulk tools after support volume proves it",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Write the tradeoff down",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A useful strategy names the audience, the constraint, the bet, and the things the team will not do while the bet is active.</p>"
+        },
+        {
+          "type": "code",
+          "file": "strategy.md",
+          "code": "Bet: reduce checkout uncertainty for first-time customers\nConstraint: no net-new payment providers this cycle\nNo: settings redesign, dashboard polish, referral revamp",
+          "caption": "The \"no\" list protects the \"yes\" list."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Review against outcomes",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Strategy needs evidence. Pick leading indicators and revisit the bet before it becomes team folklore.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "primary outcome beats five priorities"
+            },
+            {
+              "to": 6,
+              "label": "weeks is a useful bet window"
+            },
+            {
+              "to": 0,
+              "label": "secret priorities"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Focus is a kindness",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">When strategy says no clearly, engineers spend less time decoding politics and more time building the thing that matters.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Basecamp",
+              "title": "Shape Up",
+              "url": "https://basecamp.com/shapeup",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Google SRE",
+              "title": "Service Level Objectives",
+              "url": "https://sre.google/sre-book/service-level-objectives/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Basecamp",
+      "title": "Shape Up",
+      "url": "https://basecamp.com/shapeup"
+    },
+    {
+      "platform": "web",
+      "meta": "Google SRE",
+      "title": "Service Level Objectives",
+      "url": "https://sre.google/sre-book/service-level-objectives/"
+    }
+  ]
+}

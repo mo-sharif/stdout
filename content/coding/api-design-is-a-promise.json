@@ -1,0 +1,131 @@
+{
+  "slug": "api-design-is-a-promise",
+  "title": "API design is a promise",
+  "category": "coding",
+  "kicker": "Interfaces",
+  "hook": "An API is not just a route. It is a promise about names, errors, timing, compatibility, and what future teams can safely assume.",
+  "readMinutes": 5,
+  "date": "2026-06-21",
+  "tags": [
+    "api-design",
+    "contracts"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Clients remember everything",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Once a field ships, someone builds around it. Once an error shape leaks, someone parses it. The API becomes a contract even if nobody wrote the contract down.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "curl · response shape",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ curl /v1/subscriptions/sub_123",
+              "c": "pr"
+            },
+            {
+              "t": "{ \"status\": \"paused\", \"resumeAt\": \"2026-07-01\" }",
+              "c": ""
+            },
+            {
+              "t": "# clients now depend on both names",
+              "c": "dim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Design the boring cases too",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Document pagination, idempotency, errors, retries, nullability, and versioning before the first client ships. Happy paths are the easy part.</p>"
+        },
+        {
+          "type": "code",
+          "file": "errors.json",
+          "code": "{\n  \"error\": {\n    \"code\": \"subscription_already_paused\",\n    \"message\": \"Subscription is already paused.\"\n  }\n}",
+          "caption": "Stable error codes are kinder than prose scraping."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Treat compatibility as a feature",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Add contract tests for response shapes and error codes. Breaking clients is a production incident even when your server is green.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "canonical error envelope"
+            },
+            {
+              "to": 2,
+              "label": "versioning choices: evolve or fork"
+            },
+            {
+              "to": 0,
+              "label": "undocumented breaking fields"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Good APIs reduce future meetings",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A clear API lets teams move independently because the boundary says what will stay true.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Google AIP",
+              "title": "API Improvement Proposals",
+              "url": "https://google.aip.dev/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "OpenAI Docs",
+              "title": "Structured outputs",
+              "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Google AIP",
+      "title": "API Improvement Proposals",
+      "url": "https://google.aip.dev/"
+    },
+    {
+      "platform": "web",
+      "meta": "OpenAI Docs",
+      "title": "Structured outputs",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+    }
+  ]
+}

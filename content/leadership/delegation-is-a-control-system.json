@@ -1,0 +1,131 @@
+{
+  "slug": "delegation-is-a-control-system",
+  "title": "Delegation is a control system",
+  "category": "leadership",
+  "kicker": "Engineering leadership",
+  "hook": "Delegation is not throwing work over a wall. It is choosing the right amount of context, authority, and feedback for the risk.",
+  "readMinutes": 5,
+  "date": "2026-06-23",
+  "tags": [
+    "delegation",
+    "management"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Too little context creates rework",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Bad delegation sounds efficient in the moment: \"can you handle this?\" Then the person guesses the goal, the constraints, the stakeholders, and what good looks like.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "manager · task handoff",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "goal: reduce failed checkout retries",
+              "c": ""
+            },
+            {
+              "t": "constraints: no payment API changes this week",
+              "c": ""
+            },
+            {
+              "t": "checkpoint: design sketch by Tuesday",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Delegate the decision, not just the task",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Name the outcome, boundaries, owner, check-in rhythm, and decision rights. People grow when they own judgment, not just typing.</p>"
+        },
+        {
+          "type": "code",
+          "file": "delegation-brief.md",
+          "code": "Outcome: cut retry noise by 50%\nOwner: Priya\nDecision rights: implementation and rollout plan\nEscalate: payment provider contract changes",
+          "caption": "A brief beats a hallway memory."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Tune the feedback loop",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">High-risk work needs tighter checkpoints. Familiar work can run looser. Delegation fails when the loop is either absent or suffocating.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "clear owner for the outcome"
+            },
+            {
+              "to": 2,
+              "label": "checkpoints before launch for risky work"
+            },
+            {
+              "to": 0,
+              "label": "mystery decision rights"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Control is not the same as doing it yourself",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A good delegation system increases trust because everyone knows where autonomy starts and where support appears.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Atlassian",
+              "title": "Roles and Responsibilities",
+              "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Lara Hogan",
+              "title": "The Feedback Equation",
+              "url": "https://larahogan.me/blog/feedback-equation/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Atlassian",
+      "title": "Roles and Responsibilities",
+      "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities"
+    },
+    {
+      "platform": "web",
+      "meta": "Lara Hogan",
+      "title": "The Feedback Equation",
+      "url": "https://larahogan.me/blog/feedback-equation/"
+    }
+  ]
+}

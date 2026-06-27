@@ -1,0 +1,131 @@
+{
+  "slug": "choosing-the-right-next-job",
+  "title": "Choosing the right next job",
+  "category": "career",
+  "kicker": "Career decisions",
+  "hook": "The best next job is not always the most impressive one. It is the one whose tradeoffs you choose on purpose.",
+  "readMinutes": 5,
+  "date": "2026-06-18",
+  "tags": [
+    "jobs",
+    "career-planning"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Every job offer hides a curriculum",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A role teaches you something whether you plan it or not: speed, scale, craft, politics, product sense, resilience, or bad habits. Choose the curriculum deliberately.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "decision · offer compare",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "startup: high scope, high ambiguity, lower support",
+              "c": ""
+            },
+            {
+              "t": "platform team: strong mentorship, slower product feedback",
+              "c": ""
+            },
+            {
+              "t": "agency: fast reps, less ownership after launch",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Rank your constraints first",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Before comparing logos, decide what matters now: compensation, manager quality, learning slope, mission, location, stability, autonomy, or time outside work.</p>"
+        },
+        {
+          "type": "code",
+          "file": "job-scorecard.md",
+          "code": "| factor | weight | notes |\n| manager | 5 | direct, clear examples |\n| learning | 4 | systems scale work |\n| comp | 3 | meets target |",
+          "caption": "A scorecard will not decide for you, but it will expose your tradeoffs."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Talk to future peers",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The recruiter sells the opportunity. Future teammates reveal the operating system: review culture, on-call reality, planning quality, and how decisions are made.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 5,
+              "label": "factors worth ranking before offer calls"
+            },
+            {
+              "to": 2,
+              "label": "future peers to speak with if possible"
+            },
+            {
+              "to": 1,
+              "label": "dealbreaker list"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Choose the tradeoff you can live with",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">No job is pure upside. A good decision makes the cost visible before you sign.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "StaffEng",
+              "title": "What do staff engineers actually do?",
+              "url": "https://staffeng.com/guides/what-do-staff-engineers-actually-do/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Kalzumeus",
+              "title": "Salary Negotiation",
+              "url": "https://www.kalzumeus.com/2012/01/23/salary-negotiation/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "StaffEng",
+      "title": "What do staff engineers actually do?",
+      "url": "https://staffeng.com/guides/what-do-staff-engineers-actually-do/"
+    },
+    {
+      "platform": "web",
+      "meta": "Kalzumeus",
+      "title": "Salary Negotiation",
+      "url": "https://www.kalzumeus.com/2012/01/23/salary-negotiation/"
+    }
+  ]
+}

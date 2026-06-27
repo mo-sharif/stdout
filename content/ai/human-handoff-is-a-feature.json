@@ -1,0 +1,135 @@
+{
+  "slug": "human-handoff-is-a-feature",
+  "title": "Human handoff is a feature",
+  "category": "ai",
+  "kicker": "Support automation",
+  "hook": "The best AI support flow is not the one that answers everything. It is the one that knows when it is done being useful.",
+  "readMinutes": 5,
+  "date": "2026-06-19",
+  "tags": [
+    "handoff",
+    "support"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Confidence is not the same as permission",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A model can sound calm while standing on thin evidence. That is dangerous in support flows where the next sentence may affect money, health, access, or trust.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "support · escalation",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ classify ticket-4421",
+              "c": "pr"
+            },
+            {
+              "t": "intent: billing_dispute",
+              "c": ""
+            },
+            {
+              "t": "risk: high",
+              "c": "err"
+            },
+            {
+              "t": "action: draft reply and hand off to human",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Define handoff triggers",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Write down the cases that must leave automation: low confidence, missing policy, angry customer, protected class, regulated advice, payment exception, or repeated failure.</p>"
+        },
+        {
+          "type": "code",
+          "file": "support/handoff-rules.js",
+          "code": "const shouldHandoff =\n  score < 0.72 ||\n  ticket.sentiment === \"angry\" ||\n  risk.includes(\"regulated_advice\") ||\n  attempts > 2;",
+          "caption": "A handoff rule is product empathy written as code."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Measure graceful exits",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Track not just containment rate, but bad containment. A bot that traps a user in a wrong answer is worse than a bot that quickly brings a person in.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 4,
+              "label": "handoff triggers to define before launch"
+            },
+            {
+              "to": 2,
+              "label": "failed attempts before escalation"
+            },
+            {
+              "to": 1,
+              "label": "clean summary for the human"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Automation should lower the human cost",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The handoff is not failure. It is how the system protects the user, the team, and the brand when the model reaches the edge of its lane.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Anthropic",
+              "title": "Building effective agents",
+              "url": "https://www.anthropic.com/engineering/building-effective-agents",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "OWASP",
+              "title": "Top 10 for LLM Applications",
+              "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Anthropic",
+      "title": "Building effective agents",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents"
+    },
+    {
+      "platform": "web",
+      "meta": "OWASP",
+      "title": "Top 10 for LLM Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+    }
+  ]
+}

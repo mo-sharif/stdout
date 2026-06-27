@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Embeddings are compression with opinions</title>
+<meta name="description" content="An embedding turns messy meaning into numbers. That is useful, but it is not neutral, magic, or guaranteed to match how your users think.">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#c977e0"><div class="wrap">
+  <span class="kicker"><span class="dot"></span> AI fundamentals</span>
+  <h1>Embeddings are compression with opinions</h1>
+  <p class="dek">An embedding turns messy meaning into numbers. That is useful, but it is not neutral, magic, or guaranteed to match how your users think.</p>
+  <div class="meta"><span>~5 min</span><span>&bull;</span><span>AI</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the shape</div><h2>Similarity is a product choice</h2><p class="body">Vector search feels objective because it returns scores. But those scores come from a model trained to notice some kinds of similarity more than others. Your corpus, chunking, and user language decide whether that is helpful.</p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">search · weird neighbors</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"$ search \"cancel appointment fee\"","c":"pr"},{"t":"0.82 cancellation policy","c":""},{"t":"0.79 appointment reminders","c":""},{"t":"0.76 subscription cancelation typo page","c":"dim"}]</script>
+  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Look at the neighbors</h2><p class="body">Do not tune embeddings from aggregate scores alone. Inspect nearest neighbors for real queries, label misses, and decide which mistakes matter to the product.</p>
+<div class="panel">
+    <div class="top"><i></i><i></i><i></i><span class="fn">evals/nearest-neighbors.js</span></div>
+    <textarea class="code" data-code spellcheck="false">for (const query of evalQueries) {
+  const hits = await vector.search(query, { topK: 5 });
+  console.log(query, hits.map((h) =&gt; h.slug));
+}</textarea>
+  </div><p class="cap">A simple neighbor dump can explain a lot of strange answers.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Pair vectors with old-school filters</h2><p class="body">Metadata filters, keyword search, recency rules, and reranking can make vector search less mysterious. The best retrieval systems are usually hybrids.</p>
+<div class="stats"><div class="stat"><b data-to="5">0</b><span>neighbors worth inspecting per query</span></div><div class="stat"><b data-to="2">0</b><span>search modes: vector plus keyword</span></div><div class="stat"><b data-to="1">0</b><span>human-labeled eval set</span></div></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Numbers still need judgment</h2><p class="body">Embeddings are powerful because they compress meaning. They are risky for the same reason. Keep the compression visible.</p>
+<h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://martinfowler.com/articles/gen-ai-patterns/" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> Martin Fowler</div>
+      <div class="txt">Patterns of Generative AI</div><div class="stat2">reference</div>
+    </a><a class="embed e-web" href="https://developers.openai.com/api/docs/guides/structured-outputs" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> OpenAI Docs</div>
+      <div class="txt">Structured outputs</div><div class="stat2">reference</div>
+    </a></div></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-web" href="https://martinfowler.com/articles/gen-ai-patterns/" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> Martin Fowler</div>
+       <div class="txt">Patterns of Generative AI</div></a><a class="embed e-web" href="https://developers.openai.com/api/docs/guides/structured-outputs" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> OpenAI Docs</div>
+       <div class="txt">Structured outputs</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

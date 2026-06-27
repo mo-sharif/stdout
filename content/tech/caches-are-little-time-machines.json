@@ -1,0 +1,139 @@
+{
+  "slug": "caches-are-little-time-machines",
+  "title": "Caches are little time machines",
+  "category": "tech",
+  "kicker": "How systems lie",
+  "hook": "A cache makes yesterday feel instant. That is wonderful until yesterday is wrong and you cannot figure out which layer is still living there.",
+  "readMinutes": 6,
+  "date": "2026-06-25",
+  "tags": [
+    "http",
+    "caching"
+  ],
+  "beats": [
+    {
+      "num": "01 · the deal",
+      "heading": "A cache trades freshness for speed",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Every cache is a bet: this answer will still be good later. Browsers bet. CDNs bet. APIs bet. Databases bet. Your app probably bets several times before the user sees a pixel. Most of the time, that is why everything feels fast.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 4,
+              "label": "common layers: browser, CDN, app, database"
+            },
+            {
+              "to": 1,
+              "label": "bad invalidation can make the whole stack look haunted"
+            },
+            {
+              "to": 0,
+              "label": "magic involved, just old answers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the headers",
+      "heading": "HTTP caching is mostly instructions",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The server sends a response with caching instructions. <code>Cache-Control</code> can say how long a response is fresh, whether a shared cache may store it, and whether the client must revalidate before reuse. <code>ETag</code> gives the client a cheap way to ask, \"is my copy still good?\"</p>"
+        },
+        {
+          "type": "code",
+          "file": "response.txt",
+          "code": "HTTP/1.1 200 OK\nCache-Control: public, max-age=300, stale-while-revalidate=60\nETag: \"profile-v42\"\n\n{ \"name\": \"Mo\", \"plan\": \"pro\" }",
+          "caption": "Five minutes fresh, one minute stale while the cache quietly checks again."
+        }
+      ]
+    },
+    {
+      "num": "03 · the bug",
+      "heading": "Stale data is a time-travel bug",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The painful cache bugs are not crashes. They are contradictions. The admin sees the new plan. The user sees the old plan. Support sees both depending on which tab they opened first. That is not one bug, it is a map of who is reading from which time.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "zsh · chasing stale data",
+          "caption": "Follow the age before changing code.",
+          "lines": [
+            {
+              "t": "$ curl -I https://example.test/account",
+              "c": "pr"
+            },
+            {
+              "t": "cache-control: public, max-age=300",
+              "c": ""
+            },
+            {
+              "t": "age: 287",
+              "c": "err"
+            },
+            {
+              "t": "x-cache: HIT",
+              "c": ""
+            },
+            {
+              "t": "# user is seeing a five-minute-old answer",
+              "c": "dim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the rule",
+      "heading": "Cache policy is product behavior",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Some data can be old for a while. Logos, docs, marketing pages, and public assets love long caches. Account state, payments, permissions, and safety decisions need a tighter story. The right question is not \"can we cache this?\" It is \"how wrong can this be, and for how long?\"</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "MDN",
+              "title": "HTTP caching",
+              "note": "headers and browser behavior",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching"
+            },
+            {
+              "platform": "web",
+              "meta": "RFC 9111",
+              "title": "HTTP Caching",
+              "note": "protocol reference",
+              "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "MDN",
+      "title": "HTTP caching",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching"
+    },
+    {
+      "platform": "web",
+      "meta": "RFC 9111",
+      "title": "HTTP Caching",
+      "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
+    }
+  ]
+}

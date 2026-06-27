@@ -1,0 +1,136 @@
+{
+  "slug": "rag-is-a-search-problem-first",
+  "title": "RAG is a search problem before it is an AI problem",
+  "category": "ai",
+  "kicker": "Practical AI",
+  "hook": "Retrieval-augmented generation sounds fancy until you ship it. Then the hard part is not the model. It is getting the right chunk in front of the model at the right time.",
+  "readMinutes": 6,
+  "date": "2026-06-26",
+  "tags": [
+    "rag",
+    "embeddings",
+    "search"
+  ],
+  "beats": [
+    {
+      "num": "01 · the trap",
+      "heading": "The model cannot answer what it never sees",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A lot of teams start RAG by arguing about models. Bigger context window. Better embedding model. New reranker. Useful, sure. But the first failure is usually simpler: <span class=\"hl\">the answer was never retrieved</span>. Once that happens, the model is decorating an empty plate.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "zsh · missing context",
+          "caption": "The most common RAG bug looks boring in the logs.",
+          "lines": [
+            {
+              "t": "$ query \"how do refunds work for paused accounts?\"",
+              "c": "pr"
+            },
+            {
+              "t": "retrieved: billing-overview.md, stripe-webhooks.md, faq-old.md",
+              "c": ""
+            },
+            {
+              "t": "missing: paused-account-policy.md",
+              "c": "err"
+            },
+            {
+              "t": "answer: \"I do not see that policy in the docs.\"",
+              "c": "dim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the pipeline",
+      "heading": "Chunking is product design",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A chunk is not just a blob of text. It is a unit of meaning. If you split a policy table away from its heading, retrieval can find the table and lose the question it answers. If you make chunks huge, every match becomes noisy. Good RAG starts with <strong>boring document hygiene</strong>: titles, hierarchy, dates, owners, and clean boundaries.</p>"
+        },
+        {
+          "type": "code",
+          "file": "chunking/checklist.js",
+          "code": "const chunk = {\n  title: \"Refunds for paused accounts\",\n  owner: \"support-ops\",\n  updatedAt: \"2026-06-01\",\n  text: sectionText,\n  breadcrumbs: [\"Billing\", \"Refunds\"]\n};\n\nindex.write(chunk);",
+          "caption": "Metadata is part of the answer. Treat it like source code, not decoration."
+        }
+      ]
+    },
+    {
+      "num": "03 · the measurement",
+      "heading": "Measure retrieval before generation",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Before you judge answer quality, run a tiny harness that asks: did the retriever find the document a human would use? That gives you a clean signal. If retrieval failed, fix search. If retrieval passed and the answer is bad, fix prompting, context shape, or the model.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 20,
+              "label": "starter questions can expose the obvious misses"
+            },
+            {
+              "to": 3,
+              "label": "signals to log: query, retrieved ids, answer"
+            },
+            {
+              "to": 1,
+              "label": "owner for each source keeps docs from rotting"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the loop",
+      "heading": "The best RAG systems are edited weekly",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Your corpus changes. User language changes. Product names drift. So the system needs a weekly rhythm: inspect misses, merge duplicate docs, add synonyms, retire stale chunks, and replay the eval set. The glamorous part is the chat box. The durable part is <span class=\"hl\">search ops</span>.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "OpenAI Cookbook",
+              "title": "Question answering using embeddings",
+              "note": "retrieval pattern and examples",
+              "url": "https://cookbook.openai.com/examples/question_answering_using_embeddings"
+            },
+            {
+              "platform": "web",
+              "meta": "AWS",
+              "title": "What is Retrieval-Augmented Generation?",
+              "note": "RAG overview",
+              "url": "https://aws.amazon.com/what-is/retrieval-augmented-generation/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "OpenAI Cookbook",
+      "title": "Question answering using embeddings",
+      "url": "https://cookbook.openai.com/examples/question_answering_using_embeddings"
+    },
+    {
+      "platform": "web",
+      "meta": "AWS",
+      "title": "What is Retrieval-Augmented Generation?",
+      "url": "https://aws.amazon.com/what-is/retrieval-augmented-generation/"
+    }
+  ]
+}

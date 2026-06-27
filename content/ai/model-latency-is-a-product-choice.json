@@ -1,0 +1,135 @@
+{
+  "slug": "model-latency-is-a-product-choice",
+  "title": "Model latency is a product choice",
+  "category": "ai",
+  "kicker": "AI performance",
+  "hook": "A smarter answer that arrives after the user has left is not smarter in product terms.",
+  "readMinutes": 5,
+  "date": "2026-06-18",
+  "tags": [
+    "latency",
+    "ux"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Slow AI feels broken before it is wrong",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Users forgive a loading spinner only when the payoff is obvious. Many AI features hide retrieval, tool calls, planning, generation, and validation behind one blank wait.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "trace · assistant response",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "retrieve context        420ms",
+              "c": ""
+            },
+            {
+              "t": "call model           2,850ms",
+              "c": "err"
+            },
+            {
+              "t": "validate JSON          45ms",
+              "c": ""
+            },
+            {
+              "t": "render answer          18ms",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Budget the wait",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Choose the model, context size, streaming strategy, and tool count around the user moment. A background research job can take longer than an inline autocomplete.</p>"
+        },
+        {
+          "type": "code",
+          "file": "latency-budget.json",
+          "code": "{\n  \"autocomplete\": { \"budgetMs\": 300, \"model\": \"small\" },\n  \"supportDraft\": { \"budgetMs\": 4000, \"model\": \"reasoning\" },\n  \"weeklyReport\": { \"budgetMs\": 60000, \"mode\": \"background\" }\n}",
+          "caption": "Latency budgets turn performance into an explicit product decision."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Show progress with receipts",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">If the job is slow, expose useful progress: sources found, checks complete, draft ready. Streaming text can help, but structured progress is often calmer.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 300,
+              "label": "milliseconds feels instant for tiny assists"
+            },
+            {
+              "to": 4,
+              "label": "seconds needs visible progress"
+            },
+            {
+              "to": 1,
+              "label": "background path for long jobs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Pick the right amount of intelligence",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Latency is not just infrastructure. It is the shape of the promise you make to the user.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Anthropic",
+              "title": "Building effective agents",
+              "url": "https://www.anthropic.com/engineering/building-effective-agents",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "OpenAI Docs",
+              "title": "Structured outputs",
+              "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Anthropic",
+      "title": "Building effective agents",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents"
+    },
+    {
+      "platform": "web",
+      "meta": "OpenAI Docs",
+      "title": "Structured outputs",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+    }
+  ]
+}

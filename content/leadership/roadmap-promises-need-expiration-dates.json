@@ -1,0 +1,131 @@
+{
+  "slug": "roadmap-promises-need-expiration-dates",
+  "title": "Roadmap promises need expiration dates",
+  "category": "leadership",
+  "kicker": "Planning",
+  "hook": "A roadmap item without a review date slowly turns from a plan into a rumor.",
+  "readMinutes": 5,
+  "date": "2026-06-21",
+  "tags": [
+    "roadmaps",
+    "planning"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Plans age badly in silence",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Markets move, teams learn, constraints appear, and customer pain shifts. If the roadmap never expires, stale promises keep spending attention.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "planning · promise audit",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "bulk export       review 2026-07-15",
+              "c": ""
+            },
+            {
+              "t": "settings refresh  stale, no owner",
+              "c": "err"
+            },
+            {
+              "t": "new onboarding    active bet",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Attach a review moment",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Every roadmap promise should carry an owner, confidence level, decision date, and the evidence that would change the plan.</p>"
+        },
+        {
+          "type": "code",
+          "file": "roadmap.yml",
+          "code": "- name: bulk_export\n  owner: data-platform\n  confidence: medium\n  review_on: 2026-07-15",
+          "caption": "A date makes revisiting the promise normal instead of political."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Separate commitment from intent",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Some roadmap items are committed. Others are bets, options, or discovery tracks. Labeling them honestly prevents fake certainty.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 4,
+              "label": "labels: committed, bet, option, dropped"
+            },
+            {
+              "to": 1,
+              "label": "owner per promise"
+            },
+            {
+              "to": 0,
+              "label": "forever-maybe items"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Roadmaps should learn",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A roadmap is useful when it helps the company make better decisions, not when it preserves old optimism.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Basecamp",
+              "title": "Shape Up",
+              "url": "https://basecamp.com/shapeup",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Atlassian",
+              "title": "Roles and Responsibilities",
+              "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Basecamp",
+      "title": "Shape Up",
+      "url": "https://basecamp.com/shapeup"
+    },
+    {
+      "platform": "web",
+      "meta": "Atlassian",
+      "title": "Roles and Responsibilities",
+      "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities"
+    }
+  ]
+}

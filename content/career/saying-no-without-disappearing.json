@@ -1,0 +1,131 @@
+{
+  "slug": "saying-no-without-disappearing",
+  "title": "Saying no without disappearing",
+  "category": "career",
+  "kicker": "Professional boundaries",
+  "hook": "A good no does not vanish. It names the constraint and keeps the work moving.",
+  "readMinutes": 5,
+  "date": "2026-06-17",
+  "tags": [
+    "boundaries",
+    "communication"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Yes can be the irresponsible answer",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Saying yes to everything creates hidden queues, missed promises, and resentment. Saying no clearly protects the commitments that already exist.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "calendar · capacity",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "current focus: checkout migration",
+              "c": ""
+            },
+            {
+              "t": "new ask: dashboard polish this week",
+              "c": ""
+            },
+            {
+              "t": "response: can do next week or trade off migration scope",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Offer the constraint and the option",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A useful no explains the limiting factor and gives a path: later date, smaller version, different owner, or explicit tradeoff.</p>"
+        },
+        {
+          "type": "code",
+          "file": "no-template.txt",
+          "code": "I cannot take this on this week without delaying checkout.\nI can review a smaller version by Thursday,\nor we can swap it with the migration task.",
+          "caption": "Clear options make the tradeoff visible."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Do not make people infer priority",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">If everything sounds urgent, the loudest request wins. Push priority decisions back into the open where the team can choose.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 3,
+              "label": "options: later, smaller, tradeoff"
+            },
+            {
+              "to": 1,
+              "label": "current commitment named"
+            },
+            {
+              "to": 0,
+              "label": "silent resentment as planning strategy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Boundaries are coordination tools",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A clear no is not anti-team. It is how a team keeps promises in the real world.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Recurse Center",
+              "title": "Social Rules",
+              "url": "https://www.recurse.com/social-rules",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Lara Hogan",
+              "title": "The Feedback Equation",
+              "url": "https://larahogan.me/blog/feedback-equation/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Recurse Center",
+      "title": "Social Rules",
+      "url": "https://www.recurse.com/social-rules"
+    },
+    {
+      "platform": "web",
+      "meta": "Lara Hogan",
+      "title": "The Feedback Equation",
+      "url": "https://larahogan.me/blog/feedback-equation/"
+    }
+  ]
+}

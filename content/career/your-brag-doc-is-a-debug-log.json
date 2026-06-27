@@ -1,0 +1,135 @@
+{
+  "slug": "your-brag-doc-is-a-debug-log",
+  "title": "Your brag doc is a debug log",
+  "category": "career",
+  "kicker": "Career systems",
+  "hook": "If you wait until review season to remember your work, you are reconstructing production from vibes. Keep the log while the evidence is still warm.",
+  "readMinutes": 5,
+  "date": "2026-06-25",
+  "tags": [
+    "career",
+    "growth"
+  ],
+  "beats": [
+    {
+      "num": "01 · the problem",
+      "heading": "Your memory drops packets",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Six months is a long time in engineering time. You fixed the flaky deploy, mentored the new hire, killed a costly query, wrote the doc everyone uses, and quietly prevented three incidents. Then review season arrives and your brain offers: \"worked on checkout.\"</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "notes · end of quarter",
+          "caption": "Future you deserves better evidence.",
+          "lines": [
+            {
+              "t": "$ rg \"impact\" brag-2026.md",
+              "c": "pr"
+            },
+            {
+              "t": "reduced weekly deploy failures from 6 to 1",
+              "c": ""
+            },
+            {
+              "t": "cut dashboard query from 18s to 1.7s",
+              "c": ""
+            },
+            {
+              "t": "trained two engineers on incident rotation",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the shape",
+      "heading": "Track impact, not busyness",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A brag doc is not a diary of tasks. It is a searchable record of outcomes, scope, collaboration, learning, and receipts. Link the PR, dashboard, incident review, launch note, or customer quote. Make the evidence easy to inspect.</p>"
+        },
+        {
+          "type": "code",
+          "file": "brag-doc.md",
+          "code": "## June\n- Impact: cut onboarding drop-off investigation from days to hours\n- Evidence: dashboard link, PR #418, support thread\n- Collaboration: paired with data on event taxonomy\n- Next: turn the debug checklist into team docs",
+          "caption": "Small weekly notes become a strong quarterly narrative."
+        }
+      ]
+    },
+    {
+      "num": "03 · the use",
+      "heading": "The doc is for more than promotion",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A good brag doc helps your manager calibrate, helps you spot the work you want more of, and helps you notice when your job has drifted away from your goals. It turns career growth from folklore into data.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 10,
+              "label": "minutes each Friday is enough"
+            },
+            {
+              "to": 4,
+              "label": "sections: impact, evidence, collaboration, learning"
+            },
+            {
+              "to": 1,
+              "label": "running doc beats quarterly archaeology"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the tone",
+      "heading": "It is not bragging if it is evidence",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Engineers often under-write their own impact because it feels awkward. Do it anyway. Clear evidence is not ego. It is observability for your career.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Julia Evans",
+              "title": "Get your work recognized: write a brag document",
+              "note": "practical template",
+              "url": "https://jvns.ca/blog/brag-documents/"
+            },
+            {
+              "platform": "web",
+              "meta": "Lara Hogan",
+              "title": "Manager Voltron",
+              "note": "career support network",
+              "url": "https://larahogan.me/blog/manager-voltron/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Julia Evans",
+      "title": "Get your work recognized: write a brag document",
+      "url": "https://jvns.ca/blog/brag-documents/"
+    },
+    {
+      "platform": "web",
+      "meta": "Lara Hogan",
+      "title": "Manager Voltron",
+      "url": "https://larahogan.me/blog/manager-voltron/"
+    }
+  ]
+}

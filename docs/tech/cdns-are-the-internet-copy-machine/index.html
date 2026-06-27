@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CDNs are the internet copy machine</title>
+<meta name="description" content="A CDN makes the web feel close by putting copies near people. The hard part is deciding when those copies stop being true.">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#3cc7d4"><div class="wrap">
+  <span class="kicker"><span class="dot"></span> Web infrastructure</span>
+  <h1>CDNs are the internet copy machine</h1>
+  <p class="dek">A CDN makes the web feel close by putting copies near people. The hard part is deciding when those copies stop being true.</p>
+  <div class="meta"><span>~5 min</span><span>&bull;</span><span>Tech</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the shape</div><h2>Distance is latency</h2><p class="body">If every image, script, and page has to travel from one origin server, users far away pay for geography. A CDN stores copies at edge locations so repeated requests take a shorter path.</p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">curl · edge hit</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"$ curl -I https://static.example/app.css","c":"pr"},{"t":"cf-cache-status: HIT","c":""},{"t":"age: 86400","c":""}]</script>
+  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Version the things you can cache forever</h2><p class="body">Static assets love long cache lifetimes when the filename changes with the content. User-specific pages need stricter rules.</p>
+<div class="panel">
+    <div class="top"><i></i><i></i><i></i><span class="fn">asset-name.txt</span></div>
+    <textarea class="code" data-code spellcheck="false">app.8f3a91.css
+kit.42aa10.js
+
+# new content, new filename, old cache stays safe</textarea>
+  </div><p class="cap">Hashed filenames turn cache invalidation into deployment math.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Inspect the headers</h2><p class="body">CDN bugs usually show up in headers: cache status, age, vary, and cache-control. Read those before blaming the app.</p>
+<div class="stats"><div class="stat"><b data-to="1">0</b><span>origin shielded by many edge copies</span></div><div class="stat"><b data-to="4">0</b><span>headers worth checking first</span></div><div class="stat"><b data-to="0">0</b><span>private user data in public cache</span></div></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>The edge is part of the app</h2><p class="body">A CDN is not just hosting plumbing. It is where performance, correctness, and cache policy meet.</p>
+<h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://developer.mozilla.org/en-US/docs/Glossary/CDN" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> MDN</div>
+      <div class="txt">CDN</div><div class="stat2">reference</div>
+    </a><a class="embed e-web" href="https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> Google Cloud</div>
+      <div class="txt">Traffic and load management</div><div class="stat2">reference</div>
+    </a></div></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-web" href="https://developer.mozilla.org/en-US/docs/Glossary/CDN" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> MDN</div>
+       <div class="txt">CDN</div></a><a class="embed e-web" href="https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> Google Cloud</div>
+       <div class="txt">Traffic and load management</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

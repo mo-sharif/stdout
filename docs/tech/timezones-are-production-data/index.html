@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timezones are production data</title>
+<meta name="description" content="Time bugs are not caused by clocks being weird. They are caused by pretending human time is just a number.">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#3cc7d4"><div class="wrap">
+  <span class="kicker"><span class="dot"></span> Time is hard</span>
+  <h1>Timezones are production data</h1>
+  <p class="dek">Time bugs are not caused by clocks being weird. They are caused by pretending human time is just a number.</p>
+  <div class="meta"><span>~5 min</span><span>&bull;</span><span>Tech</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the shape</div><h2>Midnight depends on where you stand</h2><p class="body">A subscription renews at midnight. Which midnight? The user, the business, the database, the server, or UTC? If nobody answers, production will.</p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">time · same instant</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"2026-06-27T06:00:00Z","c":""},{"t":"America/Denver: 2026-06-27 00:00","c":""},{"t":"Europe/London: 2026-06-27 07:00","c":""}]</script>
+  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Store instants and intent</h2><p class="body">Use UTC for instants, but keep the user timezone or business timezone when the rule depends on local time.</p>
+<div class="panel">
+    <div class="top"><i></i><i></i><i></i><span class="fn">billing-schedule.json</span></div>
+    <textarea class="code" data-code spellcheck="false">{
+  &quot;renewAt&quot;: &quot;2026-07-01T06:00:00Z&quot;,
+  &quot;timezone&quot;: &quot;America/Denver&quot;,
+  &quot;rule&quot;: &quot;local_midnight&quot;
+}</textarea>
+  </div><p class="cap">The instant and the human rule are both part of the data.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Test the ugly calendar days</h2><p class="body">Daylight saving changes, leap years, month ends, and travel can all break code that only tested a sunny Tuesday.</p>
+<div class="stats"><div class="stat"><b data-to="2">0</b><span>values to keep: instant and timezone</span></div><div class="stat"><b data-to="4">0</b><span>calendar edges worth testing</span></div><div class="stat"><b data-to="0">0</b><span>server-local time assumptions</span></div></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Time is a domain model</h2><p class="body">Treat time rules like product rules, because users experience them that way.</p>
+<h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://www.iana.org/time-zones" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> IANA</div>
+      <div class="txt">Time Zone Database</div><div class="stat2">reference</div>
+    </a><a class="embed e-web" href="https://www.postgresql.org/docs/current/ddl-alter.html" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> PostgreSQL Docs</div>
+      <div class="txt">Modifying Tables</div><div class="stat2">reference</div>
+    </a></div></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-web" href="https://www.iana.org/time-zones" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> IANA</div>
+       <div class="txt">Time Zone Database</div></a><a class="embed e-web" href="https://www.postgresql.org/docs/current/ddl-alter.html" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> PostgreSQL Docs</div>
+       <div class="txt">Modifying Tables</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

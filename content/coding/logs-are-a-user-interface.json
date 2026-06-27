@@ -1,0 +1,127 @@
+{
+  "slug": "logs-are-a-user-interface",
+  "title": "Logs are a user interface",
+  "category": "coding",
+  "kicker": "Debuggability",
+  "hook": "Someone will read your logs at 2 a.m. Design for that person.",
+  "readMinutes": 5,
+  "date": "2026-06-20",
+  "tags": [
+    "logging",
+    "observability"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Logs without context are confetti",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A line that says \"failed\" is technically a log and practically useless. The future reader needs who, what, where, why now, and which request ties it together.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "logs · before and after",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "ERROR failed",
+              "c": "err"
+            },
+            {
+              "t": "ERROR payment_retry_failed user=42 invoice=in_9 retry=3 request=req_abc",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Log facts, not panic",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Use structured fields for ids, state, attempt counts, durations, and decision points. Avoid logging secrets, blobs, or poetic stack traces with no handle.</p>"
+        },
+        {
+          "type": "code",
+          "file": "logger.info.js",
+          "code": "logger.warn(\"payment_retry_failed\", {\n  userId, invoiceId, attempt, requestId,\n  reason: error.code\n});",
+          "caption": "Structured logs are easier to search, alert, and join."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Sample the noisy path",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Logs should explain rare failures without drowning normal traffic. Put more context near state transitions and fewer words in hot loops.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 5,
+              "label": "fields often beat one long sentence"
+            },
+            {
+              "to": 1,
+              "label": "request id on every line"
+            },
+            {
+              "to": 0,
+              "label": "tokens or passwords in logs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Write logs for the operator",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Good logs are an interface between past code and present panic. Make them humane.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "OpenTelemetry",
+              "title": "Observability primer",
+              "url": "https://opentelemetry.io/docs/concepts/observability-primer/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Google SRE",
+              "title": "Service Level Objectives",
+              "url": "https://sre.google/sre-book/service-level-objectives/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "OpenTelemetry",
+      "title": "Observability primer",
+      "url": "https://opentelemetry.io/docs/concepts/observability-primer/"
+    },
+    {
+      "platform": "web",
+      "meta": "Google SRE",
+      "title": "Service Level Objectives",
+      "url": "https://sre.google/sre-book/service-level-objectives/"
+    }
+  ]
+}

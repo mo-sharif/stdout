@@ -17,6 +17,386 @@
     ]
   },
   {
+    "slug": "the-one-on-one-is-not-a-status-meeting",
+    "title": "The one-on-one is not a status meeting",
+    "category": "leadership",
+    "kicker": "Engineering leadership",
+    "hook": "If your one-on-one is just a Jira tour with feelings at the end, you are wasting the only meeting designed for the person instead of the project.",
+    "readMinutes": 5,
+    "date": "2026-06-26",
+    "tags": [
+      "management",
+      "one-on-ones"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Lara Hogan",
+        "title": "Questions for our first 1:1",
+        "url": "https://larahogan.me/blog/first-one-on-one-questions/"
+      },
+      {
+        "platform": "gh",
+        "meta": "GitHub",
+        "title": "1 on 1 Meeting Questions",
+        "url": "https://github.com/VGraupera/1on1-questions"
+      }
+    ]
+  },
+  {
+    "slug": "the-code-review-that-actually-helps",
+    "title": "The code review that actually helps",
+    "category": "coding",
+    "kicker": "Team mechanics",
+    "hook": "A good review is not a scavenger hunt for style nits. It is a fast, careful pass over the parts that can hurt users, future readers, or production.",
+    "readMinutes": 5,
+    "date": "2026-06-26",
+    "tags": [
+      "code-review",
+      "engineering"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Google",
+        "title": "How to do a code review",
+        "url": "https://google.github.io/eng-practices/review/reviewer/"
+      },
+      {
+        "platform": "web",
+        "meta": "Google",
+        "title": "Small CLs",
+        "url": "https://google.github.io/eng-practices/review/developer/small-cls.html"
+      }
+    ]
+  },
+  {
+    "slug": "rag-is-a-search-problem-first",
+    "title": "RAG is a search problem before it is an AI problem",
+    "category": "ai",
+    "kicker": "Practical AI",
+    "hook": "Retrieval-augmented generation sounds fancy until you ship it. Then the hard part is not the model. It is getting the right chunk in front of the model at the right time.",
+    "readMinutes": 6,
+    "date": "2026-06-26",
+    "tags": [
+      "rag",
+      "embeddings",
+      "search"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OpenAI Cookbook",
+        "title": "Question answering using embeddings",
+        "url": "https://cookbook.openai.com/examples/question_answering_using_embeddings"
+      },
+      {
+        "platform": "web",
+        "meta": "AWS",
+        "title": "What is Retrieval-Augmented Generation?",
+        "url": "https://aws.amazon.com/what-is/retrieval-augmented-generation/"
+      }
+    ]
+  },
+  {
+    "slug": "caches-are-little-time-machines",
+    "title": "Caches are little time machines",
+    "category": "tech",
+    "kicker": "How systems lie",
+    "hook": "A cache makes yesterday feel instant. That is wonderful until yesterday is wrong and you cannot figure out which layer is still living there.",
+    "readMinutes": 6,
+    "date": "2026-06-25",
+    "tags": [
+      "http",
+      "caching"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "MDN",
+        "title": "HTTP caching",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching"
+      },
+      {
+        "platform": "web",
+        "meta": "RFC 9111",
+        "title": "HTTP Caching",
+        "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
+      }
+    ]
+  },
+  {
+    "slug": "ssrf-starts-with-a-helpful-url-box",
+    "title": "SSRF starts with a helpful URL box",
+    "category": "security",
+    "kicker": "Security explainer",
+    "hook": "The feature says \"paste a URL and we will fetch it for you.\" The attacker hears \"make our server talk to places your browser cannot reach.\"",
+    "readMinutes": 6,
+    "date": "2026-06-25",
+    "tags": [
+      "ssrf",
+      "appsec"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OWASP",
+        "title": "SSRF Prevention Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+      },
+      {
+        "platform": "web",
+        "meta": "OWASP Top 10",
+        "title": "Server-Side Request Forgery",
+        "url": "https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/"
+      }
+    ]
+  },
+  {
+    "slug": "your-brag-doc-is-a-debug-log",
+    "title": "Your brag doc is a debug log",
+    "category": "career",
+    "kicker": "Career systems",
+    "hook": "If you wait until review season to remember your work, you are reconstructing production from vibes. Keep the log while the evidence is still warm.",
+    "readMinutes": 5,
+    "date": "2026-06-25",
+    "tags": [
+      "career",
+      "growth"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Julia Evans",
+        "title": "Get your work recognized: write a brag document",
+        "url": "https://jvns.ca/blog/brag-documents/"
+      },
+      {
+        "platform": "web",
+        "meta": "Lara Hogan",
+        "title": "Manager Voltron",
+        "url": "https://larahogan.me/blog/manager-voltron/"
+      }
+    ]
+  },
+  {
+    "slug": "evals-are-the-seatbelt",
+    "title": "Evals are the seatbelt, not the science fair",
+    "category": "ai",
+    "kicker": "Shipping AI",
+    "hook": "You do not need a giant benchmark to start. You need a small set of cases that catches the exact ways your AI feature embarrasses you in production.",
+    "readMinutes": 5,
+    "date": "2026-06-25",
+    "tags": [
+      "evals",
+      "quality",
+      "llmops"
+    ],
+    "sources": [
+      {
+        "platform": "gh",
+        "meta": "GitHub",
+        "title": "openai/evals",
+        "url": "https://github.com/openai/evals"
+      },
+      {
+        "platform": "web",
+        "meta": "Google",
+        "title": "Testing and Debugging in Machine Learning",
+        "url": "https://developers.google.com/machine-learning/testing-debugging"
+      }
+    ]
+  },
+  {
+    "slug": "secrets-do-not-belong-in-build-logs",
+    "title": "Secrets do not belong in build logs",
+    "category": "security",
+    "kicker": "Operational security",
+    "hook": "A secret leak is not always a dramatic breach. Sometimes it is one helpful debug line in CI, copied into a ticket, indexed forever.",
+    "readMinutes": 5,
+    "date": "2026-06-24",
+    "tags": [
+      "secrets",
+      "ci"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "The Twelve-Factor App",
+        "title": "Config",
+        "url": "https://12factor.net/config"
+      },
+      {
+        "platform": "web",
+        "meta": "GitHub Docs",
+        "title": "About secret scanning",
+        "url": "https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning"
+      }
+    ]
+  },
+  {
+    "slug": "incident-reviews-without-the-theater",
+    "title": "Incident reviews without the theater",
+    "category": "leadership",
+    "kicker": "Reliability culture",
+    "hook": "A postmortem is not a courtroom. It is a debugging session for the system that made the incident possible.",
+    "readMinutes": 6,
+    "date": "2026-06-24",
+    "tags": [
+      "incidents",
+      "reliability"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Google SRE",
+        "title": "Postmortem Culture",
+        "url": "https://sre.google/sre-book/postmortem-culture/"
+      },
+      {
+        "platform": "web",
+        "meta": "Atlassian",
+        "title": "Incident postmortem template",
+        "url": "https://www.atlassian.com/incident-management/postmortem/templates"
+      }
+    ]
+  },
+  {
+    "slug": "feature-flags-are-production-code",
+    "title": "Feature flags are production code",
+    "category": "coding",
+    "kicker": "Release discipline",
+    "hook": "A flag is not a sticky note you slap on risky code. It is a branch in production. Name it, test it, own it, and delete it before it becomes archaeology.",
+    "readMinutes": 6,
+    "date": "2026-06-24",
+    "tags": [
+      "feature-flags",
+      "release"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "Feature Toggles",
+        "url": "https://martinfowler.com/articles/feature-toggles.html"
+      },
+      {
+        "platform": "web",
+        "meta": "OpenFeature",
+        "title": "OpenFeature specification",
+        "url": "https://openfeature.dev/specification/"
+      }
+    ]
+  },
+  {
+    "slug": "queues-turn-spikes-into-lines",
+    "title": "Queues turn spikes into lines",
+    "category": "tech",
+    "kicker": "Distributed systems",
+    "hook": "A queue does not make work disappear. It makes work wait in a place you can observe.",
+    "readMinutes": 5,
+    "date": "2026-06-23",
+    "tags": [
+      "queues",
+      "systems"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "AWS",
+        "title": "What is a message queue?",
+        "url": "https://aws.amazon.com/message-queue/"
+      },
+      {
+        "platform": "web",
+        "meta": "OpenTelemetry",
+        "title": "Observability primer",
+        "url": "https://opentelemetry.io/docs/concepts/observability-primer/"
+      }
+    ]
+  },
+  {
+    "slug": "threat-modeling-is-just-asking-what-could-go-wrong",
+    "title": "Threat modeling is just asking what could go wrong",
+    "category": "security",
+    "kicker": "Security practice",
+    "hook": "Threat modeling sounds formal until you do it. Then it is mostly drawing the system and asking where trust gets weird.",
+    "readMinutes": 5,
+    "date": "2026-06-23",
+    "tags": [
+      "threat-modeling",
+      "appsec"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OWASP",
+        "title": "Threat Modeling",
+        "url": "https://owasp.org/www-community/Threat_Modeling"
+      },
+      {
+        "platform": "web",
+        "meta": "CISA",
+        "title": "Secure by Design",
+        "url": "https://www.cisa.gov/securebydesign"
+      }
+    ]
+  },
+  {
+    "slug": "delegation-is-a-control-system",
+    "title": "Delegation is a control system",
+    "category": "leadership",
+    "kicker": "Engineering leadership",
+    "hook": "Delegation is not throwing work over a wall. It is choosing the right amount of context, authority, and feedback for the risk.",
+    "readMinutes": 5,
+    "date": "2026-06-23",
+    "tags": [
+      "delegation",
+      "management"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Atlassian",
+        "title": "Roles and Responsibilities",
+        "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities"
+      },
+      {
+        "platform": "web",
+        "meta": "Lara Hogan",
+        "title": "The Feedback Equation",
+        "url": "https://larahogan.me/blog/feedback-equation/"
+      }
+    ]
+  },
+  {
+    "slug": "tests-are-change-detectors",
+    "title": "Tests are change detectors",
+    "category": "coding",
+    "kicker": "Testing mindset",
+    "hook": "A test is not there to prove you are smart. It is there to notice when future you accidentally changes the deal.",
+    "readMinutes": 5,
+    "date": "2026-06-23",
+    "tags": [
+      "testing",
+      "quality"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "The Practical Test Pyramid",
+        "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+      },
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "Refactoring",
+        "url": "https://martinfowler.com/books/refactoring.html"
+      }
+    ]
+  },
+  {
     "slug": "11-lines-broke-the-internet",
     "title": "11 lines of code took down the internet",
     "category": "coding",
@@ -36,6 +416,60 @@
         "meta": "GitHub",
         "title": "stevemao/left-pad",
         "url": "https://github.com/stevemao/left-pad"
+      }
+    ]
+  },
+  {
+    "slug": "how-to-ask-for-help-without-making-it-weird",
+    "title": "How to ask for help without making it weird",
+    "category": "career",
+    "kicker": "Developer survival",
+    "hook": "Asking for help is not a confession. Done well, it is a compact bug report that lets another brain attach to the problem fast.",
+    "readMinutes": 5,
+    "date": "2026-06-23",
+    "tags": [
+      "debugging",
+      "communication"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Stack Overflow",
+        "title": "Minimal, reproducible example",
+        "url": "https://stackoverflow.com/help/minimal-reproducible-example"
+      },
+      {
+        "platform": "web",
+        "meta": "Simon Tatham",
+        "title": "How to Report Bugs Effectively",
+        "url": "https://www.chiark.greenend.org.uk/~sgtatham/bugs.html"
+      }
+    ]
+  },
+  {
+    "slug": "prompt-injection-is-product-security",
+    "title": "Prompt injection is product security",
+    "category": "ai",
+    "kicker": "AI security",
+    "hook": "The attacker does not need shell access if your assistant will politely leak the thing it was told to protect.",
+    "readMinutes": 5,
+    "date": "2026-06-23",
+    "tags": [
+      "prompt-injection",
+      "ai-security"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OWASP",
+        "title": "Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+      },
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "Patterns of Generative AI",
+        "url": "https://martinfowler.com/articles/gen-ai-patterns/"
       }
     ]
   },
@@ -65,6 +499,789 @@
         "meta": "hpbn.co",
         "title": "High Performance Browser Networking (free book)",
         "url": "https://hpbn.co/"
+      }
+    ]
+  },
+  {
+    "slug": "authz-bugs-hide-behind-working-auth",
+    "title": "Authz bugs hide behind working auth",
+    "category": "security",
+    "kicker": "Access control",
+    "hook": "Logging in proves who someone is. It does not prove they are allowed to do the thing they just asked for.",
+    "readMinutes": 5,
+    "date": "2026-06-22",
+    "tags": [
+      "authorization",
+      "security"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OWASP",
+        "title": "Authorization Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "platform": "web",
+        "meta": "Google AIP",
+        "title": "API Improvement Proposals",
+        "url": "https://google.aip.dev/"
+      }
+    ]
+  },
+  {
+    "slug": "good-strategy-says-no",
+    "title": "Good strategy says no",
+    "category": "leadership",
+    "kicker": "Product engineering",
+    "hook": "A strategy that supports every idea is just a calendar with nicer fonts.",
+    "readMinutes": 5,
+    "date": "2026-06-22",
+    "tags": [
+      "strategy",
+      "prioritization"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Basecamp",
+        "title": "Shape Up",
+        "url": "https://basecamp.com/shapeup"
+      },
+      {
+        "platform": "web",
+        "meta": "Google SRE",
+        "title": "Service Level Objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/"
+      }
+    ]
+  },
+  {
+    "slug": "the-smallest-useful-refactor",
+    "title": "The smallest useful refactor",
+    "category": "coding",
+    "kicker": "Code health",
+    "hook": "A refactor does not need a parade. Sometimes the best version is a tiny move that makes tomorrow obvious.",
+    "readMinutes": 5,
+    "date": "2026-06-22",
+    "tags": [
+      "refactoring",
+      "maintainability"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "Refactoring",
+        "url": "https://martinfowler.com/books/refactoring.html"
+      },
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "The Practical Test Pyramid",
+        "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+      }
+    ]
+  },
+  {
+    "slug": "senior-engineering-is-force-multiplication",
+    "title": "Senior engineering is force multiplication",
+    "category": "career",
+    "kicker": "Career growth",
+    "hook": "At some point the job stops being only about how much code you personally ship and starts being about how much better the system ships.",
+    "readMinutes": 5,
+    "date": "2026-06-22",
+    "tags": [
+      "senior-engineer",
+      "career"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "StaffEng",
+        "title": "What do staff engineers actually do?",
+        "url": "https://staffeng.com/guides/what-do-staff-engineers-actually-do/"
+      },
+      {
+        "platform": "web",
+        "meta": "Julia Evans",
+        "title": "Brag documents",
+        "url": "https://jvns.ca/blog/brag-documents/"
+      }
+    ]
+  },
+  {
+    "slug": "agents-need-boring-guardrails",
+    "title": "Agents need boring guardrails",
+    "category": "ai",
+    "kicker": "Agent design",
+    "hook": "The impressive demo is an agent doing five steps by itself. The production version is knowing which sixth step it must never take.",
+    "readMinutes": 5,
+    "date": "2026-06-22",
+    "tags": [
+      "agents",
+      "tools"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Anthropic",
+        "title": "Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents"
+      },
+      {
+        "platform": "web",
+        "meta": "OWASP",
+        "title": "Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+      }
+    ]
+  },
+  {
+    "slug": "cdns-are-the-internet-copy-machine",
+    "title": "CDNs are the internet copy machine",
+    "category": "tech",
+    "kicker": "Web infrastructure",
+    "hook": "A CDN makes the web feel close by putting copies near people. The hard part is deciding when those copies stop being true.",
+    "readMinutes": 5,
+    "date": "2026-06-21",
+    "tags": [
+      "cdn",
+      "performance"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "MDN",
+        "title": "CDN",
+        "url": "https://developer.mozilla.org/en-US/docs/Glossary/CDN"
+      },
+      {
+        "platform": "web",
+        "meta": "Google Cloud",
+        "title": "Traffic and load management",
+        "url": "https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load"
+      }
+    ]
+  },
+  {
+    "slug": "dependency-updates-are-security-work",
+    "title": "Dependency updates are security work",
+    "category": "security",
+    "kicker": "Supply chain",
+    "hook": "Updating packages is not chores around the real work. It is part of keeping strangers’ code from aging inside your app.",
+    "readMinutes": 5,
+    "date": "2026-06-21",
+    "tags": [
+      "dependencies",
+      "supply-chain"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "GitHub Docs",
+        "title": "Secure your supply chain",
+        "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain"
+      },
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "The Practical Test Pyramid",
+        "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+      }
+    ]
+  },
+  {
+    "slug": "roadmap-promises-need-expiration-dates",
+    "title": "Roadmap promises need expiration dates",
+    "category": "leadership",
+    "kicker": "Planning",
+    "hook": "A roadmap item without a review date slowly turns from a plan into a rumor.",
+    "readMinutes": 5,
+    "date": "2026-06-21",
+    "tags": [
+      "roadmaps",
+      "planning"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Basecamp",
+        "title": "Shape Up",
+        "url": "https://basecamp.com/shapeup"
+      },
+      {
+        "platform": "web",
+        "meta": "Atlassian",
+        "title": "Roles and Responsibilities",
+        "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities"
+      }
+    ]
+  },
+  {
+    "slug": "api-design-is-a-promise",
+    "title": "API design is a promise",
+    "category": "coding",
+    "kicker": "Interfaces",
+    "hook": "An API is not just a route. It is a promise about names, errors, timing, compatibility, and what future teams can safely assume.",
+    "readMinutes": 5,
+    "date": "2026-06-21",
+    "tags": [
+      "api-design",
+      "contracts"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Google AIP",
+        "title": "API Improvement Proposals",
+        "url": "https://google.aip.dev/"
+      },
+      {
+        "platform": "web",
+        "meta": "OpenAI Docs",
+        "title": "Structured outputs",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+      }
+    ]
+  },
+  {
+    "slug": "interviewing-is-debugging-a-match",
+    "title": "Interviewing is debugging a match",
+    "category": "career",
+    "kicker": "Job search",
+    "hook": "An interview is not only a performance. It is also your chance to find the hidden production behavior of the team.",
+    "readMinutes": 5,
+    "date": "2026-06-21",
+    "tags": [
+      "interviewing",
+      "jobs"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Kalzumeus",
+        "title": "Salary Negotiation",
+        "url": "https://www.kalzumeus.com/2012/01/23/salary-negotiation/"
+      },
+      {
+        "platform": "web",
+        "meta": "Lara Hogan",
+        "title": "Manager Voltron",
+        "url": "https://larahogan.me/blog/manager-voltron/"
+      }
+    ]
+  },
+  {
+    "slug": "structured-output-is-a-contract",
+    "title": "Structured output is a contract",
+    "category": "ai",
+    "kicker": "AI interfaces",
+    "hook": "A model that returns almost-JSON is not integrated. It is freelancing inside your parser.",
+    "readMinutes": 5,
+    "date": "2026-06-21",
+    "tags": [
+      "structured-output",
+      "schemas"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OpenAI Docs",
+        "title": "Structured outputs",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+      },
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "Patterns of Generative AI",
+        "url": "https://martinfowler.com/articles/gen-ai-patterns/"
+      }
+    ]
+  },
+  {
+    "slug": "passwords-are-not-a-strategy",
+    "title": "Passwords are not a strategy",
+    "category": "security",
+    "kicker": "Authentication",
+    "hook": "A password field is only one piece of identity. Treating it as the whole plan is how accounts become support tickets.",
+    "readMinutes": 5,
+    "date": "2026-06-20",
+    "tags": [
+      "authentication",
+      "accounts"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OWASP",
+        "title": "Authentication Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+      },
+      {
+        "platform": "web",
+        "meta": "CISA",
+        "title": "Secure by Design",
+        "url": "https://www.cisa.gov/securebydesign"
+      }
+    ]
+  },
+  {
+    "slug": "feedback-works-best-when-it-is-specific",
+    "title": "Feedback works best when it is specific",
+    "category": "leadership",
+    "kicker": "Team communication",
+    "hook": "Vague feedback makes people anxious. Specific feedback gives them a handle.",
+    "readMinutes": 5,
+    "date": "2026-06-20",
+    "tags": [
+      "feedback",
+      "coaching"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Lara Hogan",
+        "title": "The Feedback Equation",
+        "url": "https://larahogan.me/blog/feedback-equation/"
+      },
+      {
+        "platform": "web",
+        "meta": "Atlassian",
+        "title": "Roles and Responsibilities",
+        "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities"
+      }
+    ]
+  },
+  {
+    "slug": "logs-are-a-user-interface",
+    "title": "Logs are a user interface",
+    "category": "coding",
+    "kicker": "Debuggability",
+    "hook": "Someone will read your logs at 2 a.m. Design for that person.",
+    "readMinutes": 5,
+    "date": "2026-06-20",
+    "tags": [
+      "logging",
+      "observability"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OpenTelemetry",
+        "title": "Observability primer",
+        "url": "https://opentelemetry.io/docs/concepts/observability-primer/"
+      },
+      {
+        "platform": "web",
+        "meta": "Google SRE",
+        "title": "Service Level Objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/"
+      }
+    ]
+  },
+  {
+    "slug": "your-manager-cannot-read-your-stack-trace",
+    "title": "Your manager cannot read your stack trace",
+    "category": "career",
+    "kicker": "Working well",
+    "hook": "If you only report that you are busy, your manager has no way to help with the actual failure mode.",
+    "readMinutes": 5,
+    "date": "2026-06-20",
+    "tags": [
+      "communication",
+      "management"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Lara Hogan",
+        "title": "Manager Voltron",
+        "url": "https://larahogan.me/blog/manager-voltron/"
+      },
+      {
+        "platform": "web",
+        "meta": "Lara Hogan",
+        "title": "The Feedback Equation",
+        "url": "https://larahogan.me/blog/feedback-equation/"
+      }
+    ]
+  },
+  {
+    "slug": "embeddings-are-compression-with-opinions",
+    "title": "Embeddings are compression with opinions",
+    "category": "ai",
+    "kicker": "AI fundamentals",
+    "hook": "An embedding turns messy meaning into numbers. That is useful, but it is not neutral, magic, or guaranteed to match how your users think.",
+    "readMinutes": 5,
+    "date": "2026-06-20",
+    "tags": [
+      "embeddings",
+      "search"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "Patterns of Generative AI",
+        "url": "https://martinfowler.com/articles/gen-ai-patterns/"
+      },
+      {
+        "platform": "web",
+        "meta": "OpenAI Docs",
+        "title": "Structured outputs",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+      }
+    ]
+  },
+  {
+    "slug": "timezones-are-production-data",
+    "title": "Timezones are production data",
+    "category": "tech",
+    "kicker": "Time is hard",
+    "hook": "Time bugs are not caused by clocks being weird. They are caused by pretending human time is just a number.",
+    "readMinutes": 5,
+    "date": "2026-06-19",
+    "tags": [
+      "timezones",
+      "systems"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "IANA",
+        "title": "Time Zone Database",
+        "url": "https://www.iana.org/time-zones"
+      },
+      {
+        "platform": "web",
+        "meta": "PostgreSQL Docs",
+        "title": "Modifying Tables",
+        "url": "https://www.postgresql.org/docs/current/ddl-alter.html"
+      }
+    ]
+  },
+  {
+    "slug": "rate-limiting-is-a-security-control",
+    "title": "Rate limiting is a security control",
+    "category": "security",
+    "kicker": "Abuse prevention",
+    "hook": "A system that accepts unlimited attempts is not being generous. It is volunteering for abuse.",
+    "readMinutes": 5,
+    "date": "2026-06-19",
+    "tags": [
+      "rate-limits",
+      "abuse"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OWASP",
+        "title": "Denial of Service Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html"
+      },
+      {
+        "platform": "web",
+        "meta": "Google Cloud",
+        "title": "Traffic and load management",
+        "url": "https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load"
+      }
+    ]
+  },
+  {
+    "slug": "onboarding-is-a-production-system",
+    "title": "Onboarding is a production system",
+    "category": "leadership",
+    "kicker": "Team scaling",
+    "hook": "A new hire should not have to reverse-engineer your company by reading old Slack threads.",
+    "readMinutes": 5,
+    "date": "2026-06-19",
+    "tags": [
+      "onboarding",
+      "documentation"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "GitLab Handbook",
+        "title": "General onboarding",
+        "url": "https://handbook.gitlab.com/handbook/people-group/general-onboarding/"
+      },
+      {
+        "platform": "web",
+        "meta": "Atlassian",
+        "title": "Roles and Responsibilities",
+        "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities"
+      }
+    ]
+  },
+  {
+    "slug": "migrations-need-exit-ramps",
+    "title": "Migrations need exit ramps",
+    "category": "coding",
+    "kicker": "Database changes",
+    "hook": "A migration plan is not complete until you know how to pause, resume, and recover when production is less tidy than staging.",
+    "readMinutes": 5,
+    "date": "2026-06-19",
+    "tags": [
+      "databases",
+      "migrations"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "PostgreSQL Docs",
+        "title": "Modifying Tables",
+        "url": "https://www.postgresql.org/docs/current/ddl-alter.html"
+      },
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "The Practical Test Pyramid",
+        "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+      }
+    ]
+  },
+  {
+    "slug": "learning-in-public-without-performing",
+    "title": "Learning in public without performing",
+    "category": "career",
+    "kicker": "Sustainable growth",
+    "hook": "Sharing what you learn can be generous. It gets weird when the performance replaces the learning.",
+    "readMinutes": 5,
+    "date": "2026-06-19",
+    "tags": [
+      "learning",
+      "writing"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Julia Evans",
+        "title": "Brag documents",
+        "url": "https://jvns.ca/blog/brag-documents/"
+      },
+      {
+        "platform": "web",
+        "meta": "Recurse Center",
+        "title": "Social Rules",
+        "url": "https://www.recurse.com/social-rules"
+      }
+    ]
+  },
+  {
+    "slug": "human-handoff-is-a-feature",
+    "title": "Human handoff is a feature",
+    "category": "ai",
+    "kicker": "Support automation",
+    "hook": "The best AI support flow is not the one that answers everything. It is the one that knows when it is done being useful.",
+    "readMinutes": 5,
+    "date": "2026-06-19",
+    "tags": [
+      "handoff",
+      "support"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Anthropic",
+        "title": "Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents"
+      },
+      {
+        "platform": "web",
+        "meta": "OWASP",
+        "title": "Top 10 for LLM Applications",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+      }
+    ]
+  },
+  {
+    "slug": "rate-limits-are-backpressure-with-a-policy",
+    "title": "Rate limits are backpressure with a policy",
+    "category": "tech",
+    "kicker": "Traffic control",
+    "hook": "A rate limit is not just saying no. It is telling traffic where the edge of fairness lives.",
+    "readMinutes": 5,
+    "date": "2026-06-18",
+    "tags": [
+      "rate-limits",
+      "reliability"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Google Cloud",
+        "title": "Traffic and load management",
+        "url": "https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load"
+      },
+      {
+        "platform": "web",
+        "meta": "Google SRE",
+        "title": "Service Level Objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/"
+      }
+    ]
+  },
+  {
+    "slug": "secure-defaults-beat-security-training",
+    "title": "Secure defaults beat security training",
+    "category": "security",
+    "kicker": "Secure by design",
+    "hook": "Training helps. Defaults help even when everyone is tired, rushed, or new.",
+    "readMinutes": 5,
+    "date": "2026-06-18",
+    "tags": [
+      "secure-by-design",
+      "defaults"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "CISA",
+        "title": "Secure by Design",
+        "url": "https://www.cisa.gov/securebydesign"
+      },
+      {
+        "platform": "web",
+        "meta": "OWASP",
+        "title": "Threat Modeling",
+        "url": "https://owasp.org/www-community/Threat_Modeling"
+      }
+    ]
+  },
+  {
+    "slug": "technical-debt-needs-an-interest-rate",
+    "title": "Technical debt needs an interest rate",
+    "category": "leadership",
+    "kicker": "Engineering economics",
+    "hook": "Not every messy corner is urgent. The urgent debt is the part charging you interest every week.",
+    "readMinutes": 5,
+    "date": "2026-06-18",
+    "tags": [
+      "technical-debt",
+      "planning"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Martin Fowler",
+        "title": "Technical Debt",
+        "url": "https://martinfowler.com/bliki/TechnicalDebt.html"
+      },
+      {
+        "platform": "web",
+        "meta": "Basecamp",
+        "title": "Shape Up",
+        "url": "https://basecamp.com/shapeup"
+      }
+    ]
+  },
+  {
+    "slug": "choosing-the-right-next-job",
+    "title": "Choosing the right next job",
+    "category": "career",
+    "kicker": "Career decisions",
+    "hook": "The best next job is not always the most impressive one. It is the one whose tradeoffs you choose on purpose.",
+    "readMinutes": 5,
+    "date": "2026-06-18",
+    "tags": [
+      "jobs",
+      "career-planning"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "StaffEng",
+        "title": "What do staff engineers actually do?",
+        "url": "https://staffeng.com/guides/what-do-staff-engineers-actually-do/"
+      },
+      {
+        "platform": "web",
+        "meta": "Kalzumeus",
+        "title": "Salary Negotiation",
+        "url": "https://www.kalzumeus.com/2012/01/23/salary-negotiation/"
+      }
+    ]
+  },
+  {
+    "slug": "model-latency-is-a-product-choice",
+    "title": "Model latency is a product choice",
+    "category": "ai",
+    "kicker": "AI performance",
+    "hook": "A smarter answer that arrives after the user has left is not smarter in product terms.",
+    "readMinutes": 5,
+    "date": "2026-06-18",
+    "tags": [
+      "latency",
+      "ux"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Anthropic",
+        "title": "Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents"
+      },
+      {
+        "platform": "web",
+        "meta": "OpenAI Docs",
+        "title": "Structured outputs",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+      }
+    ]
+  },
+  {
+    "slug": "observability-starts-with-questions",
+    "title": "Observability starts with questions",
+    "category": "tech",
+    "kicker": "Production debugging",
+    "hook": "Dashboards do not make a system observable. Good questions do.",
+    "readMinutes": 5,
+    "date": "2026-06-17",
+    "tags": [
+      "observability",
+      "debugging"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "OpenTelemetry",
+        "title": "Observability primer",
+        "url": "https://opentelemetry.io/docs/concepts/observability-primer/"
+      },
+      {
+        "platform": "web",
+        "meta": "Google SRE",
+        "title": "Service Level Objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/"
+      }
+    ]
+  },
+  {
+    "slug": "saying-no-without-disappearing",
+    "title": "Saying no without disappearing",
+    "category": "career",
+    "kicker": "Professional boundaries",
+    "hook": "A good no does not vanish. It names the constraint and keeps the work moving.",
+    "readMinutes": 5,
+    "date": "2026-06-17",
+    "tags": [
+      "boundaries",
+      "communication"
+    ],
+    "sources": [
+      {
+        "platform": "web",
+        "meta": "Recurse Center",
+        "title": "Social Rules",
+        "url": "https://www.recurse.com/social-rules"
+      },
+      {
+        "platform": "web",
+        "meta": "Lara Hogan",
+        "title": "The Feedback Equation",
+        "url": "https://larahogan.me/blog/feedback-equation/"
       }
     ]
   }

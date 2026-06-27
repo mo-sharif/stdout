@@ -1,0 +1,131 @@
+{
+  "slug": "threat-modeling-is-just-asking-what-could-go-wrong",
+  "title": "Threat modeling is just asking what could go wrong",
+  "category": "security",
+  "kicker": "Security practice",
+  "hook": "Threat modeling sounds formal until you do it. Then it is mostly drawing the system and asking where trust gets weird.",
+  "readMinutes": 5,
+  "date": "2026-06-23",
+  "tags": [
+    "threat-modeling",
+    "appsec"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Security reviews fail when they start too late",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">If the first security conversation happens after the feature is built, every fix feels expensive. A lightweight threat model before implementation can catch the cheap changes.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "design · trust boundaries",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "browser -> API -> queue -> worker -> payment provider",
+              "c": ""
+            },
+            {
+              "t": "boundary: user input enters API",
+              "c": "err"
+            },
+            {
+              "t": "boundary: worker holds payment credential",
+              "c": "err"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Draw the data flow",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Name the actors, data, trust boundaries, secrets, and worst reasonable outcomes. You do not need a perfect diagram to find the scary edges.</p>"
+        },
+        {
+          "type": "code",
+          "file": "threat-model.md",
+          "code": "Asset: payment token\nThreat: replay refund request\nControl: idempotency key and authorization check\nOpen question: webhook retry window",
+          "caption": "A useful threat model creates concrete engineering questions."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Turn threats into tests or controls",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The model is only useful if it changes the system: new validation, logging, authorization, rate limits, or a decision not to build the risky path.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 4,
+              "label": "things to map: actors, data, boundaries, assets"
+            },
+            {
+              "to": 1,
+              "label": "control per accepted high risk"
+            },
+            {
+              "to": 0,
+              "label": "security theater required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Make the risk visible early",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Threat modeling is not a ceremony. It is a cheap way to avoid discovering the architecture from the breach report.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "OWASP",
+              "title": "Threat Modeling",
+              "url": "https://owasp.org/www-community/Threat_Modeling",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "CISA",
+              "title": "Secure by Design",
+              "url": "https://www.cisa.gov/securebydesign",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "OWASP",
+      "title": "Threat Modeling",
+      "url": "https://owasp.org/www-community/Threat_Modeling"
+    },
+    {
+      "platform": "web",
+      "meta": "CISA",
+      "title": "Secure by Design",
+      "url": "https://www.cisa.gov/securebydesign"
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "slug": "onboarding-is-a-production-system",
+  "title": "Onboarding is a production system",
+  "category": "leadership",
+  "kicker": "Team scaling",
+  "hook": "A new hire should not have to reverse-engineer your company by reading old Slack threads.",
+  "readMinutes": 5,
+  "date": "2026-06-19",
+  "tags": [
+    "onboarding",
+    "documentation"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "The first week teaches the real culture",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">If setup is broken, docs are stale, and nobody knows who owns the plan, the new engineer learns that the team survives by guessing.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "onboarding · day one",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ ./setup.sh",
+              "c": "pr"
+            },
+            {
+              "t": "OK node, db, env, seed data",
+              "c": ""
+            },
+            {
+              "t": "next: first good issue linked",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Make the path executable",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A good onboarding plan has a working setup script, a first task, named buddies, system maps, and checkpoints for questions that do not fit the docs.</p>"
+        },
+        {
+          "type": "code",
+          "file": "onboarding/checklist.md",
+          "code": "- Run setup and verify local app\n- Ship one docs-only PR\n- Pair on one customer-facing bug\n- Map the services touched by checkout",
+          "caption": "The checklist should create motion, not homework."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Update it from real friction",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Every new hire is a fresh test run. When they get stuck, fix the system, not just their laptop.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "first task ready before start date"
+            },
+            {
+              "to": 2,
+              "label": "buddies: domain and culture"
+            },
+            {
+              "to": 30,
+              "label": "days to revisit the plan"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Onboarding compounds",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A strong onboarding system turns each new hire into both a contributor and a debugger of the team itself.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "GitLab Handbook",
+              "title": "General onboarding",
+              "url": "https://handbook.gitlab.com/handbook/people-group/general-onboarding/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Atlassian",
+              "title": "Roles and Responsibilities",
+              "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "GitLab Handbook",
+      "title": "General onboarding",
+      "url": "https://handbook.gitlab.com/handbook/people-group/general-onboarding/"
+    },
+    {
+      "platform": "web",
+      "meta": "Atlassian",
+      "title": "Roles and Responsibilities",
+      "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities"
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "slug": "feedback-works-best-when-it-is-specific",
+  "title": "Feedback works best when it is specific",
+  "category": "leadership",
+  "kicker": "Team communication",
+  "hook": "Vague feedback makes people anxious. Specific feedback gives them a handle.",
+  "readMinutes": 5,
+  "date": "2026-06-20",
+  "tags": [
+    "feedback",
+    "coaching"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Good job is nice, not useful",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Praise and critique both need detail. Without the situation, behavior, and impact, the person cannot repeat the good part or change the rough part.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "manager · feedback draft",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "situation: design review Tuesday",
+              "c": ""
+            },
+            {
+              "t": "behavior: you named the risk and offered two paths",
+              "c": ""
+            },
+            {
+              "t": "impact: the team made a decision in the room",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Anchor it in observable behavior",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Describe what happened, why it mattered, and what to continue or adjust. Keep identity out of it. Focus on behavior the person can control.</p>"
+        },
+        {
+          "type": "code",
+          "file": "feedback.txt",
+          "code": "When the API debate stalled,\nyou wrote the two tradeoffs on the board.\nThat helped the team choose a path.\nPlease keep doing that in ambiguous reviews.",
+          "caption": "Specific praise teaches the behavior you want repeated."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Give feedback while it is fresh",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Feedback decays. A tiny note this week beats a dramatic monologue three months from now.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 3,
+              "label": "parts: situation, behavior, impact"
+            },
+            {
+              "to": 1,
+              "label": "clear next action"
+            },
+            {
+              "to": 0,
+              "label": "personality diagnoses"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Clarity is respect",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Specific feedback lowers the emotional tax because it turns a cloudy judgment into a workable observation.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Lara Hogan",
+              "title": "The Feedback Equation",
+              "url": "https://larahogan.me/blog/feedback-equation/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Atlassian",
+              "title": "Roles and Responsibilities",
+              "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Lara Hogan",
+      "title": "The Feedback Equation",
+      "url": "https://larahogan.me/blog/feedback-equation/"
+    },
+    {
+      "platform": "web",
+      "meta": "Atlassian",
+      "title": "Roles and Responsibilities",
+      "url": "https://www.atlassian.com/team-playbook/plays/roles-and-responsibilities"
+    }
+  ]
+}

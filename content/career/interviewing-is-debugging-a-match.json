@@ -1,0 +1,131 @@
+{
+  "slug": "interviewing-is-debugging-a-match",
+  "title": "Interviewing is debugging a match",
+  "category": "career",
+  "kicker": "Job search",
+  "hook": "An interview is not only a performance. It is also your chance to find the hidden production behavior of the team.",
+  "readMinutes": 5,
+  "date": "2026-06-21",
+  "tags": [
+    "interviewing",
+    "jobs"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "The offer is not the whole answer",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A role can have good compensation and still be wrong for your energy, growth, manager, schedule, or values. You need questions that reveal the day-to-day system.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "interview · questions",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "How are incidents handled after hours?",
+              "c": ""
+            },
+            {
+              "t": "What changed in the last performance cycle?",
+              "c": ""
+            },
+            {
+              "t": "What would make this hire successful in 90 days?",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Ask for examples",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Specific stories beat brand claims. Ask about a recent conflict, launch, missed deadline, promotion, or incident. Real examples reveal operating habits.</p>"
+        },
+        {
+          "type": "code",
+          "file": "interview-notes.md",
+          "code": "Signal: manager gave concrete examples\nConcern: roadmap changed weekly, no prioritization method\nFollow-up: ask future teammates about review load",
+          "caption": "Notes keep excitement from overwriting evidence."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Evaluate both directions",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">You are being assessed, but so is the company. A healthy interview process leaves you with more clarity, not just more anxiety.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 3,
+              "label": "signals: manager, team, operating model"
+            },
+            {
+              "to": 90,
+              "label": "days to ask about success criteria"
+            },
+            {
+              "to": 1,
+              "label": "written decision note before accepting"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Debug the environment",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The job is the system around the work. Interview that system before you join it.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Kalzumeus",
+              "title": "Salary Negotiation",
+              "url": "https://www.kalzumeus.com/2012/01/23/salary-negotiation/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Lara Hogan",
+              "title": "Manager Voltron",
+              "url": "https://larahogan.me/blog/manager-voltron/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Kalzumeus",
+      "title": "Salary Negotiation",
+      "url": "https://www.kalzumeus.com/2012/01/23/salary-negotiation/"
+    },
+    {
+      "platform": "web",
+      "meta": "Lara Hogan",
+      "title": "Manager Voltron",
+      "url": "https://larahogan.me/blog/manager-voltron/"
+    }
+  ]
+}

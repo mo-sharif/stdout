@@ -25,14 +25,12 @@
 <div class="stats"><div class="stat"><b data-to="3">0</b><span>packets in the TCP handshake</span></div><div class="stat"><b data-to="1">0</b><span>round trip for a TLS 1.3 handshake</span></div><div class="stat"><b data-to="13">0</b><span>DNS root server clusters worldwide</span></div></div></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">04 · the ask</div><h2>The request is just text</h2><p class="body">With the tunnel up, the actual request is almost boring. It's a few lines of plain text sent through the encrypted pipe:</p>
 <div class="panel">
-    <div class="top"><i></i><i></i><i></i><span class="fn">GET / HTTP/1.1</span>
-      </div>
+    <div class="top"><i></i><i></i><i></i><span class="fn">GET / HTTP/1.1</span></div>
     <textarea class="code" data-code spellcheck="false">GET / HTTP/1.1
 Host: example.com
 User-Agent: Mozilla/5.0
 Accept: text/html
 Connection: keep-alive</textarea>
-    
   </div><p class="cap">That's the whole thing. The server reads it and starts sending HTML back.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">05 · paint</div><h2>Parse, then paint</h2><p class="body">The server streams HTML back. Your browser doesn't wait for all of it. It parses as bytes arrive, building the <strong>DOM</strong> from HTML and the <strong>CSSOM</strong> from CSS, then combines them into a render tree, works out where every box goes (layout), and finally <span class="hl">paints pixels</span>. Images, scripts and fonts it spotted along the way get fetched in parallel, often over the same connection.</p></div></section>
 <section class="beat"><div class="wrap reveal"><div class="num">06 · the takeaway</div><h2>It's fallbacks all the way down</h2><p class="body">Every leg of that race has a cache in front of it and a fallback behind it. That's why the same page can feel instant once and sluggish the next: a cold DNS cache, a fresh TLS handshake, a far-away server. <strong>Next time it's slow,</strong> you now know exactly which leg to go measure.</p></div></section></main>

@@ -1,0 +1,135 @@
+{
+  "slug": "migrations-need-exit-ramps",
+  "title": "Migrations need exit ramps",
+  "category": "coding",
+  "kicker": "Database changes",
+  "hook": "A migration plan is not complete until you know how to pause, resume, and recover when production is less tidy than staging.",
+  "readMinutes": 5,
+  "date": "2026-06-19",
+  "tags": [
+    "databases",
+    "migrations"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "The schema is only half the change",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Real migrations touch code, data, jobs, queries, dashboards, and rollback assumptions. The risky part is often the period where old and new shapes both exist.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "db · expand contract",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "step 1 add nullable column",
+              "c": ""
+            },
+            {
+              "t": "step 2 dual write",
+              "c": ""
+            },
+            {
+              "t": "step 3 backfill in batches",
+              "c": ""
+            },
+            {
+              "t": "step 4 read new column",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Expand, migrate, contract",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Add the new shape first, write both paths, backfill carefully, switch reads, then remove the old shape after you have evidence.</p>"
+        },
+        {
+          "type": "code",
+          "file": "migration.sql",
+          "code": "ALTER TABLE subscriptions\nADD COLUMN pause_reason text;\n\n-- Backfill separately in small batches.\n-- Do not lock the world for a tidy diff.",
+          "caption": "The safest migration is usually more than one deploy."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Watch the batch job",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Backfills need progress logs, retry behavior, rate limits, and a way to stop. A migration that cannot be paused is a deploy with a fuse.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 4,
+              "label": "phases: expand, dual write, backfill, contract"
+            },
+            {
+              "to": 1,
+              "label": "pause switch for long-running jobs"
+            },
+            {
+              "to": 0,
+              "label": "giant unbounded production updates"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Data changes are product changes",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Users do not care that the migration was elegant. They care that the system kept working while the floor moved.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "PostgreSQL Docs",
+              "title": "Modifying Tables",
+              "url": "https://www.postgresql.org/docs/current/ddl-alter.html",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Martin Fowler",
+              "title": "The Practical Test Pyramid",
+              "url": "https://martinfowler.com/articles/practical-test-pyramid.html",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "PostgreSQL Docs",
+      "title": "Modifying Tables",
+      "url": "https://www.postgresql.org/docs/current/ddl-alter.html"
+    },
+    {
+      "platform": "web",
+      "meta": "Martin Fowler",
+      "title": "The Practical Test Pyramid",
+      "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+    }
+  ]
+}

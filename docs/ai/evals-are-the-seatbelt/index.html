@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evals are the seatbelt, not the science fair</title>
+<meta name="description" content="You do not need a giant benchmark to start. You need a small set of cases that catches the exact ways your AI feature embarrasses you in production.">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#c977e0"><div class="wrap">
+  <span class="kicker"><span class="dot"></span> Shipping AI</span>
+  <h1>Evals are the seatbelt, not the science fair</h1>
+  <p class="dek">You do not need a giant benchmark to start. You need a small set of cases that catches the exact ways your AI feature embarrasses you in production.</p>
+  <div class="meta"><span>~5 min</span><span>&bull;</span><span>AI</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the smell</div><h2>Vibes are a terrible release gate</h2><p class="body">The prototype feels good because you know the happy path. Production finds the weird path immediately: short prompts, angry prompts, copied tickets, partial context, old product names, and users who ask three things at once. That is why an eval set is not academic overhead. It is <span class="hl">a tripwire</span>.</p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">zsh · before release</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"$ npm run evals","c":"pr"},{"t":"PASS refund_policy_basic","c":""},{"t":"PASS appointment_reschedule_context","c":""},{"t":"FAIL medication_question_refusal","c":"err"},{"t":"blocked: model answered instead of routing to clinician copy","c":"err"}]</script>
+  </div><p class="cap">A small replay beats a confident demo.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the set</div><h2>Start with the failures you fear</h2><p class="body">A useful first eval set is not huge. It is honest. Include common requests, edge cases, policy boundaries, prompt injection attempts, and examples from real support tickets after removing private data. Each case should say what good looks like in plain language.</p>
+<div class="panel">
+    <div class="top"><i></i><i></i><i></i><span class="fn">evals/cases.json</span></div>
+    <textarea class="code" data-code spellcheck="false">[
+  {
+    &quot;name&quot;: &quot;refund_for_paused_account&quot;,
+    &quot;input&quot;: &quot;I paused last month. Can I get my money back?&quot;,
+    &quot;mustInclude&quot;: [&quot;policy link&quot;, &quot;support handoff&quot;],
+    &quot;mustNotInclude&quot;: [&quot;medical advice&quot;, &quot;made-up timeline&quot;]
+  }
+]</textarea>
+  </div><p class="cap">Readable beats clever. If a product manager can review the case, you are on the right track.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the judge</div><h2>Score behavior, not eloquence</h2><p class="body">Pretty answers can still be wrong. The rubric should check concrete behavior: cites the right source, refuses the forbidden task, asks the missing question, routes the risky topic, or returns structured JSON. Let style be a smaller score. Accuracy gets the veto.</p>
+<blockquote>Do the boring checks first: exact match, schema match, source match, refusal match. Bring in an LLM judge only when rules cannot express the behavior.<cite>stdout rule of thumb</cite></blockquote></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the habit</div><h2>Run evals whenever the system changes</h2><p class="body">The model changed? Run evals. The prompt changed? Run evals. The docs changed? Run evals. The retrieval code changed? Definitely run evals. You are building a moving system, so quality has to move with it.</p>
+<h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-gh" href="https://github.com/openai/evals" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9679;</span> GitHub</div>
+      <div class="txt">openai/evals</div><div class="stat2">evaluation framework</div>
+    </a><a class="embed e-web" href="https://developers.google.com/machine-learning/testing-debugging" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> Google</div>
+      <div class="txt">Testing and Debugging in Machine Learning</div><div class="stat2">ML testing guidance</div>
+    </a></div></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-gh" href="https://github.com/openai/evals" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9679;</span> GitHub</div>
+       <div class="txt">openai/evals</div></a><a class="embed e-web" href="https://developers.google.com/machine-learning/testing-debugging" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> Google</div>
+       <div class="txt">Testing and Debugging in Machine Learning</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

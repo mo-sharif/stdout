@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secure defaults beat security training</title>
+<meta name="description" content="Training helps. Defaults help even when everyone is tired, rushed, or new.">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#e85d5d"><div class="wrap">
+  <span class="kicker"><span class="dot"></span> Secure by design</span>
+  <h1>Secure defaults beat security training</h1>
+  <p class="dek">Training helps. Defaults help even when everyone is tired, rushed, or new.</p>
+  <div class="meta"><span>~5 min</span><span>&bull;</span><span>Security</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the shape</div><h2>Humans should not have to remember every guardrail</h2><p class="body">If every team has to rediscover safe headers, secret handling, auth checks, logging rules, and dependency policy, security becomes a memory test.</p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">scaffold · safe path</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"$ npm create service","c":"pr"},{"t":"added auth middleware","c":""},{"t":"added request logging without sensitive fields","c":""},{"t":"added default rate limits","c":""}]</script>
+  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Put safety in the template</h2><p class="body">Framework defaults, generators, shared middleware, and CI checks make the secure path the easiest path.</p>
+<div class="panel">
+    <div class="top"><i></i><i></i><i></i><span class="fn">service-template.ts</span></div>
+    <textarea class="code" data-code spellcheck="false">app.use(requireAuth);
+app.use(rateLimit.defaults());
+app.use(redactSensitiveLogs);
+app.use(securityHeaders());</textarea>
+  </div><p class="cap">The best control is the one every new service gets automatically.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Review exceptions, not basics</h2><p class="body">If defaults cover the common path, security review can focus on unusual risk instead of repeating the same checklist forever.</p>
+<div class="stats"><div class="stat"><b data-to="4">0</b><span>defaults: auth, logs, limits, headers</span></div><div class="stat"><b data-to="1">0</b><span>approved service template</span></div><div class="stat"><b data-to="0">0</b><span>copy-pasted security folklore</span></div></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Make the safe path boring</h2><p class="body">A secure culture is not only people knowing the right thing. It is systems that make the right thing the normal thing.</p>
+<h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://www.cisa.gov/securebydesign" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> CISA</div>
+      <div class="txt">Secure by Design</div><div class="stat2">reference</div>
+    </a><a class="embed e-web" href="https://owasp.org/www-community/Threat_Modeling" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> OWASP</div>
+      <div class="txt">Threat Modeling</div><div class="stat2">reference</div>
+    </a></div></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-web" href="https://www.cisa.gov/securebydesign" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> CISA</div>
+       <div class="txt">Secure by Design</div></a><a class="embed e-web" href="https://owasp.org/www-community/Threat_Modeling" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> OWASP</div>
+       <div class="txt">Threat Modeling</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

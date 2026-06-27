@@ -1,0 +1,131 @@
+{
+  "slug": "authz-bugs-hide-behind-working-auth",
+  "title": "Authz bugs hide behind working auth",
+  "category": "security",
+  "kicker": "Access control",
+  "hook": "Logging in proves who someone is. It does not prove they are allowed to do the thing they just asked for.",
+  "readMinutes": 5,
+  "date": "2026-06-22",
+  "tags": [
+    "authorization",
+    "security"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Authentication gets the attention",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Teams test login carefully and then accidentally trust any logged-in user too much. Authorization bugs live in the gap between identity and permission.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "api · broken object access",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ curl /api/invoices/inv_other_team",
+              "c": "pr"
+            },
+            {
+              "t": "HTTP/1.1 200 OK",
+              "c": "err"
+            },
+            {
+              "t": "# user is logged in, but should not see this invoice",
+              "c": "dim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Check permission at the object",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Every sensitive read and write should verify the user can access that specific resource, not just the route or role name.</p>"
+        },
+        {
+          "type": "code",
+          "file": "invoices/authz.ts",
+          "code": "const invoice = await invoices.get(id);\nif (invoice.tenantId !== user.tenantId) {\n  throw new ForbiddenError();\n}",
+          "caption": "Object-level checks stop cross-tenant surprises."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Test the neighbor account",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">For every important endpoint, test a valid user asking for someone else’s object. That is where many authz bugs become obvious.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 403,
+              "label": "status code for forbidden access"
+            },
+            {
+              "to": 1,
+              "label": "object-level check per sensitive resource"
+            },
+            {
+              "to": 0,
+              "label": "trust in client-hidden buttons"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Identity is only the start",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The dangerous question is not \"are you logged in?\" It is \"are you allowed to do this to that?\"</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "OWASP",
+              "title": "Authorization Cheat Sheet",
+              "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Google AIP",
+              "title": "API Improvement Proposals",
+              "url": "https://google.aip.dev/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "OWASP",
+      "title": "Authorization Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+    },
+    {
+      "platform": "web",
+      "meta": "Google AIP",
+      "title": "API Improvement Proposals",
+      "url": "https://google.aip.dev/"
+    }
+  ]
+}

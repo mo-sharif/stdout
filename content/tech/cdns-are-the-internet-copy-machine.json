@@ -1,0 +1,131 @@
+{
+  "slug": "cdns-are-the-internet-copy-machine",
+  "title": "CDNs are the internet copy machine",
+  "category": "tech",
+  "kicker": "Web infrastructure",
+  "hook": "A CDN makes the web feel close by putting copies near people. The hard part is deciding when those copies stop being true.",
+  "readMinutes": 5,
+  "date": "2026-06-21",
+  "tags": [
+    "cdn",
+    "performance"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Distance is latency",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">If every image, script, and page has to travel from one origin server, users far away pay for geography. A CDN stores copies at edge locations so repeated requests take a shorter path.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "curl · edge hit",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ curl -I https://static.example/app.css",
+              "c": "pr"
+            },
+            {
+              "t": "cf-cache-status: HIT",
+              "c": ""
+            },
+            {
+              "t": "age: 86400",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Version the things you can cache forever",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Static assets love long cache lifetimes when the filename changes with the content. User-specific pages need stricter rules.</p>"
+        },
+        {
+          "type": "code",
+          "file": "asset-name.txt",
+          "code": "app.8f3a91.css\nkit.42aa10.js\n\n# new content, new filename, old cache stays safe",
+          "caption": "Hashed filenames turn cache invalidation into deployment math."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Inspect the headers",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">CDN bugs usually show up in headers: cache status, age, vary, and cache-control. Read those before blaming the app.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "origin shielded by many edge copies"
+            },
+            {
+              "to": 4,
+              "label": "headers worth checking first"
+            },
+            {
+              "to": 0,
+              "label": "private user data in public cache"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "The edge is part of the app",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A CDN is not just hosting plumbing. It is where performance, correctness, and cache policy meet.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "MDN",
+              "title": "CDN",
+              "url": "https://developer.mozilla.org/en-US/docs/Glossary/CDN",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Google Cloud",
+              "title": "Traffic and load management",
+              "url": "https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "MDN",
+      "title": "CDN",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/CDN"
+    },
+    {
+      "platform": "web",
+      "meta": "Google Cloud",
+      "title": "Traffic and load management",
+      "url": "https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load"
+    }
+  ]
+}

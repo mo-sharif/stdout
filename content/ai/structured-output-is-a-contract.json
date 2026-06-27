@@ -1,0 +1,131 @@
+{
+  "slug": "structured-output-is-a-contract",
+  "title": "Structured output is a contract",
+  "category": "ai",
+  "kicker": "AI interfaces",
+  "hook": "A model that returns almost-JSON is not integrated. It is freelancing inside your parser.",
+  "readMinutes": 5,
+  "date": "2026-06-21",
+  "tags": [
+    "structured-output",
+    "schemas"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Text is a terrible API boundary",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Free-form text is great for humans and slippery for code. The moment another service depends on the shape, the answer needs a schema, validation, retries, and a failure path.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "parser · almost works",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ node parse-answer.mjs",
+              "c": "pr"
+            },
+            {
+              "t": "expected: {\"priority\":\"high\",\"owner\":\"billing\"}",
+              "c": ""
+            },
+            {
+              "t": "got: \"Sure, priority is probably high.\"",
+              "c": "err"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Make the shape explicit",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Define the fields, allowed values, and nullable cases before calling the model. Then validate the response like any other external dependency.</p>"
+        },
+        {
+          "type": "code",
+          "file": "schemas/triage.json",
+          "code": "{\n  \"type\": \"object\",\n  \"required\": [\"priority\", \"owner\", \"reason\"],\n  \"properties\": {\n    \"priority\": { \"enum\": [\"low\", \"medium\", \"high\"] }\n  }\n}",
+          "caption": "A schema turns vibes into a contract your app can reject."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Reject invalid answers loudly",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">If the model misses the schema, do not patch around it downstream. Retry with the validation error, fall back to a human path, or fail the job with a useful log.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 3,
+              "label": "allowed priority values beats free text"
+            },
+            {
+              "to": 1,
+              "label": "schema shared by prompt and validator"
+            },
+            {
+              "to": 0,
+              "label": "silent parser fallbacks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Reliable AI feels boring at the boundary",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The inside can be probabilistic. The edge of the system should look like software: typed, validated, observable, and honest when it cannot comply.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "OpenAI Docs",
+              "title": "Structured outputs",
+              "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Martin Fowler",
+              "title": "Patterns of Generative AI",
+              "url": "https://martinfowler.com/articles/gen-ai-patterns/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "OpenAI Docs",
+      "title": "Structured outputs",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+    },
+    {
+      "platform": "web",
+      "meta": "Martin Fowler",
+      "title": "Patterns of Generative AI",
+      "url": "https://martinfowler.com/articles/gen-ai-patterns/"
+    }
+  ]
+}

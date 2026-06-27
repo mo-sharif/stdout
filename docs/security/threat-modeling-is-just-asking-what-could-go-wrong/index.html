@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Threat modeling is just asking what could go wrong</title>
+<meta name="description" content="Threat modeling sounds formal until you do it. Then it is mostly drawing the system and asking where trust gets weird.">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#e85d5d"><div class="wrap">
+  <span class="kicker"><span class="dot"></span> Security practice</span>
+  <h1>Threat modeling is just asking what could go wrong</h1>
+  <p class="dek">Threat modeling sounds formal until you do it. Then it is mostly drawing the system and asking where trust gets weird.</p>
+  <div class="meta"><span>~5 min</span><span>&bull;</span><span>Security</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the shape</div><h2>Security reviews fail when they start too late</h2><p class="body">If the first security conversation happens after the feature is built, every fix feels expensive. A lightweight threat model before implementation can catch the cheap changes.</p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">design · trust boundaries</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"browser -> API -> queue -> worker -> payment provider","c":""},{"t":"boundary: user input enters API","c":"err"},{"t":"boundary: worker holds payment credential","c":"err"}]</script>
+  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Draw the data flow</h2><p class="body">Name the actors, data, trust boundaries, secrets, and worst reasonable outcomes. You do not need a perfect diagram to find the scary edges.</p>
+<div class="panel">
+    <div class="top"><i></i><i></i><i></i><span class="fn">threat-model.md</span></div>
+    <textarea class="code" data-code spellcheck="false">Asset: payment token
+Threat: replay refund request
+Control: idempotency key and authorization check
+Open question: webhook retry window</textarea>
+  </div><p class="cap">A useful threat model creates concrete engineering questions.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Turn threats into tests or controls</h2><p class="body">The model is only useful if it changes the system: new validation, logging, authorization, rate limits, or a decision not to build the risky path.</p>
+<div class="stats"><div class="stat"><b data-to="4">0</b><span>things to map: actors, data, boundaries, assets</span></div><div class="stat"><b data-to="1">0</b><span>control per accepted high risk</span></div><div class="stat"><b data-to="0">0</b><span>security theater required</span></div></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Make the risk visible early</h2><p class="body">Threat modeling is not a ceremony. It is a cheap way to avoid discovering the architecture from the breach report.</p>
+<h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://owasp.org/www-community/Threat_Modeling" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> OWASP</div>
+      <div class="txt">Threat Modeling</div><div class="stat2">reference</div>
+    </a><a class="embed e-web" href="https://www.cisa.gov/securebydesign" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> CISA</div>
+      <div class="txt">Secure by Design</div><div class="stat2">reference</div>
+    </a></div></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-web" href="https://owasp.org/www-community/Threat_Modeling" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> OWASP</div>
+       <div class="txt">Threat Modeling</div></a><a class="embed e-web" href="https://www.cisa.gov/securebydesign" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> CISA</div>
+       <div class="txt">Secure by Design</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

@@ -1,0 +1,131 @@
+{
+  "slug": "the-smallest-useful-refactor",
+  "title": "The smallest useful refactor",
+  "category": "coding",
+  "kicker": "Code health",
+  "hook": "A refactor does not need a parade. Sometimes the best version is a tiny move that makes tomorrow obvious.",
+  "readMinutes": 5,
+  "date": "2026-06-22",
+  "tags": [
+    "refactoring",
+    "maintainability"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Big cleanup is where scope goes to hide",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The dangerous refactor starts with \"while I am here\" and ends with a pull request nobody can review. The safer move is to make the next change easy, then stop.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "git · tiny diff",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ git diff --stat",
+              "c": "pr"
+            },
+            {
+              "t": "billing.ts        | 12 ++++++------",
+              "c": ""
+            },
+            {
+              "t": "billing.test.ts   | 18 ++++++++++++++++++",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Refactor around the change",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Extract the branch you need to touch, name the concept, add a test around current behavior, then make the actual feature change in a separate commit if possible.</p>"
+        },
+        {
+          "type": "code",
+          "file": "billing.ts",
+          "code": "function isRetryablePaymentError(error) {\n  return [\"timeout\", \"rate_limited\"].includes(error.code);\n}\n\nif (isRetryablePaymentError(error)) retryLater();",
+          "caption": "A small name can remove a lot of local guessing."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Make review easy",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A useful refactor should have boring tests and a boring diff. If the reviewer cannot tell behavior stayed the same, split the patch.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "concept extracted at a time"
+            },
+            {
+              "to": 2,
+              "label": "commits: preserve behavior, then change behavior"
+            },
+            {
+              "to": 0,
+              "label": "drive-by rewrites needed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Leave a cleaner path, not a new maze",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Refactoring is maintenance with manners. It helps most when the shape of the change stays obvious.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Martin Fowler",
+              "title": "Refactoring",
+              "url": "https://martinfowler.com/books/refactoring.html",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Martin Fowler",
+              "title": "The Practical Test Pyramid",
+              "url": "https://martinfowler.com/articles/practical-test-pyramid.html",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Martin Fowler",
+      "title": "Refactoring",
+      "url": "https://martinfowler.com/books/refactoring.html"
+    },
+    {
+      "platform": "web",
+      "meta": "Martin Fowler",
+      "title": "The Practical Test Pyramid",
+      "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+    }
+  ]
+}

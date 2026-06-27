@@ -1,0 +1,131 @@
+{
+  "slug": "learning-in-public-without-performing",
+  "title": "Learning in public without performing",
+  "category": "career",
+  "kicker": "Sustainable growth",
+  "hook": "Sharing what you learn can be generous. It gets weird when the performance replaces the learning.",
+  "readMinutes": 5,
+  "date": "2026-06-19",
+  "tags": [
+    "learning",
+    "writing"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "The internet rewards certainty",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Real learning is awkward: false starts, half models, corrections, and notes that only make sense later. Public platforms reward clean takes. Those incentives can pull you away from curiosity.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "notes · learning loop",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "question: why did this cache stay stale?",
+              "c": ""
+            },
+            {
+              "t": "experiment: inspect headers and CDN rules",
+              "c": ""
+            },
+            {
+              "t": "share: short note with caveats",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Publish the useful artifact",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Share a debugging note, diagram, checklist, or mistake with enough context that someone else can use it. You do not need to pretend it is the final word.</p>"
+        },
+        {
+          "type": "code",
+          "file": "learning-note.md",
+          "code": "What I thought:\nWhat changed my mind:\nHow I tested it:\nWhat I still do not know:",
+          "caption": "A caveat section is a power move."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Keep a private workbench",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Not every note needs an audience. Private scratchpads protect the messy part of learning so public sharing can stay honest.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "useful artifact per post"
+            },
+            {
+              "to": 4,
+              "label": "sections that keep learning honest"
+            },
+            {
+              "to": 0,
+              "label": "fake certainty required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Share to clarify, not to cosplay mastery",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The best public learning still feels like a person thinking carefully, not a brand defending a throne.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Julia Evans",
+              "title": "Brag documents",
+              "url": "https://jvns.ca/blog/brag-documents/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Recurse Center",
+              "title": "Social Rules",
+              "url": "https://www.recurse.com/social-rules",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Julia Evans",
+      "title": "Brag documents",
+      "url": "https://jvns.ca/blog/brag-documents/"
+    },
+    {
+      "platform": "web",
+      "meta": "Recurse Center",
+      "title": "Social Rules",
+      "url": "https://www.recurse.com/social-rules"
+    }
+  ]
+}

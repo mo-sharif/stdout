@@ -1,0 +1,135 @@
+{
+  "slug": "ssrf-starts-with-a-helpful-url-box",
+  "title": "SSRF starts with a helpful URL box",
+  "category": "security",
+  "kicker": "Security explainer",
+  "hook": "The feature says \"paste a URL and we will fetch it for you.\" The attacker hears \"make our server talk to places your browser cannot reach.\"",
+  "readMinutes": 6,
+  "date": "2026-06-25",
+  "tags": [
+    "ssrf",
+    "appsec"
+  ],
+  "beats": [
+    {
+      "num": "01 · the feature",
+      "heading": "Fetching a URL moves trust to your server",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">URL importers are useful: unfurl a link, fetch an avatar, import a feed, preview a webhook. But once your backend makes the request, it has a different network position than the user. It may reach internal hosts, metadata services, admin panels, or private IP ranges.</p>"
+        },
+        {
+          "type": "code",
+          "file": "preview-url.js",
+          "code": "app.post(\"/preview\", async (req, res) => {\n  const html = await fetch(req.body.url).then((r) => r.text());\n  res.json(extractPreview(html));\n});",
+          "caption": "This helper is one validation step away from becoming a tunnel."
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "The URL can point inward",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The attacker does not need your credentials if they can make your server ask the question. They try localhost, private address ranges, cloud metadata endpoints, redirects, DNS tricks, and alternate URL forms. The server becomes the browser they wanted.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "zsh · attacker input",
+          "caption": "Do not fetch first and validate later.",
+          "lines": [
+            {
+              "t": "POST /preview",
+              "c": "pr"
+            },
+            {
+              "t": "{ \"url\": \"http://169.254.169.254/latest/meta-data/\" }",
+              "c": ""
+            },
+            {
+              "t": "backend fetches from inside the network",
+              "c": "err"
+            },
+            {
+              "t": "response leaks internal metadata",
+              "c": "err"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "03 · the defense",
+      "heading": "Validate, resolve, and restrict the egress path",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A strong defense is layered: allow only expected schemes, parse with a real URL parser, resolve DNS, block private and link-local ranges, re-check after redirects, limit response size and timeout, and send fetches through an egress proxy that enforces the policy.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 2,
+              "label": "schemes usually enough: http and https"
+            },
+            {
+              "to": 1,
+              "label": "egress policy beats scattered checks"
+            },
+            {
+              "to": 0,
+              "label": "trust in user-provided hostnames"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the habit",
+      "heading": "Treat server-side fetch as a privileged action",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The mindset shift is the whole game. A URL box is not just input validation. It is a network access decision. Put it through the same review you would give a new outbound integration.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "OWASP",
+              "title": "SSRF Prevention Cheat Sheet",
+              "note": "defense checklist",
+              "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+            },
+            {
+              "platform": "web",
+              "meta": "OWASP Top 10",
+              "title": "Server-Side Request Forgery",
+              "note": "risk overview",
+              "url": "https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "OWASP",
+      "title": "SSRF Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+    },
+    {
+      "platform": "web",
+      "meta": "OWASP Top 10",
+      "title": "Server-Side Request Forgery",
+      "url": "https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/"
+    }
+  ]
+}

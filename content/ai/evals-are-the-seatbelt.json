@@ -1,0 +1,128 @@
+{
+  "slug": "evals-are-the-seatbelt",
+  "title": "Evals are the seatbelt, not the science fair",
+  "category": "ai",
+  "kicker": "Shipping AI",
+  "hook": "You do not need a giant benchmark to start. You need a small set of cases that catches the exact ways your AI feature embarrasses you in production.",
+  "readMinutes": 5,
+  "date": "2026-06-25",
+  "tags": [
+    "evals",
+    "quality",
+    "llmops"
+  ],
+  "beats": [
+    {
+      "num": "01 · the smell",
+      "heading": "Vibes are a terrible release gate",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The prototype feels good because you know the happy path. Production finds the weird path immediately: short prompts, angry prompts, copied tickets, partial context, old product names, and users who ask three things at once. That is why an eval set is not academic overhead. It is <span class=\"hl\">a tripwire</span>.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "zsh · before release",
+          "caption": "A small replay beats a confident demo.",
+          "lines": [
+            {
+              "t": "$ npm run evals",
+              "c": "pr"
+            },
+            {
+              "t": "PASS refund_policy_basic",
+              "c": ""
+            },
+            {
+              "t": "PASS appointment_reschedule_context",
+              "c": ""
+            },
+            {
+              "t": "FAIL medication_question_refusal",
+              "c": "err"
+            },
+            {
+              "t": "blocked: model answered instead of routing to clinician copy",
+              "c": "err"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the set",
+      "heading": "Start with the failures you fear",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A useful first eval set is not huge. It is honest. Include common requests, edge cases, policy boundaries, prompt injection attempts, and examples from real support tickets after removing private data. Each case should say what good looks like in plain language.</p>"
+        },
+        {
+          "type": "code",
+          "file": "evals/cases.json",
+          "code": "[\n  {\n    \"name\": \"refund_for_paused_account\",\n    \"input\": \"I paused last month. Can I get my money back?\",\n    \"mustInclude\": [\"policy link\", \"support handoff\"],\n    \"mustNotInclude\": [\"medical advice\", \"made-up timeline\"]\n  }\n]",
+          "caption": "Readable beats clever. If a product manager can review the case, you are on the right track."
+        }
+      ]
+    },
+    {
+      "num": "03 · the judge",
+      "heading": "Score behavior, not eloquence",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Pretty answers can still be wrong. The rubric should check concrete behavior: cites the right source, refuses the forbidden task, asks the missing question, routes the risky topic, or returns structured JSON. Let style be a smaller score. Accuracy gets the veto.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "Do the boring checks first: exact match, schema match, source match, refusal match. Bring in an LLM judge only when rules cannot express the behavior.",
+          "cite": "stdout rule of thumb"
+        }
+      ]
+    },
+    {
+      "num": "04 · the habit",
+      "heading": "Run evals whenever the system changes",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The model changed? Run evals. The prompt changed? Run evals. The docs changed? Run evals. The retrieval code changed? Definitely run evals. You are building a moving system, so quality has to move with it.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "gh",
+              "meta": "GitHub",
+              "title": "openai/evals",
+              "note": "evaluation framework",
+              "url": "https://github.com/openai/evals"
+            },
+            {
+              "platform": "web",
+              "meta": "Google",
+              "title": "Testing and Debugging in Machine Learning",
+              "note": "ML testing guidance",
+              "url": "https://developers.google.com/machine-learning/testing-debugging"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "gh",
+      "meta": "GitHub",
+      "title": "openai/evals",
+      "url": "https://github.com/openai/evals"
+    },
+    {
+      "platform": "web",
+      "meta": "Google",
+      "title": "Testing and Debugging in Machine Learning",
+      "url": "https://developers.google.com/machine-learning/testing-debugging"
+    }
+  ]
+}

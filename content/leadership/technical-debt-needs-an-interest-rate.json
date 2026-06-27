@@ -1,0 +1,131 @@
+{
+  "slug": "technical-debt-needs-an-interest-rate",
+  "title": "Technical debt needs an interest rate",
+  "category": "leadership",
+  "kicker": "Engineering economics",
+  "hook": "Not every messy corner is urgent. The urgent debt is the part charging you interest every week.",
+  "readMinutes": 5,
+  "date": "2026-06-18",
+  "tags": [
+    "technical-debt",
+    "planning"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Debt is not a synonym for code you dislike",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Teams call everything debt: old code, ugly code, slow code, unfamiliar code. The useful version names the cost: slower delivery, more incidents, harder onboarding, or missed product options.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "debt · cost log",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "checkout state machine: +2 days per pricing change",
+              "c": "err"
+            },
+            {
+              "t": "old admin CSS: annoying, low product impact",
+              "c": "dim"
+            },
+            {
+              "t": "billing retry job: caused 3 incidents this quarter",
+              "c": "err"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Quantify the drag",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Attach debt work to a visible cost and a near-term opportunity. \"Clean up billing\" is weak. \"Make pricing experiments one-day changes again\" is a business case.</p>"
+        },
+        {
+          "type": "code",
+          "file": "debt-register.md",
+          "code": "| area | interest | payoff |\n| billing retries | incidents | safer renewals |\n| checkout state | slow changes | faster pricing tests |",
+          "caption": "A debt register should read like a decision tool, not a shame list."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Pay down debt near the work",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The best debt work often rides with feature work that already touches the risky area. Big cleanup seasons are harder to protect.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "visible cost per debt item"
+            },
+            {
+              "to": 3,
+              "label": "signals: incidents, cycle time, confusion"
+            },
+            {
+              "to": 0,
+              "label": "blanket rewrites without payoff"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Debt conversations need economics",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">When you can explain the interest rate, debt work stops sounding like polish and starts sounding like risk management.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Martin Fowler",
+              "title": "Technical Debt",
+              "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Basecamp",
+              "title": "Shape Up",
+              "url": "https://basecamp.com/shapeup",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Martin Fowler",
+      "title": "Technical Debt",
+      "url": "https://martinfowler.com/bliki/TechnicalDebt.html"
+    },
+    {
+      "platform": "web",
+      "meta": "Basecamp",
+      "title": "Shape Up",
+      "url": "https://basecamp.com/shapeup"
+    }
+  ]
+}

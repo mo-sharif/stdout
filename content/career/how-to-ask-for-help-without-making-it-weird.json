@@ -1,0 +1,123 @@
+{
+  "slug": "how-to-ask-for-help-without-making-it-weird",
+  "title": "How to ask for help without making it weird",
+  "category": "career",
+  "kicker": "Developer survival",
+  "hook": "Asking for help is not a confession. Done well, it is a compact bug report that lets another brain attach to the problem fast.",
+  "readMinutes": 5,
+  "date": "2026-06-23",
+  "tags": [
+    "debugging",
+    "communication"
+  ],
+  "beats": [
+    {
+      "num": "01 · the fear",
+      "heading": "The delay is usually more expensive than the question",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Everyone gets stuck. The risky part is silently spinning until the problem grows teeth. A good help request protects both sides: you show your work, the helper gets context, and the team gets unstuck sooner.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "The goal is not to prove you tried hard. The goal is to make the next experiment obvious.",
+          "cite": "debugging note"
+        }
+      ]
+    },
+    {
+      "num": "02 · the packet",
+      "heading": "Send the smallest complete problem",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A useful request has five pieces: what you expected, what happened, what changed recently, what you already tried, and the smallest reproduction you can make. That turns \"it is broken\" into something another person can run.</p>"
+        },
+        {
+          "type": "code",
+          "file": "help-request.md",
+          "code": "Expected: checkout total updates after coupon apply\nActual: total stays stale until refresh\nChanged: moved coupon state into useCartTotals\nTried: cleared cache, confirmed API returns new total\nRepro: branch mo/coupon-total, test command below",
+          "caption": "This is much easier to answer than a screenshot and a sigh."
+        }
+      ]
+    },
+    {
+      "num": "03 · the timing",
+      "heading": "Timebox the solo dig",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The right timebox depends on the task and your level, but have one. Spend focused time reducing the problem. Then ask before the calendar catches fire. \"I gave this 45 minutes and have narrowed it to X\" is a strong signal.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "zsh · make it reproducible",
+          "caption": "A helper should be able to start here.",
+          "lines": [
+            {
+              "t": "$ git checkout mo/coupon-total",
+              "c": "pr"
+            },
+            {
+              "t": "$ npm test -- coupon-total",
+              "c": "pr"
+            },
+            {
+              "t": "FAIL updates total after coupon apply",
+              "c": "err"
+            },
+            {
+              "t": "# API response is correct, UI selector is stale",
+              "c": "dim"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the close",
+      "heading": "Report back with the fix",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The loop is not done when someone rescues you. Write the outcome in the thread, update the doc or test, and thank the specific help. That makes the next person faster and makes future help easier to ask for.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Stack Overflow",
+              "title": "Minimal, reproducible example",
+              "note": "how to shrink a problem",
+              "url": "https://stackoverflow.com/help/minimal-reproducible-example"
+            },
+            {
+              "platform": "web",
+              "meta": "Simon Tatham",
+              "title": "How to Report Bugs Effectively",
+              "note": "classic bug-reporting guide",
+              "url": "https://www.chiark.greenend.org.uk/~sgtatham/bugs.html"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Stack Overflow",
+      "title": "Minimal, reproducible example",
+      "url": "https://stackoverflow.com/help/minimal-reproducible-example"
+    },
+    {
+      "platform": "web",
+      "meta": "Simon Tatham",
+      "title": "How to Report Bugs Effectively",
+      "url": "https://www.chiark.greenend.org.uk/~sgtatham/bugs.html"
+    }
+  ]
+}

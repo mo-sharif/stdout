@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Incident reviews without the theater</title>
+<meta name="description" content="A postmortem is not a courtroom. It is a debugging session for the system that made the incident possible.">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#e3a93a"><div class="wrap">
+  <span class="kicker"><span class="dot"></span> Reliability culture</span>
+  <h1>Incident reviews without the theater</h1>
+  <p class="dek">A postmortem is not a courtroom. It is a debugging session for the system that made the incident possible.</p>
+  <div class="meta"><span>~6 min</span><span>&bull;</span><span>Leadership</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the reflex</div><h2>The first story is usually too simple</h2><p class="body">Right after an incident, everyone wants the clean sentence: deploy broke checkout. Human clicked wrong button. Alert was missed. Those may be true, but they are rarely enough. The useful question is: <span class="hl">why did that action make sense at the time?</span></p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">incident · rough timeline</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"09:42 deploy starts","c":""},{"t":"09:46 first payment errors","c":"err"},{"t":"09:49 alert fires in low-priority channel","c":"dim"},{"t":"10:07 rollback begins","c":""},{"t":"10:12 checkout recovers","c":""}]</script>
+  </div><p class="cap">A timeline is evidence, not a blame map.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the room</div><h2>Blameless does not mean consequence-free</h2><p class="body">Blameless means you investigate without making people hide details to survive the meeting. It does not mean shrugging. You can be kind to people and ruthless about weak signals, risky defaults, confusing tools, and missing guardrails.</p>
+<blockquote>Replace &quot;who caused this?&quot; with &quot;what made this easy to do and hard to catch?&quot;<cite>review prompt</cite></blockquote></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the output</div><h2>Actions should change the system</h2><p class="body">Training everyone to be more careful is usually a weak action item. Stronger actions alter the path: add an automated check, change the deploy order, page the right owner, make rollback one command, or remove the confusing option.</p>
+<div class="panel">
+    <div class="top"><i></i><i></i><i></i><span class="fn">postmortem-actions.md</span></div>
+    <textarea class="code" data-code spellcheck="false">- Add migration smoke test before production deploy
+- Move payment errors to paging alert, owner: infra
+- Add checkout rollback runbook with one-command path
+- Delete stale processor config after audit</textarea>
+  </div><p class="cap">Good action items are specific enough to close.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the memory</div><h2>A review should be useful six months later</h2><p class="body">Future engineers will not remember the meeting. They will find the doc during a similar outage. Write for them: impact, timeline, contributing factors, detection gaps, what changed, and how to tell if it worked.</p>
+<h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://sre.google/sre-book/postmortem-culture/" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> Google SRE</div>
+      <div class="txt">Postmortem Culture</div><div class="stat2">SRE book chapter</div>
+    </a><a class="embed e-web" href="https://www.atlassian.com/incident-management/postmortem/templates" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> Atlassian</div>
+      <div class="txt">Incident postmortem template</div><div class="stat2">review structure</div>
+    </a></div></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-web" href="https://sre.google/sre-book/postmortem-culture/" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> Google SRE</div>
+       <div class="txt">Postmortem Culture</div></a><a class="embed e-web" href="https://www.atlassian.com/incident-management/postmortem/templates" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> Atlassian</div>
+       <div class="txt">Incident postmortem template</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

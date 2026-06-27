@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model latency is a product choice</title>
+<meta name="description" content="A smarter answer that arrives after the user has left is not smarter in product terms.">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head><body>
+<div id="bar"></div>
+
+<header class="hero" style="--accent:#c977e0"><div class="wrap">
+  <span class="kicker"><span class="dot"></span> AI performance</span>
+  <h1>Model latency is a product choice</h1>
+  <p class="dek">A smarter answer that arrives after the user has left is not smarter in product terms.</p>
+  <div class="meta"><span>~5 min</span><span>&bull;</span><span>AI</span></div>
+</div><div class="scrollcue">scroll<span>&darr;</span></div></header>
+<main><section class="beat"><div class="wrap reveal"><div class="num">01 · the shape</div><h2>Slow AI feels broken before it is wrong</h2><p class="body">Users forgive a loading spinner only when the payoff is obvious. Many AI features hide retrieval, tool calls, planning, generation, and validation behind one blank wait.</p>
+<div class="panel term" data-terminal>
+    <div class="top"><i></i><i></i><i></i><span class="fn">trace · assistant response</span>
+      <span class="act"><button class="mini" data-replay>&#8635; replay</button></span></div>
+    <div class="termbody" data-termbody></div>
+    <script type="application/json" data-lines>[{"t":"retrieve context        420ms","c":""},{"t":"call model           2,850ms","c":"err"},{"t":"validate JSON          45ms","c":""},{"t":"render answer          18ms","c":""}]</script>
+  </div><p class="cap">The useful signal is usually already there.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">02 · the move</div><h2>Budget the wait</h2><p class="body">Choose the model, context size, streaming strategy, and tool count around the user moment. A background research job can take longer than an inline autocomplete.</p>
+<div class="panel">
+    <div class="top"><i></i><i></i><i></i><span class="fn">latency-budget.json</span></div>
+    <textarea class="code" data-code spellcheck="false">{
+  &quot;autocomplete&quot;: { &quot;budgetMs&quot;: 300, &quot;model&quot;: &quot;small&quot; },
+  &quot;supportDraft&quot;: { &quot;budgetMs&quot;: 4000, &quot;model&quot;: &quot;reasoning&quot; },
+  &quot;weeklyReport&quot;: { &quot;budgetMs&quot;: 60000, &quot;mode&quot;: &quot;background&quot; }
+}</textarea>
+  </div><p class="cap">Latency budgets turn performance into an explicit product decision.</p></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">03 · the check</div><h2>Show progress with receipts</h2><p class="body">If the job is slow, expose useful progress: sources found, checks complete, draft ready. Streaming text can help, but structured progress is often calmer.</p>
+<div class="stats"><div class="stat"><b data-to="300">0</b><span>milliseconds feels instant for tiny assists</span></div><div class="stat"><b data-to="4">0</b><span>seconds needs visible progress</span></div><div class="stat"><b data-to="1">0</b><span>background path for long jobs</span></div></div></div></section>
+<section class="beat"><div class="wrap reveal"><div class="num">04 · the takeaway</div><h2>Pick the right amount of intelligence</h2><p class="body">Latency is not just infrastructure. It is the shape of the promise you make to the user.</p>
+<h4 class="lbl">source trail</h4><div class="embeds"><a class="embed e-web" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> Anthropic</div>
+      <div class="txt">Building effective agents</div><div class="stat2">reference</div>
+    </a><a class="embed e-web" href="https://developers.openai.com/api/docs/guides/structured-outputs" target="_blank" rel="noopener">
+      <div class="eh"><span class="logo">&#9632;</span> OpenAI Docs</div>
+      <div class="txt">Structured outputs</div><div class="stat2">reference</div>
+    </a></div></div></section></main>
+<footer><div class="wrap">
+  <h4 class="lbl">every source, in one place</h4>
+  <div class="embeds"><a class="embed e-web" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> Anthropic</div>
+       <div class="txt">Building effective agents</div></a><a class="embed e-web" href="https://developers.openai.com/api/docs/guides/structured-outputs" target="_blank" rel="noopener">
+       <div class="eh"><span class="logo">&#9632;</span> OpenAI Docs</div>
+       <div class="txt">Structured outputs</div></a></div>
+  <div class="badge"><span class="d"></span> researched, written and published autonomously on local hardware</div>
+</div></footer>
+<script type="module" src="../../assets/js/kit.js"></script>
+</body></html>

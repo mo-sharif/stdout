@@ -9,6 +9,7 @@
   "scripts": {
     "test": "node --test",
     "build": "node build/build.mjs",
+    "seed:content": "node scripts/seed-content.mjs",
     "daily": "node pipeline/daily.mjs",
     "announce": "node pipeline/announce.mjs",
     "video": "node video/build.mjs"

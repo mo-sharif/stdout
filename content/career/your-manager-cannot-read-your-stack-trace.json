@@ -1,0 +1,131 @@
+{
+  "slug": "your-manager-cannot-read-your-stack-trace",
+  "title": "Your manager cannot read your stack trace",
+  "category": "career",
+  "kicker": "Working well",
+  "hook": "If you only report that you are busy, your manager has no way to help with the actual failure mode.",
+  "readMinutes": 5,
+  "date": "2026-06-20",
+  "tags": [
+    "communication",
+    "management"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Busy is not diagnostic",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Managers hear \"busy\" from everyone. Useful context sounds more like: this decision is blocked, this project has hidden risk, this scope no longer fits, or this work is draining the wrong battery.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "1:1 · better signal",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "not: I am slammed",
+              "c": "dim"
+            },
+            {
+              "t": "yes: API decision is blocking mobile by Friday",
+              "c": ""
+            },
+            {
+              "t": "ask: can you align product and platform today?",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Bring the ask with the problem",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Say what is happening, why it matters, what you tried, and what help would change the outcome. That lets your manager use their different tools.</p>"
+        },
+        {
+          "type": "code",
+          "file": "manager-update.md",
+          "code": "Risk: checkout migration misses beta date\nCause: product copy not approved\nTried: async thread, design review\nAsk: decision owner by Wednesday",
+          "caption": "A clear ask is easier to act on than a weather report."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Escalate early enough to matter",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Escalation is not failure. It is routing a problem to the level where it can be solved before it becomes drama.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 4,
+              "label": "parts: risk, cause, tried, ask"
+            },
+            {
+              "to": 1,
+              "label": "specific manager action"
+            },
+            {
+              "to": 0,
+              "label": "surprise blockers at launch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Make help easy to give",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Your manager does not need every detail. They need the shape of the problem and the lever only they can pull.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Lara Hogan",
+              "title": "Manager Voltron",
+              "url": "https://larahogan.me/blog/manager-voltron/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Lara Hogan",
+              "title": "The Feedback Equation",
+              "url": "https://larahogan.me/blog/feedback-equation/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Lara Hogan",
+      "title": "Manager Voltron",
+      "url": "https://larahogan.me/blog/manager-voltron/"
+    },
+    {
+      "platform": "web",
+      "meta": "Lara Hogan",
+      "title": "The Feedback Equation",
+      "url": "https://larahogan.me/blog/feedback-equation/"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "slug": "the-one-on-one-is-not-a-status-meeting",
+  "title": "The one-on-one is not a status meeting",
+  "category": "leadership",
+  "kicker": "Engineering leadership",
+  "hook": "If your one-on-one is just a Jira tour with feelings at the end, you are wasting the only meeting designed for the person instead of the project.",
+  "readMinutes": 5,
+  "date": "2026-06-26",
+  "tags": [
+    "management",
+    "one-on-ones"
+  ],
+  "beats": [
+    {
+      "num": "01 · the mistake",
+      "heading": "Status has better homes",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Status belongs in the board, the standup, the project doc, or the pull request. The one-on-one is for signal that does not fit there: motivation, confusion, ambition, burnout, friction, trust, and the weird little blocker someone is embarrassed to name in a group.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "calendar · 1:1",
+          "caption": "Same slot, better agenda.",
+          "lines": [
+            {
+              "t": "5m  what is taking more energy than it should?",
+              "c": ""
+            },
+            {
+              "t": "10m where are you blocked or under-used?",
+              "c": ""
+            },
+            {
+              "t": "10m feedback, coaching, decisions",
+              "c": ""
+            },
+            {
+              "t": "5m  commitments before next time",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the owner",
+      "heading": "The report should shape the agenda",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A manager can bring questions, but the meeting should not become manager theater. Ask the person to keep a running note. What should we talk about? What decision do you need? What feedback would help? That turns the meeting from inspection into leverage.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "The best one-on-one agenda is alive before the meeting starts.",
+          "cite": "stdout manager note"
+        }
+      ]
+    },
+    {
+      "num": "03 · the pattern",
+      "heading": "Listen for changes in slope",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A single rough week might be noise. A month of flat energy is signal. The value of regular one-on-ones is not one brilliant question. It is noticing the slope early enough to do something humane and useful.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "shared note beats memory"
+            },
+            {
+              "to": 2,
+              "label": "commitments max, or nothing moves"
+            },
+            {
+              "to": 30,
+              "label": "minutes is enough when the agenda is real"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the follow-through",
+      "heading": "Trust is built after the meeting",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The real one-on-one test happens later. Did the manager unblock the thing? Did they give the feedback they promised? Did they remember the career thread? The meeting creates the promise. Follow-through makes it believable.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Lara Hogan",
+              "title": "Questions for our first 1:1",
+              "note": "practical prompts",
+              "url": "https://larahogan.me/blog/first-one-on-one-questions/"
+            },
+            {
+              "platform": "gh",
+              "meta": "GitHub",
+              "title": "1 on 1 Meeting Questions",
+              "note": "question bank for managers",
+              "url": "https://github.com/VGraupera/1on1-questions"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Lara Hogan",
+      "title": "Questions for our first 1:1",
+      "url": "https://larahogan.me/blog/first-one-on-one-questions/"
+    },
+    {
+      "platform": "gh",
+      "meta": "GitHub",
+      "title": "1 on 1 Meeting Questions",
+      "url": "https://github.com/VGraupera/1on1-questions"
+    }
+  ]
+}

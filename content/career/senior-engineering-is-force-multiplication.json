@@ -1,0 +1,131 @@
+{
+  "slug": "senior-engineering-is-force-multiplication",
+  "title": "Senior engineering is force multiplication",
+  "category": "career",
+  "kicker": "Career growth",
+  "hook": "At some point the job stops being only about how much code you personally ship and starts being about how much better the system ships.",
+  "readMinutes": 5,
+  "date": "2026-06-22",
+  "tags": [
+    "senior-engineer",
+    "career"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "More tickets is not the whole ladder",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A senior engineer still writes code. But the visible difference is judgment: picking the right problem, reducing risk, raising the quality bar, and making other engineers faster.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "impact · wider than commits",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "shipped pricing migration safely",
+              "c": ""
+            },
+            {
+              "t": "unblocked mobile team with API contract",
+              "c": ""
+            },
+            {
+              "t": "turned incident pattern into guardrail",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Work at the constraint",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Find the bottleneck the team keeps tripping over: unclear ownership, slow reviews, brittle deploys, missing docs, or risky architecture. Then make that thing better.</p>"
+        },
+        {
+          "type": "code",
+          "file": "senior-scope.md",
+          "code": "- Own ambiguous problems\n- Create reusable patterns\n- Teach through docs and reviews\n- Remove repeated sources of failure",
+          "caption": "Scope is often measured by repeated problems removed."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Make impact legible",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Track outcomes, not just effort. The work that multiplies others is easy to undercount unless you write down what changed.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "team bottleneck worth removing"
+            },
+            {
+              "to": 3,
+              "label": "forms of impact: code, judgment, leverage"
+            },
+            {
+              "to": 0,
+              "label": "mystery heroics required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Senior is a trust shape",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The career move is not to become important everywhere. It is to become reliable where the team most needs judgment.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "StaffEng",
+              "title": "What do staff engineers actually do?",
+              "url": "https://staffeng.com/guides/what-do-staff-engineers-actually-do/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Julia Evans",
+              "title": "Brag documents",
+              "url": "https://jvns.ca/blog/brag-documents/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "StaffEng",
+      "title": "What do staff engineers actually do?",
+      "url": "https://staffeng.com/guides/what-do-staff-engineers-actually-do/"
+    },
+    {
+      "platform": "web",
+      "meta": "Julia Evans",
+      "title": "Brag documents",
+      "url": "https://jvns.ca/blog/brag-documents/"
+    }
+  ]
+}

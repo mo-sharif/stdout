@@ -1,0 +1,131 @@
+{
+  "slug": "queues-turn-spikes-into-lines",
+  "title": "Queues turn spikes into lines",
+  "category": "tech",
+  "kicker": "Distributed systems",
+  "hook": "A queue does not make work disappear. It makes work wait in a place you can observe.",
+  "readMinutes": 5,
+  "date": "2026-06-23",
+  "tags": [
+    "queues",
+    "systems"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Synchronous work breaks at the edge",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">When every request tries to do every job immediately, spikes become timeouts. A queue lets the user-facing path accept work quickly and lets workers drain it at a controlled pace.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "worker · backlog",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "queue depth: 1842",
+              "c": "err"
+            },
+            {
+              "t": "oldest job age: 73s",
+              "c": ""
+            },
+            {
+              "t": "workers: 12",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Design for waiting",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Queued work needs idempotency, retries, dead-letter handling, progress visibility, and a clear answer to how old is too old.</p>"
+        },
+        {
+          "type": "code",
+          "file": "jobs/send-receipt.js",
+          "code": "await queue.publish(\"send_receipt\", {\n  idempotencyKey: order.id,\n  orderId: order.id,\n  attempt: 0\n});",
+          "caption": "Idempotency keeps retries from becoming duplicate side effects."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Watch age, not just depth",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Queue depth tells you how much work exists. Oldest job age tells you what users are experiencing.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 2,
+              "label": "core alerts: age and failure rate"
+            },
+            {
+              "to": 1,
+              "label": "dead-letter path for poison jobs"
+            },
+            {
+              "to": 0,
+              "label": "unbounded retries"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "A queue is a promise to finish later",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Use queues when later is acceptable, then make later observable enough that nobody has to guess.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "AWS",
+              "title": "What is a message queue?",
+              "url": "https://aws.amazon.com/message-queue/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "OpenTelemetry",
+              "title": "Observability primer",
+              "url": "https://opentelemetry.io/docs/concepts/observability-primer/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "AWS",
+      "title": "What is a message queue?",
+      "url": "https://aws.amazon.com/message-queue/"
+    },
+    {
+      "platform": "web",
+      "meta": "OpenTelemetry",
+      "title": "Observability primer",
+      "url": "https://opentelemetry.io/docs/concepts/observability-primer/"
+    }
+  ]
+}

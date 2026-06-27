@@ -1,0 +1,131 @@
+{
+  "slug": "timezones-are-production-data",
+  "title": "Timezones are production data",
+  "category": "tech",
+  "kicker": "Time is hard",
+  "hook": "Time bugs are not caused by clocks being weird. They are caused by pretending human time is just a number.",
+  "readMinutes": 5,
+  "date": "2026-06-19",
+  "tags": [
+    "timezones",
+    "systems"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Midnight depends on where you stand",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A subscription renews at midnight. Which midnight? The user, the business, the database, the server, or UTC? If nobody answers, production will.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "time · same instant",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "2026-06-27T06:00:00Z",
+              "c": ""
+            },
+            {
+              "t": "America/Denver: 2026-06-27 00:00",
+              "c": ""
+            },
+            {
+              "t": "Europe/London: 2026-06-27 07:00",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Store instants and intent",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Use UTC for instants, but keep the user timezone or business timezone when the rule depends on local time.</p>"
+        },
+        {
+          "type": "code",
+          "file": "billing-schedule.json",
+          "code": "{\n  \"renewAt\": \"2026-07-01T06:00:00Z\",\n  \"timezone\": \"America/Denver\",\n  \"rule\": \"local_midnight\"\n}",
+          "caption": "The instant and the human rule are both part of the data."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Test the ugly calendar days",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Daylight saving changes, leap years, month ends, and travel can all break code that only tested a sunny Tuesday.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 2,
+              "label": "values to keep: instant and timezone"
+            },
+            {
+              "to": 4,
+              "label": "calendar edges worth testing"
+            },
+            {
+              "to": 0,
+              "label": "server-local time assumptions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Time is a domain model",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Treat time rules like product rules, because users experience them that way.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "IANA",
+              "title": "Time Zone Database",
+              "url": "https://www.iana.org/time-zones",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "PostgreSQL Docs",
+              "title": "Modifying Tables",
+              "url": "https://www.postgresql.org/docs/current/ddl-alter.html",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "IANA",
+      "title": "Time Zone Database",
+      "url": "https://www.iana.org/time-zones"
+    },
+    {
+      "platform": "web",
+      "meta": "PostgreSQL Docs",
+      "title": "Modifying Tables",
+      "url": "https://www.postgresql.org/docs/current/ddl-alter.html"
+    }
+  ]
+}

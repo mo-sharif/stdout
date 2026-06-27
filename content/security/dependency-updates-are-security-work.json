@@ -1,0 +1,131 @@
+{
+  "slug": "dependency-updates-are-security-work",
+  "title": "Dependency updates are security work",
+  "category": "security",
+  "kicker": "Supply chain",
+  "hook": "Updating packages is not chores around the real work. It is part of keeping strangers’ code from aging inside your app.",
+  "readMinutes": 5,
+  "date": "2026-06-21",
+  "tags": [
+    "dependencies",
+    "supply-chain"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Dependencies do not stay still",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Every package brings code, maintainers, release habits, transitive dependencies, and vulnerability history. Ignoring updates just saves the risk for a worse week.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "npm · audit signal",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ npm audit",
+              "c": "pr"
+            },
+            {
+              "t": "4 vulnerabilities found",
+              "c": "err"
+            },
+            {
+              "t": "run npm audit fix or review advisory",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Make updates routine",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Small, regular updates are easier to review than yearly dependency archaeology. Automation can open the door, but tests and ownership still close the loop.</p>"
+        },
+        {
+          "type": "code",
+          "file": "dependency-policy.md",
+          "code": "- Patch updates weekly\n- Security advisories same day when exploitable\n- Major updates get owner and rollback note",
+          "caption": "A policy keeps dependency work from becoming random guilt."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Review what changed",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Read release notes for risky packages, watch lockfile churn, and rely on tests that exercise the behavior you actually use.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "owner for dependency alerts"
+            },
+            {
+              "to": 7,
+              "label": "days is a decent patch cadence"
+            },
+            {
+              "to": 0,
+              "label": "unreviewed production majors"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Freshness lowers surprise",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Dependency maintenance is not glamorous. Neither is brushing your teeth. Both are worse when skipped for months.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "GitHub Docs",
+              "title": "Secure your supply chain",
+              "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Martin Fowler",
+              "title": "The Practical Test Pyramid",
+              "url": "https://martinfowler.com/articles/practical-test-pyramid.html",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "GitHub Docs",
+      "title": "Secure your supply chain",
+      "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain"
+    },
+    {
+      "platform": "web",
+      "meta": "Martin Fowler",
+      "title": "The Practical Test Pyramid",
+      "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+    }
+  ]
+}

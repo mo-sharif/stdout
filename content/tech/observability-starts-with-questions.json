@@ -1,0 +1,135 @@
+{
+  "slug": "observability-starts-with-questions",
+  "title": "Observability starts with questions",
+  "category": "tech",
+  "kicker": "Production debugging",
+  "hook": "Dashboards do not make a system observable. Good questions do.",
+  "readMinutes": 5,
+  "date": "2026-06-17",
+  "tags": [
+    "observability",
+    "debugging"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "More charts can mean less clarity",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A wall of CPU, memory, request count, and error graphs can still leave you unable to answer why one customer is stuck. Observability is about asking new questions without shipping new code every time.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "trace · one checkout",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "request req_123 checkout_submit",
+              "c": ""
+            },
+            {
+              "t": "payment.authorize 820ms",
+              "c": ""
+            },
+            {
+              "t": "coupon.validate 18ms",
+              "c": ""
+            },
+            {
+              "t": "email.queue 4ms",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Emit the story of the request",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Logs, metrics, and traces should share ids and vocabulary. That lets you move from symptom to path to cause without guessing.</p>"
+        },
+        {
+          "type": "code",
+          "file": "instrumentation.ts",
+          "code": "span.setAttribute(\"tenant.id\", tenantId);\nspan.setAttribute(\"checkout.total\", total);\nlogger.info(\"checkout_submitted\", { requestId, tenantId });",
+          "caption": "Shared attributes make telemetry joinable."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Start with user pain",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Ask what a user would report, then make sure telemetry can answer it: who was affected, when it started, what changed, and which dependency was slow or wrong.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 3,
+              "label": "signals: logs, metrics, traces"
+            },
+            {
+              "to": 1,
+              "label": "request id across all signals"
+            },
+            {
+              "to": 0,
+              "label": "dashboards nobody uses"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Telemetry should shorten the mystery",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">The point is not to collect everything. The point is to make production explain itself faster.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "OpenTelemetry",
+              "title": "Observability primer",
+              "url": "https://opentelemetry.io/docs/concepts/observability-primer/",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Google SRE",
+              "title": "Service Level Objectives",
+              "url": "https://sre.google/sre-book/service-level-objectives/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "OpenTelemetry",
+      "title": "Observability primer",
+      "url": "https://opentelemetry.io/docs/concepts/observability-primer/"
+    },
+    {
+      "platform": "web",
+      "meta": "Google SRE",
+      "title": "Service Level Objectives",
+      "url": "https://sre.google/sre-book/service-level-objectives/"
+    }
+  ]
+}

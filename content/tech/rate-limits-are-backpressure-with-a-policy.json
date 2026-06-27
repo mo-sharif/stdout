@@ -1,0 +1,131 @@
+{
+  "slug": "rate-limits-are-backpressure-with-a-policy",
+  "title": "Rate limits are backpressure with a policy",
+  "category": "tech",
+  "kicker": "Traffic control",
+  "hook": "A rate limit is not just saying no. It is telling traffic where the edge of fairness lives.",
+  "readMinutes": 5,
+  "date": "2026-06-18",
+  "tags": [
+    "rate-limits",
+    "reliability"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Unlimited is not a product plan",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Without limits, one client can burn the shared pool for everyone. With crude limits, good clients get punished for normal spikes. The policy matters.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "api · throttled",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "HTTP/1.1 429 Too Many Requests",
+              "c": "err"
+            },
+            {
+              "t": "Retry-After: 30",
+              "c": ""
+            },
+            {
+              "t": "X-RateLimit-Remaining: 0",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Limit by the thing that consumes capacity",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Sometimes that is user id, API key, tenant, IP, endpoint, cost unit, or write path. Match the limit to the resource you are protecting.</p>"
+        },
+        {
+          "type": "code",
+          "file": "limits.yml",
+          "code": "checkout_write:\n  key: tenant_id\n  burst: 20\n  sustained_per_minute: 60\n  retry_after: true",
+          "caption": "A good limit includes a recovery hint."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Make rejection useful",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Clients need status codes, retry headers, and docs. Operators need dashboards showing who is limited and why.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 429,
+              "label": "status code for too many requests"
+            },
+            {
+              "to": 1,
+              "label": "retry hint in the response"
+            },
+            {
+              "to": 0,
+              "label": "mystery throttles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Limits protect the promise",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Rate limiting is reliability with manners: it preserves the service by making overload explicit.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Google Cloud",
+              "title": "Traffic and load management",
+              "url": "https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Google SRE",
+              "title": "Service Level Objectives",
+              "url": "https://sre.google/sre-book/service-level-objectives/",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Google Cloud",
+      "title": "Traffic and load management",
+      "url": "https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load"
+    },
+    {
+      "platform": "web",
+      "meta": "Google SRE",
+      "title": "Service Level Objectives",
+      "url": "https://sre.google/sre-book/service-level-objectives/"
+    }
+  ]
+}

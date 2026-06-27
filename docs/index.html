@@ -13,13 +13,134 @@
     <h1>The stories behind the code, <span class="grad">told like a dev would tell them</span></h1>
     <p class="sub">Interactive, deeply-researched walk-throughs of the moments that shaped how we build.</p>
   </div></header>
-  <div class="wrap"><section class="cat reveal" id="coding" style="--accent:#46d17e">
+  <div class="wrap"><section class="cat reveal" id="ai" style="--accent:#c977e0">
+      <div class="rowhead"><span class="pill c-ai bd"><span class="d"></span> AI</span><span class="why">models, agents, and the messy reality of shipping them</span></div>
+      <div class="grid"><a class="card" href="ai/rag-is-a-search-problem-first/">
+    <span class="pill c-ai"><span class="d"></span> ai</span>
+    <h4>RAG is a search problem before it is an AI problem</h4>
+    <p>Retrieval-augmented generation sounds fancy until you ship it. Then the hard part is not the model. It is getting the right chunk in front of the model at the right time.</p>
+    <div class="foot"><span>6 min</span></div>
+  </a><a class="card" href="ai/evals-are-the-seatbelt/">
+    <span class="pill c-ai"><span class="d"></span> ai</span>
+    <h4>Evals are the seatbelt, not the science fair</h4>
+    <p>You do not need a giant benchmark to start. You need a small set of cases that catches the exact ways your AI feature embarrasses you in production.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="ai/prompt-injection-is-product-security/">
+    <span class="pill c-ai"><span class="d"></span> ai</span>
+    <h4>Prompt injection is product security</h4>
+    <p>The attacker does not need shell access if your assistant will politely leak the thing it was told to protect.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="ai/agents-need-boring-guardrails/">
+    <span class="pill c-ai"><span class="d"></span> ai</span>
+    <h4>Agents need boring guardrails</h4>
+    <p>The impressive demo is an agent doing five steps by itself. The production version is knowing which sixth step it must never take.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="ai/structured-output-is-a-contract/">
+    <span class="pill c-ai"><span class="d"></span> ai</span>
+    <h4>Structured output is a contract</h4>
+    <p>A model that returns almost-JSON is not integrated. It is freelancing inside your parser.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="ai/embeddings-are-compression-with-opinions/">
+    <span class="pill c-ai"><span class="d"></span> ai</span>
+    <h4>Embeddings are compression with opinions</h4>
+    <p>An embedding turns messy meaning into numbers. That is useful, but it is not neutral, magic, or guaranteed to match how your users think.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="ai/human-handoff-is-a-feature/">
+    <span class="pill c-ai"><span class="d"></span> ai</span>
+    <h4>Human handoff is a feature</h4>
+    <p>The best AI support flow is not the one that answers everything. It is the one that knows when it is done being useful.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="ai/model-latency-is-a-product-choice/">
+    <span class="pill c-ai"><span class="d"></span> ai</span>
+    <h4>Model latency is a product choice</h4>
+    <p>A smarter answer that arrives after the user has left is not smarter in product terms.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a></div>
+    </section><section class="cat reveal" id="coding" style="--accent:#46d17e">
       <div class="rowhead"><span class="pill c-coding bd"><span class="d"></span> Coding</span><span class="why">the war stories and the fundamentals</span></div>
-      <div class="grid"><a class="card" href="coding/11-lines-broke-the-internet/">
+      <div class="grid"><a class="card" href="coding/the-code-review-that-actually-helps/">
+    <span class="pill c-coding"><span class="d"></span> coding</span>
+    <h4>The code review that actually helps</h4>
+    <p>A good review is not a scavenger hunt for style nits. It is a fast, careful pass over the parts that can hurt users, future readers, or production.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="coding/feature-flags-are-production-code/">
+    <span class="pill c-coding"><span class="d"></span> coding</span>
+    <h4>Feature flags are production code</h4>
+    <p>A flag is not a sticky note you slap on risky code. It is a branch in production. Name it, test it, own it, and delete it before it becomes archaeology.</p>
+    <div class="foot"><span>6 min</span></div>
+  </a><a class="card" href="coding/tests-are-change-detectors/">
+    <span class="pill c-coding"><span class="d"></span> coding</span>
+    <h4>Tests are change detectors</h4>
+    <p>A test is not there to prove you are smart. It is there to notice when future you accidentally changes the deal.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="coding/11-lines-broke-the-internet/">
     <span class="pill c-coding"><span class="d"></span> coding</span>
     <h4>11 lines of code took down the internet</h4>
     <p>True story. A dev got into a naming fight, rage-quit npm, and half the world's builds started failing. You've shipped stuff that depends on packages like this. Here's exactly how it happened.</p>
     <div class="foot"><span>6 min</span></div>
+  </a><a class="card" href="coding/the-smallest-useful-refactor/">
+    <span class="pill c-coding"><span class="d"></span> coding</span>
+    <h4>The smallest useful refactor</h4>
+    <p>A refactor does not need a parade. Sometimes the best version is a tiny move that makes tomorrow obvious.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="coding/api-design-is-a-promise/">
+    <span class="pill c-coding"><span class="d"></span> coding</span>
+    <h4>API design is a promise</h4>
+    <p>An API is not just a route. It is a promise about names, errors, timing, compatibility, and what future teams can safely assume.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="coding/logs-are-a-user-interface/">
+    <span class="pill c-coding"><span class="d"></span> coding</span>
+    <h4>Logs are a user interface</h4>
+    <p>Someone will read your logs at 2 a.m. Design for that person.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="coding/migrations-need-exit-ramps/">
+    <span class="pill c-coding"><span class="d"></span> coding</span>
+    <h4>Migrations need exit ramps</h4>
+    <p>A migration plan is not complete until you know how to pause, resume, and recover when production is less tidy than staging.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a></div>
+    </section><section class="cat reveal" id="leadership" style="--accent:#e3a93a">
+      <div class="rowhead"><span class="pill c-leadership bd"><span class="d"></span> Leadership</span><span class="why">managing humans who manage machines</span></div>
+      <div class="grid"><a class="card" href="leadership/the-one-on-one-is-not-a-status-meeting/">
+    <span class="pill c-leadership"><span class="d"></span> leadership</span>
+    <h4>The one-on-one is not a status meeting</h4>
+    <p>If your one-on-one is just a Jira tour with feelings at the end, you are wasting the only meeting designed for the person instead of the project.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="leadership/incident-reviews-without-the-theater/">
+    <span class="pill c-leadership"><span class="d"></span> leadership</span>
+    <h4>Incident reviews without the theater</h4>
+    <p>A postmortem is not a courtroom. It is a debugging session for the system that made the incident possible.</p>
+    <div class="foot"><span>6 min</span></div>
+  </a><a class="card" href="leadership/delegation-is-a-control-system/">
+    <span class="pill c-leadership"><span class="d"></span> leadership</span>
+    <h4>Delegation is a control system</h4>
+    <p>Delegation is not throwing work over a wall. It is choosing the right amount of context, authority, and feedback for the risk.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="leadership/good-strategy-says-no/">
+    <span class="pill c-leadership"><span class="d"></span> leadership</span>
+    <h4>Good strategy says no</h4>
+    <p>A strategy that supports every idea is just a calendar with nicer fonts.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="leadership/roadmap-promises-need-expiration-dates/">
+    <span class="pill c-leadership"><span class="d"></span> leadership</span>
+    <h4>Roadmap promises need expiration dates</h4>
+    <p>A roadmap item without a review date slowly turns from a plan into a rumor.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="leadership/feedback-works-best-when-it-is-specific/">
+    <span class="pill c-leadership"><span class="d"></span> leadership</span>
+    <h4>Feedback works best when it is specific</h4>
+    <p>Vague feedback makes people anxious. Specific feedback gives them a handle.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="leadership/onboarding-is-a-production-system/">
+    <span class="pill c-leadership"><span class="d"></span> leadership</span>
+    <h4>Onboarding is a production system</h4>
+    <p>A new hire should not have to reverse-engineer your company by reading old Slack threads.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="leadership/technical-debt-needs-an-interest-rate/">
+    <span class="pill c-leadership"><span class="d"></span> leadership</span>
+    <h4>Technical debt needs an interest rate</h4>
+    <p>Not every messy corner is urgent. The urgent debt is the part charging you interest every week.</p>
+    <div class="foot"><span>5 min</span></div>
   </a></div>
     </section><section class="cat reveal" id="tech" style="--accent:#3cc7d4">
       <div class="rowhead"><span class="pill c-tech bd"><span class="d"></span> Tech</span><span class="why">how the big systems actually work</span></div>
@@ -28,11 +149,127 @@
     <h4>First Complete Reading of a Herculaneum Scroll Achieved</h4>
     <p>For the first time, an entire ancient Herculaneum scroll was virtually unwrapped and read without damaging it, thanks to cutting-edge technology.</p>
     <div class="foot"><span>6 min</span></div>
+  </a><a class="card" href="tech/caches-are-little-time-machines/">
+    <span class="pill c-tech"><span class="d"></span> tech</span>
+    <h4>Caches are little time machines</h4>
+    <p>A cache makes yesterday feel instant. That is wonderful until yesterday is wrong and you cannot figure out which layer is still living there.</p>
+    <div class="foot"><span>6 min</span></div>
+  </a><a class="card" href="tech/queues-turn-spikes-into-lines/">
+    <span class="pill c-tech"><span class="d"></span> tech</span>
+    <h4>Queues turn spikes into lines</h4>
+    <p>A queue does not make work disappear. It makes work wait in a place you can observe.</p>
+    <div class="foot"><span>5 min</span></div>
   </a><a class="card" href="tech/what-happens-when-you-type-a-url/">
     <span class="pill c-tech"><span class="d"></span> tech</span>
     <h4>What actually happens when you type a URL</h4>
     <p>You hit enter and a page appears. In between, your machine runs a relay race across the planet in about 200 milliseconds. Here's every leg of it.</p>
     <div class="foot"><span>9 min</span></div>
+  </a><a class="card" href="tech/cdns-are-the-internet-copy-machine/">
+    <span class="pill c-tech"><span class="d"></span> tech</span>
+    <h4>CDNs are the internet copy machine</h4>
+    <p>A CDN makes the web feel close by putting copies near people. The hard part is deciding when those copies stop being true.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="tech/timezones-are-production-data/">
+    <span class="pill c-tech"><span class="d"></span> tech</span>
+    <h4>Timezones are production data</h4>
+    <p>Time bugs are not caused by clocks being weird. They are caused by pretending human time is just a number.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="tech/rate-limits-are-backpressure-with-a-policy/">
+    <span class="pill c-tech"><span class="d"></span> tech</span>
+    <h4>Rate limits are backpressure with a policy</h4>
+    <p>A rate limit is not just saying no. It is telling traffic where the edge of fairness lives.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="tech/observability-starts-with-questions/">
+    <span class="pill c-tech"><span class="d"></span> tech</span>
+    <h4>Observability starts with questions</h4>
+    <p>Dashboards do not make a system observable. Good questions do.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a></div>
+    </section><section class="cat reveal" id="career" style="--accent:#5b94e6">
+      <div class="rowhead"><span class="pill c-career bd"><span class="d"></span> Career</span><span class="why">the stuff no bootcamp teaches</span></div>
+      <div class="grid"><a class="card" href="career/your-brag-doc-is-a-debug-log/">
+    <span class="pill c-career"><span class="d"></span> career</span>
+    <h4>Your brag doc is a debug log</h4>
+    <p>If you wait until review season to remember your work, you are reconstructing production from vibes. Keep the log while the evidence is still warm.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="career/how-to-ask-for-help-without-making-it-weird/">
+    <span class="pill c-career"><span class="d"></span> career</span>
+    <h4>How to ask for help without making it weird</h4>
+    <p>Asking for help is not a confession. Done well, it is a compact bug report that lets another brain attach to the problem fast.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="career/senior-engineering-is-force-multiplication/">
+    <span class="pill c-career"><span class="d"></span> career</span>
+    <h4>Senior engineering is force multiplication</h4>
+    <p>At some point the job stops being only about how much code you personally ship and starts being about how much better the system ships.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="career/interviewing-is-debugging-a-match/">
+    <span class="pill c-career"><span class="d"></span> career</span>
+    <h4>Interviewing is debugging a match</h4>
+    <p>An interview is not only a performance. It is also your chance to find the hidden production behavior of the team.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="career/your-manager-cannot-read-your-stack-trace/">
+    <span class="pill c-career"><span class="d"></span> career</span>
+    <h4>Your manager cannot read your stack trace</h4>
+    <p>If you only report that you are busy, your manager has no way to help with the actual failure mode.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="career/learning-in-public-without-performing/">
+    <span class="pill c-career"><span class="d"></span> career</span>
+    <h4>Learning in public without performing</h4>
+    <p>Sharing what you learn can be generous. It gets weird when the performance replaces the learning.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="career/choosing-the-right-next-job/">
+    <span class="pill c-career"><span class="d"></span> career</span>
+    <h4>Choosing the right next job</h4>
+    <p>The best next job is not always the most impressive one. It is the one whose tradeoffs you choose on purpose.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="career/saying-no-without-disappearing/">
+    <span class="pill c-career"><span class="d"></span> career</span>
+    <h4>Saying no without disappearing</h4>
+    <p>A good no does not vanish. It names the constraint and keeps the work moving.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a></div>
+    </section><section class="cat reveal" id="security" style="--accent:#e85d5d">
+      <div class="rowhead"><span class="pill c-security bd"><span class="d"></span> Security</span><span class="why">how it breaks, told responsibly</span></div>
+      <div class="grid"><a class="card" href="security/ssrf-starts-with-a-helpful-url-box/">
+    <span class="pill c-security"><span class="d"></span> security</span>
+    <h4>SSRF starts with a helpful URL box</h4>
+    <p>The feature says &quot;paste a URL and we will fetch it for you.&quot; The attacker hears &quot;make our server talk to places your browser cannot reach.&quot;</p>
+    <div class="foot"><span>6 min</span></div>
+  </a><a class="card" href="security/secrets-do-not-belong-in-build-logs/">
+    <span class="pill c-security"><span class="d"></span> security</span>
+    <h4>Secrets do not belong in build logs</h4>
+    <p>A secret leak is not always a dramatic breach. Sometimes it is one helpful debug line in CI, copied into a ticket, indexed forever.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="security/threat-modeling-is-just-asking-what-could-go-wrong/">
+    <span class="pill c-security"><span class="d"></span> security</span>
+    <h4>Threat modeling is just asking what could go wrong</h4>
+    <p>Threat modeling sounds formal until you do it. Then it is mostly drawing the system and asking where trust gets weird.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="security/authz-bugs-hide-behind-working-auth/">
+    <span class="pill c-security"><span class="d"></span> security</span>
+    <h4>Authz bugs hide behind working auth</h4>
+    <p>Logging in proves who someone is. It does not prove they are allowed to do the thing they just asked for.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="security/dependency-updates-are-security-work/">
+    <span class="pill c-security"><span class="d"></span> security</span>
+    <h4>Dependency updates are security work</h4>
+    <p>Updating packages is not chores around the real work. It is part of keeping strangers’ code from aging inside your app.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="security/passwords-are-not-a-strategy/">
+    <span class="pill c-security"><span class="d"></span> security</span>
+    <h4>Passwords are not a strategy</h4>
+    <p>A password field is only one piece of identity. Treating it as the whole plan is how accounts become support tickets.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="security/rate-limiting-is-a-security-control/">
+    <span class="pill c-security"><span class="d"></span> security</span>
+    <h4>Rate limiting is a security control</h4>
+    <p>A system that accepts unlimited attempts is not being generous. It is volunteering for abuse.</p>
+    <div class="foot"><span>5 min</span></div>
+  </a><a class="card" href="security/secure-defaults-beat-security-training/">
+    <span class="pill c-security"><span class="d"></span> security</span>
+    <h4>Secure defaults beat security training</h4>
+    <p>Training helps. Defaults help even when everyone is tired, rushed, or new.</p>
+    <div class="foot"><span>5 min</span></div>
   </a></div>
     </section></div>
   <footer><div class="wrap"><span class="badge"><span class="d"></span> researched, written and published autonomously on local hardware · open source on GitHub</span></div></footer>

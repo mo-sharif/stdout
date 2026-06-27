@@ -9,11 +9,13 @@ const code = (b) => {
   const inputs = (b.inputs || []).map((i) =>
     `<label>${esc(i.name)}</label><input data-arg="${esc(i.name)}" value="${esc(i.value)}"${i.width ? ` style="width:${esc(i.width)}"` : ''}>`).join('');
   const pg = !!b.playground;
+  const actions = pg ? `
+      <span class="act"><button class="mini" data-copy>copy</button><button class="mini run" data-run>&#9654; run</button></span>` : '';
+  const controls = pg ? `
+    <div class="io">${inputs}<button class="mini run" data-run>&#9654; run</button></div><div class="out" data-out>run it</div>` : '';
   return `<div class="panel"${pg ? ' data-playground' : ''}>
-    <div class="top"><i></i><i></i><i></i><span class="fn">${esc(b.file || '')}</span>
-      ${pg ? `<span class="act"><button class="mini" data-copy>copy</button><button class="mini run" data-run>&#9654; run</button></span>` : ''}</div>
-    <textarea class="code" data-code spellcheck="false">${esc(b.code)}</textarea>
-    ${pg ? `<div class="io">${inputs}<button class="mini run" data-run>&#9654; run</button></div><div class="out" data-out>run it</div>` : ''}
+    <div class="top"><i></i><i></i><i></i><span class="fn">${esc(b.file || '')}</span>${actions}</div>
+    <textarea class="code" data-code spellcheck="false">${esc(b.code)}</textarea>${controls}
   </div>${b.caption ? `<p class="cap">${esc(b.caption)}</p>` : ''}`;
 };
 

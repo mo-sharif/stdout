@@ -1,0 +1,131 @@
+{
+  "slug": "rate-limiting-is-a-security-control",
+  "title": "Rate limiting is a security control",
+  "category": "security",
+  "kicker": "Abuse prevention",
+  "hook": "A system that accepts unlimited attempts is not being generous. It is volunteering for abuse.",
+  "readMinutes": 5,
+  "date": "2026-06-19",
+  "tags": [
+    "rate-limits",
+    "abuse"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Attackers love cheap loops",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Login guesses, coupon brute force, scraping, OTP spam, and expensive search endpoints all get worse when the attacker can repeat them for free.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "edge · blocked burst",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "POST /login from 203.0.113.10 count=61/min",
+              "c": "err"
+            },
+            {
+              "t": "decision: challenge",
+              "c": ""
+            },
+            {
+              "t": "next: block if failures continue",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Limit by behavior, not just IP",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">IP limits help, but attackers rotate. Combine user, device, account, route, cost, and failure signals where it matters.</p>"
+        },
+        {
+          "type": "code",
+          "file": "abuse-limits.yml",
+          "code": "login_failures:\n  key: account_id\n  limit: 5\n  window: 10m\n  action: step_up_challenge",
+          "caption": "The best action is not always block; sometimes it is challenge."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Avoid punishing normal users",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A good abuse control makes attackers expensive while giving legitimate users a recovery path.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 5,
+              "label": "failed logins before step-up in this example"
+            },
+            {
+              "to": 3,
+              "label": "keys to consider: IP, account, device"
+            },
+            {
+              "to": 0,
+              "label": "unlimited sensitive attempts"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "Friction belongs at the risky edge",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Rate limiting is not just reliability. It is how you make abusive loops cost more than they are worth.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "OWASP",
+              "title": "Denial of Service Cheat Sheet",
+              "url": "https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Google Cloud",
+              "title": "Traffic and load management",
+              "url": "https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "OWASP",
+      "title": "Denial of Service Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html"
+    },
+    {
+      "platform": "web",
+      "meta": "Google Cloud",
+      "title": "Traffic and load management",
+      "url": "https://docs.cloud.google.com/architecture/infra-reliability-guide/traffic-load"
+    }
+  ]
+}

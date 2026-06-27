@@ -1,0 +1,127 @@
+{
+  "slug": "incident-reviews-without-the-theater",
+  "title": "Incident reviews without the theater",
+  "category": "leadership",
+  "kicker": "Reliability culture",
+  "hook": "A postmortem is not a courtroom. It is a debugging session for the system that made the incident possible.",
+  "readMinutes": 6,
+  "date": "2026-06-24",
+  "tags": [
+    "incidents",
+    "reliability"
+  ],
+  "beats": [
+    {
+      "num": "01 · the reflex",
+      "heading": "The first story is usually too simple",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Right after an incident, everyone wants the clean sentence: deploy broke checkout. Human clicked wrong button. Alert was missed. Those may be true, but they are rarely enough. The useful question is: <span class=\"hl\">why did that action make sense at the time?</span></p>"
+        },
+        {
+          "type": "terminal",
+          "title": "incident · rough timeline",
+          "caption": "A timeline is evidence, not a blame map.",
+          "lines": [
+            {
+              "t": "09:42 deploy starts",
+              "c": ""
+            },
+            {
+              "t": "09:46 first payment errors",
+              "c": "err"
+            },
+            {
+              "t": "09:49 alert fires in low-priority channel",
+              "c": "dim"
+            },
+            {
+              "t": "10:07 rollback begins",
+              "c": ""
+            },
+            {
+              "t": "10:12 checkout recovers",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the room",
+      "heading": "Blameless does not mean consequence-free",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Blameless means you investigate without making people hide details to survive the meeting. It does not mean shrugging. You can be kind to people and ruthless about weak signals, risky defaults, confusing tools, and missing guardrails.</p>"
+        },
+        {
+          "type": "quote",
+          "text": "Replace \"who caused this?\" with \"what made this easy to do and hard to catch?\"",
+          "cite": "review prompt"
+        }
+      ]
+    },
+    {
+      "num": "03 · the output",
+      "heading": "Actions should change the system",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Training everyone to be more careful is usually a weak action item. Stronger actions alter the path: add an automated check, change the deploy order, page the right owner, make rollback one command, or remove the confusing option.</p>"
+        },
+        {
+          "type": "code",
+          "file": "postmortem-actions.md",
+          "code": "- Add migration smoke test before production deploy\n- Move payment errors to paging alert, owner: infra\n- Add checkout rollback runbook with one-command path\n- Delete stale processor config after audit",
+          "caption": "Good action items are specific enough to close."
+        }
+      ]
+    },
+    {
+      "num": "04 · the memory",
+      "heading": "A review should be useful six months later",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Future engineers will not remember the meeting. They will find the doc during a similar outage. Write for them: impact, timeline, contributing factors, detection gaps, what changed, and how to tell if it worked.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Google SRE",
+              "title": "Postmortem Culture",
+              "note": "SRE book chapter",
+              "url": "https://sre.google/sre-book/postmortem-culture/"
+            },
+            {
+              "platform": "web",
+              "meta": "Atlassian",
+              "title": "Incident postmortem template",
+              "note": "review structure",
+              "url": "https://www.atlassian.com/incident-management/postmortem/templates"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Google SRE",
+      "title": "Postmortem Culture",
+      "url": "https://sre.google/sre-book/postmortem-culture/"
+    },
+    {
+      "platform": "web",
+      "meta": "Atlassian",
+      "title": "Incident postmortem template",
+      "url": "https://www.atlassian.com/incident-management/postmortem/templates"
+    }
+  ]
+}

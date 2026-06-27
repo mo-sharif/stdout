@@ -1,0 +1,131 @@
+{
+  "slug": "tests-are-change-detectors",
+  "title": "Tests are change detectors",
+  "category": "coding",
+  "kicker": "Testing mindset",
+  "hook": "A test is not there to prove you are smart. It is there to notice when future you accidentally changes the deal.",
+  "readMinutes": 5,
+  "date": "2026-06-23",
+  "tags": [
+    "testing",
+    "quality"
+  ],
+  "beats": [
+    {
+      "num": "01 · the shape",
+      "heading": "Coverage is not confidence",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">A suite can cover lines and still miss behavior. The useful question is not how much code ran, but what user-facing promise would break if this test failed.</p>"
+        },
+        {
+          "type": "terminal",
+          "title": "zsh · focused test",
+          "caption": "The useful signal is usually already there.",
+          "lines": [
+            {
+              "t": "$ npm test -- checkout-total",
+              "c": "pr"
+            },
+            {
+              "t": "PASS keeps tax when coupon changes subtotal",
+              "c": ""
+            },
+            {
+              "t": "PASS rejects expired coupon",
+              "c": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "02 · the move",
+      "heading": "Name the promise",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Write tests around the contract: inputs, outputs, state transitions, and error paths. Implementation details deserve fewer tests because they should be allowed to move.</p>"
+        },
+        {
+          "type": "code",
+          "file": "checkout-total.test.ts",
+          "code": "it(\"keeps tax when coupon changes subtotal\", () => {\n  const total = priceCart(cart, { coupon: \"SAVE10\" });\n  expect(total.tax).toBe(840);\n});",
+          "caption": "The assertion names behavior a user would notice."
+        }
+      ]
+    },
+    {
+      "num": "03 · the check",
+      "heading": "Keep the pyramid honest",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Fast unit tests catch most logic changes. A smaller number of integration and end-to-end tests catches wiring. Too much of either creates blind spots or slow feedback.</p>"
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "to": 1,
+              "label": "behavior per test is easiest to debug"
+            },
+            {
+              "to": 3,
+              "label": "layers: unit, integration, end-to-end"
+            },
+            {
+              "to": 0,
+              "label": "tests that only prove mocks work"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "num": "04 · the takeaway",
+      "heading": "A failing test is a useful alarm",
+      "blocks": [
+        {
+          "type": "prose",
+          "html": "<p class=\"body\">Good tests make change safer because they remember the promises the code made before your brain got busy.</p>"
+        },
+        {
+          "type": "embeds",
+          "heading": "source trail",
+          "items": [
+            {
+              "platform": "web",
+              "meta": "Martin Fowler",
+              "title": "The Practical Test Pyramid",
+              "url": "https://martinfowler.com/articles/practical-test-pyramid.html",
+              "note": "reference"
+            },
+            {
+              "platform": "web",
+              "meta": "Martin Fowler",
+              "title": "Refactoring",
+              "url": "https://martinfowler.com/books/refactoring.html",
+              "note": "reference"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "platform": "web",
+      "meta": "Martin Fowler",
+      "title": "The Practical Test Pyramid",
+      "url": "https://martinfowler.com/articles/practical-test-pyramid.html"
+    },
+    {
+      "platform": "web",
+      "meta": "Martin Fowler",
+      "title": "Refactoring",
+      "url": "https://martinfowler.com/books/refactoring.html"
+    }
+  ]
+}
